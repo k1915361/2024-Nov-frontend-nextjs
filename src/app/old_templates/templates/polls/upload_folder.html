@@ -1,0 +1,74 @@
+{% extends "base_logged_in.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h1>Upload a Folder</h1>
+
+<form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    
+    <div class="form-floating mb-1">
+        <input type="text" name="name" id="id_name" class="form-control" placeholder="">
+        <label for="id_name">Name</label>
+    </div>
+
+    <!-- accept=".csv, .tsv, .jsonl, .json, .parquet, .arrow, .txt, .png, .jpg, .wav, .mp3, .tar, .bin, etc." -->
+    <label for="id_folder" class="form-label">Folder and Multiple Files:</label>
+    <input type="file" name="file" id="id_folder" class="form-control mb-1" webkitdirectory directory mozdirectory multiple>
+    <input type="text" id="directories" name="directories" hidden/>
+
+    <!-- accept=".zip, .gz, .zst, .bz2, .lz4, .xz" -->
+    <label for="id_zipfile" class="form-label">Zip File:</label>
+    <input type="file" accept=".zip,.rar,.7zip" name="zipfile" id="id_zipfile" class="form-control mb-1">    
+    
+    <div class="input-group mb-3">
+        {{ form.filepaths.errors }}
+        <label for="id_filepaths" class="input-group-text">File Paths</label>
+        <select type="text" name="filepaths" id="id_filepaths" class="form-select">
+            {% for field in form.filepaths %}
+                {{ field }}
+            {% endfor %}
+        </select>
+    </div>
+    
+    <fieldset>
+        <legend class="fs-6 fw-medium">Publicity</legend>
+        <div class="form-check">
+            <label class="form-check-label" for="id_is_public_0">
+                <input class="form-check-input" type="radio" name="is_public" value="1" id="id_is_public_0" required checked>
+                private
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="id_is_public_1">
+                <input class="form-check-input" type="radio" name="is_public" value="2" id="id_is_public_1" required>
+                public
+            </label>
+        </div>
+    </fieldset>
+    <br>
+    
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+<script>
+    files = document.querySelector("#id_folder").files;
+    document.querySelector("#id_folder").addEventListener("change", function() {
+        files = document.querySelector("#id_folder").files;
+        var directories = {}
+        for (var file of files) {
+            file.webkitRelativePath
+            directories[file.name] = file.webkitRelativePath            
+        }
+        directories = JSON.stringify(directories);
+        
+        document.querySelector("#directories").value = directories
+    });
+</script>
+
+</div>
+
+
+{% endblock %}
+

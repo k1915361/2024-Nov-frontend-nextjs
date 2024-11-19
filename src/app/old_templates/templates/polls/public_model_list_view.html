@@ -1,0 +1,50 @@
+{% extends base_html %}
+
+{% block content %}
+
+<div class="container">
+
+<h1>Public Models</h1>
+
+{% csrf_token %}
+
+{% if page_obj %}
+    <div>
+        {% for data in page_obj %}
+            <div>
+                <a class="fw-semibold" temphref="url 'polls:public-model-data-view/?page=' data.id" href="#">
+                    {{ data.name }}
+                </a>
+                <span>
+                    <span class="fw-medium">{{ data.user }}</span> 
+                    <span class="fw-lighter">{{ data.updated }}</span>
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No Models are available.</p>
+{% endif %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="btn btn-primary">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+
+{% endblock %}
+

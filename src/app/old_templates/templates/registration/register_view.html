@@ -1,0 +1,45 @@
+{% extends "base_login_register_search.html" %}
+
+{% block content %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="container">
+
+{{ retry_register_message }}
+
+<form method="post" action="register/">
+{% csrf_token %}
+
+<div class="container row g-3 align-items-center mt-2">
+    <div class="form-floating mb-3">
+        <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="ace" maxlength="100" required>
+        <label for="floatingUsername">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="ace@example.com" maxlength="100" required>
+        <label for="floatingEmail">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" name="password" class="form-control" id="InputPassword" minlength="8" required>
+        <label for="InputPassword">Password</label>
+    </div>      
+    <input type="submit" value="login" class="btn btn-primary">
+    <input type="hidden" name="next" value="{{ next }}">
+</div>
+
+</form>
+
+{# Assumes you set up the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+</div>
+
+{% endblock %}

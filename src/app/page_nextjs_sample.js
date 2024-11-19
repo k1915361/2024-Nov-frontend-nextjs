@@ -7,41 +7,48 @@ export default function Home() {
       <main className={styles.main}>
         <Image
           className={styles.logo}
-          src="/globe.svg"
+          src="/next.svg"
           alt="Next.js logo"
           width={180}
           height={38}
           priority
         />
-          <div className={styles.ctas}>
+        <ol>
+          <li>
+            Get started by editing <code>src/app/page.js</code>.
+          </li>
+          <li>Save and see your changes instantly.</li>
+        </ol>
+
+        <div className={styles.ctas}>
           <a
             className={styles.primary}
-            href="#"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
               className={styles.logo}
-              src="/window.svg"
+              src="/vercel.svg"
               alt="Vercel logomark"
               width={20}
               height={20}
             />
-            A
+            Deploy now
           </a>
           <a
-            href="#"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
           >
-            B
+            Read our docs
           </a>
         </div>
       </main>
       <footer className={styles.footer}>
         <a
-          href="#"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -52,10 +59,10 @@ export default function Home() {
             width={16}
             height={16}
           />
-          About
+          Learn
         </a>
         <a
-          href="#"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -66,10 +73,10 @@ export default function Home() {
             width={16}
             height={16}
           />
-          T&C
+          Examples
         </a>
         <a
-          href="#"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -80,7 +87,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Home
+          Go to nextjs.org →
         </a>
       </footer>
     </div>

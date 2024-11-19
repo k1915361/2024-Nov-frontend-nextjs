@@ -1,0 +1,48 @@
+{% extends "base_logged_in.html" %}
+
+{% block content %}
+
+<div class="container ">
+    <div class="col p-1 mb-1 bg-body-tertiary rounded border border-light-subtle">
+        <h5>Previous RAIDO Tasks</h5>
+    </div>
+    <div class="row align-items-start gap-1">
+        <div class="row gap-1">
+            <div class="col p-1 bg-body-tertiary rounded border border-light-subtle">
+                <div class="row gap-1 m-0">
+                    <button class="btn btn-primary">RAIDO Task 01</button>
+                    <button class="btn btn-primary">RAIDO Task 02</button>
+                    <button class="btn btn-primary">RAIDO Task 03</button>
+                </div>
+            </div>
+            <div class="col p-1 bg-body-tertiary rounded border border-light-subtle">
+                <div class="row gap-1 m-0">
+                    <button class="btn btn-primary">Task Analysis</button>
+                    <button class="btn btn-primary">Action 02</button>
+                    <button class="btn btn-primary">Action 03</button>
+                </div>
+            </div>
+            <div class="col p-1 bg-body-tertiary rounded border border-light-subtle">
+                Task Details/Report
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+        <div class="row gap-1">
+            <button class="col btn btn-primary">
+                Reproduce
+            </button>
+            <button class="col btn btn-primary">
+                Save
+            </button>
+            <button class="col btn btn-primary">
+                Download
+            </button>
+        </div>        
+    </div>
+</div>
+
+
+
+{% endblock content %}

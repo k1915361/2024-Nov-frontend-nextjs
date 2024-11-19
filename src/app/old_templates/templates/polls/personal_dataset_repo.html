@@ -1,0 +1,135 @@
+{% extends "base_logged_in.html" %}
+
+{% load custom_filters %}
+{% block content %}
+
+<div class="col p-1 pt-2 m-n2 mb-1 bg-secondary bg-gradient border-bottom border-light-subtle" style="--bs-bg-opacity: .05;">
+    <h5>Dataset Management</h5>
+</div>
+<div class="container">
+    <div class="row align-items-start gap-1">
+        <div class="row gap-1">
+            <div class="col p-1 outline-tertiary rounded border border-light-subtle">
+                <div class="row gap-1 m-0">
+                    {% if private_dataset_list %}
+                        {% for dataset in private_dataset_list %}
+                            <a class="btn btn-light border-light-subtle shadow-sm text-smd text-start" temphref="url 'polls:private-dataset-data-view/?page=' data.id" href="#" role="button">
+                                <span class="text-sm">{{ dataset.name }}</span> 
+                                <div>
+                                    <span class="text-body-secondary text-sm">{{ dataset.user }}</span> 
+                                    <span class="text-body-secondary text-sm">• {{ dataset.updated|timesince|upto }} ago</span>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p>No Dataset are available.</p>
+                    {% endif %}
+
+                    <a class="btn btn-light border-light-subtle shadow-sm" href="/polls/personal-dataset-analysis/" role="button">Dataset A</a>
+                    <a class="btn btn-light border-light-subtle shadow-sm" href="/polls/personal-dataset-analysis/" role="button">Dataset B</a>
+                    <a class="btn btn-light border-light-subtle shadow-sm" href="/polls/personal-dataset-analysis/" role="button">Dataset C</a>
+                </div>
+            </div>
+            <div class="col p-1 outline-tertiary rounded border border-light-subtle">
+                <div class="row gap-1 m-0">
+                    <button class="btn btn-light border-light-subtle shadow-sm">Dataset Analysis</button>
+                    <div class="dropdown d-grid px-0">
+                        <button class="btn btn-light dropdown-toggle border-light-subtle shadow-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Data Generation
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">action A</a></li>
+                            <li><a class="dropdown-item" href="#">action B</a></li>
+                            <li><a class="dropdown-item" href="#">action C</a></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-light border-light-subtle shadow-sm">Cleaning</button>
+                    <button class="btn btn-light border-light-subtle shadow-sm">Enrichment</button>
+                    <button class="btn btn-light border-light-subtle shadow-sm">Data Curation</button>
+                    <button class="btn btn-light border-light-subtle shadow-sm">Balancing</button>
+                    <button class="btn btn-light border-light-subtle shadow-sm">XAI</button>
+                </div>
+            </div>
+            <div class="col p-2 outline-tertiary rounded border border-light-subtle">
+                Dataset Details
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+        <form method="post" enctype="multipart/form-data" class="row gap-1">        
+            <div class="col p-1 rounded border border-light-subtle">
+    
+                <label for="id_folder" class="form-label p-1">
+                    Upload Dataset 
+                    <span class="text-body-secondary fw-lighter">
+                        (Folder and Multiple Files)
+                    </span>
+                </label>
+                <input type="file" name="file" id="id_folder" class="form-control mb-1" webkitdirectory directory mozdirectory multiple required>
+                <input type="text" id="directories" name="directories" hidden/>
+
+                <div class="form-floating mb-1">
+                    <input type="text" name="name" id="id_name" class="form-control" placeholder="" required>
+                    <label for="id_name">Dataset Name</label>
+                </div>
+
+                <div id="upload-dataset-ispublic-option" class="col">
+                    <fieldset>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="id_is_public_0">
+                                <input class="form-check-input" type="radio" name="is_public" value="1" id="id_is_public_0" required checked>
+                                private
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="id_is_public_1">
+                                <input class="form-check-input" type="radio" name="is_public" value="2" id="id_is_public_1" required>
+                                public
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <button type="submit" class="btn btn-light border-light-subtle shadow-sm">Upload</button>
+            </div>
+            <div class="col px-0 rounded border border-light-subtle">
+                <div class="row gap-1 m-1">
+                    <button class="col btn btn-outline-danger shadow-sm">
+                        Delete Dataset
+                    </button>
+                </div>
+            </div>
+            <div class="col px-0 rounded border border-light-subtle">
+                <div class="row gap-1 m-1">
+                    <button class="col btn btn-light border-light-subtle shadow-sm">
+                        Download / Export
+                    </button>
+                </div>
+            </div>
+            <div class="w-100"></div>                
+            <div class="col">
+            </div>
+            {% csrf_token %}
+        </form>
+        <script>
+            files = document.querySelector("#id_folder").files;
+            document.querySelector("#id_folder").addEventListener("change", function() {
+                files = document.querySelector("#id_folder").files;
+                var directories = {}
+                for (var file of files) {
+                    file.webkitRelativePath
+                    directories[file.name] = file.webkitRelativePath            
+                }
+                directories = JSON.stringify(directories);
+                
+                document.querySelector("#directories").value = directories
+            });
+        </script>
+
+    </div>
+</div>
+
+
+
+{% endblock content %}
