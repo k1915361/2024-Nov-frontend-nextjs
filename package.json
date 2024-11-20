@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "dayjs": "^1.11.13",
+    "dayjs-ext": "^2.1.1",
+    "next": "15.0.3",
+    "next-themes": "^0.4.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
     "eslint": "^8",

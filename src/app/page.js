@@ -1,39 +1,70 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import SwitchThemeButton from "./_components/switch_theme_button";
+import Homepage from "./homepage/list_model";
+
+export const viewport = {
+  colorScheme: 'light',
+}
+
+const user_list_response = {
+  response_message: "success",
+  response_body: {
+    user_list: [
+      {
+        id:1,
+        username: 'ace'
+      },
+      {
+        id:2,
+        username: 'bob'
+      },
+      {
+        id:3,
+        username: 'admin'
+      },
+    ]
+  }
+}
+
+const model_page_obj = {
+  response_message: "success",
+  response_body: {
+    model: [
+      {
+        id: 1,
+        name: 'model A',
+        type: 'type A',
+        user: user_list_response.response_body.user_list[0],
+        updated: '2024-11-11 12:11'
+      },
+      {
+        id: 2,
+        name: 'model B',
+        type: 'type B',
+        user: user_list_response.response_body.user_list[1],
+        updated: '2024-12-11 01:11'
+      },
+    ]
+  }
+}
 
 export default function Home() {
+  
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/globe.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+        <SwitchThemeButton/>
+        <Homepage 
+          model_page_obj={model_page_obj}
         />
+        
           <div className={styles.ctas}>
+          
           <a
-            className={styles.primary}
-            href="#"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/window.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            A
-          </a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+            className={`text-primary ${styles.secondary}`}
           >
             B
           </a>
