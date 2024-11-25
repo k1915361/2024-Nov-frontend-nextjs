@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import SwitchThemeButton from "./_components/switch_theme_button";
-import Homepage from "./homepage/list_model";
+import ListModelsTest from "./homepage/list_models_test";
+import ListModels from "./homepage/list_models";
+import ListDatasets from "./homepage/list_datasets";
 
 export const viewport = {
   colorScheme: 'light',
@@ -54,11 +56,8 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <SwitchThemeButton/>
-        <Homepage 
-          model_page_obj={model_page_obj}
-        />
-        
+        <ListModels/>
+        <ListDatasets/>
           <div className={styles.ctas}>
           
           <a
@@ -66,7 +65,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className={`text-primary ${styles.secondary}`}
           >
-            B
+            a Button
           </a>
         </div>
       </main>
