@@ -19,8 +19,8 @@ export function isforked(model, prefix = "• ") {
     }
 }
 
-const API_ROOT = "http://127.0.0.1:8000"
-const API = API_ROOT + "/polls"
+export const API_ROOT = "http://127.0.0.1:8000"
+export const API = API_ROOT + "/polls"
 
 export function TextSecondary({ children, ...props}) {
     return (

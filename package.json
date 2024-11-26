@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.61.3",
+    "@tanstack/react-query-devtools": "^5.61.4",
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.13",
     "dayjs-ext": "^2.1.1",
@@ -18,6 +20,7 @@
     "react-dom": "19.0.0-rc-66855b96-20241106"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.61.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.3"
   }
