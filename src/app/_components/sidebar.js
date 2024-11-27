@@ -17,7 +17,7 @@ export function DropDownItem({ children, hrefName='', ...props }) {
     return (
         <li className="nav-item">
             <a 
-            href={`"/polls/${hrefName}"`} 
+            href={`/${hrefName}`} 
             className="dropdown-item" 
             {...props}
             >
@@ -35,7 +35,7 @@ export default function Sidebar({ children }) {
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid gap-1">
                 <div className="d-flex me-3">
-                    <a href="/polls/home/" 
+                    <a href="/home/" 
                     className="link-underline-dark link-underline-opacity-0"
                     >
                         <h4>

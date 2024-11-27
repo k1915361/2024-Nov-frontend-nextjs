@@ -6,57 +6,11 @@ import ListModelsTest from "./homepage/list_models_test";
 import ListModels from "./homepage/list_models";
 import ListDatasets from "./homepage/list_datasets";
 
-export const viewport = {
-  colorScheme: 'light',
-}
-
-const user_list_response = {
-  response_message: "success",
-  response_body: {
-    user_list: [
-      {
-        id:1,
-        username: 'ace'
-      },
-      {
-        id:2,
-        username: 'bob'
-      },
-      {
-        id:3,
-        username: 'admin'
-      },
-    ]
-  }
-}
-
-const model_page_obj = {
-  response_message: "success",
-  response_body: {
-    model: [
-      {
-        id: 1,
-        name: 'model A',
-        type: 'type A',
-        user: user_list_response.response_body.user_list[0],
-        updated: '2024-11-11 12:11'
-      },
-      {
-        id: 2,
-        name: 'model B',
-        type: 'type B',
-        user: user_list_response.response_body.user_list[1],
-        updated: '2024-12-11 01:11'
-      },
-    ]
-  }
-}
-
 import { BlogProvider } from './context'
 import { BlogPosts } from "./blog-posts";
 import ModelForm from './_components/model_form';
 
-export default function Home() {
+export default function PageComponent({children}) {
   const blogPromise = fetch('https://api.vercel.app/blog').then((res) =>
     res.json()
   )
@@ -64,21 +18,7 @@ export default function Home() {
   return (
     <div className={styles.page}>     
       <main className={styles.main}>
-        <ListModels/>
-        <ListDatasets/>
-        <BlogProvider blogPromise={blogPromise}>
-          <BlogPosts/>
-        </BlogProvider>
-        <ModelForm/>
-          <div className={styles.ctas}>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`text-primary ${styles.secondary}`}
-          >
-            a Button
-          </a>
-        </div>
+          {children}        
       </main>
       <footer className={styles.footer}>
         <a
