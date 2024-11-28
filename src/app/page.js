@@ -1,8 +1,6 @@
 import React from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
-import SwitchThemeButton from "./_components/switch_theme_button";
-import ListModelsTest from "./homepage/list_models_test";
 import ListModels from "./homepage/list_models";
 import ListDatasets from "./homepage/list_datasets";
 
@@ -52,24 +50,18 @@ const model_page_obj = {
   }
 }
 
-import { BlogProvider } from './context'
-import { BlogPosts } from "./blog-posts";
-import ModelForm from './_components/model_form';
-
 export default function Home() {
-  const blogPromise = fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
-  )
   
   return (
     <div className={styles.page}>     
       <main className={styles.main}>
+        <a href='login'>Login</a>
+        <a href='model/upload'>Model Upload</a>
+        <a href='test/list-server-side'>Test List Server Side</a>
+        <a href='test/blog-posts'>Test Blog Posts</a>
+        <a href='test/public-models-datasets'>Test List Public Models and Datasets</a>
         <ListModels/>
         <ListDatasets/>
-        <BlogProvider blogPromise={blogPromise}>
-          <BlogPosts/>
-        </BlogProvider>
-        <ModelForm/>
           <div className={styles.ctas}>
           <a
             target="_blank"

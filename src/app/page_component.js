@@ -6,7 +6,7 @@ import ListModelsTest from "./homepage/list_models_test";
 import ListModels from "./homepage/list_models";
 import ListDatasets from "./homepage/list_datasets";
 
-import { BlogProvider } from './context'
+import { BlogProvider } from './blog-context'
 import { BlogPosts } from "./blog-posts";
 import ModelForm from './_components/model_form';
 

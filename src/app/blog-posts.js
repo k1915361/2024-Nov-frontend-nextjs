@@ -1,7 +1,7 @@
 'use client'
  
 import { use } from 'react'
-import { useBlogContext } from './context'
+import { useBlogContext } from './blog-context'
  
 export function randomInt(max) {
   return   Math.floor(Math.random() * max);

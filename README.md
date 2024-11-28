@@ -89,7 +89,36 @@ Bootstrap-like stylesheets and classnames are seen.
 
 ## Installing TanStack Query
 
-<https://nextjs.org/docs/messages/no-async-client-component>
+`TanStack Query` is for client fetching.
+
+In scenarios where client fetching is needed, you can call `fetch` in `useEffect` (not recommended), or lean on popular React libraries in the community (such as SWR or React Query / TanStack Query ) for client fetching.
+
+SWR: <https://swr.vercel.app/>.
+
+Example SWR usage 
+```js
+import useSWR from 'swr'
+ 
+function Profile() {
+  const { data, error, isLoading } = useSWR('/api/user', fetcher)
+ 
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
+  return <div>hello {data.name}!</div>
+}
+```
+
+Example TanStack Query Usage
+
+```js
+const { isPending, error, data, isFetching } = useQuery({
+// ...
+})
+```
+
+This section is optional but may help with handling response resources such as `isPending`, `error`, `data`, `isFetching`. 
+
+TanStack Query: <https://nextjs.org/docs/messages/no-async-client-component>
 
 `npm i -D @tanstack/eslint-plugin-query`
 `npm i -D @tanstack/eslint-plugin-query --legacy-peer-deps`
@@ -103,6 +132,65 @@ Why Did Nextjs started using React 19 RC?
 > "React 19 was supposed to be out already"
 
 > "you'll need to either do as suggested and use `--legacy-peer-deps` etc with every package that needs it, or keep using next 14 for now.. try `npx create-next-app@14`"
+
+## Routing Pages
+
+<https://nextjs.org/docs/app/building-your-application/routing>
+
+folder structure `/app/login/page.js` becomes page link `http://localhost:3002/login`.
+
+File Conventions
+
+|||
+|-|-|
+|layout|	Shared UI for a segment and its children|
+|page|	Unique UI of a route and make routes publicly accessible|
+|loading|	Loading UI for a segment and its children|
+|not-found|	Not found UI for a segment and its children|
+|error|	Error UI for a segment and its children|
+|global-error|	Global Error UI|
+|route|	Server-side API endpoint|
+|template|	Specialized re-rendered Layout UI|
+|default|	Fallback UI for Parallel Routes|
+
+Go to section **Component Hierarchy** in the nextjs documentation link above for handling fallbacks of `Error`, `Suspense`/`Loading`, and `NotFound` error.
+
+## Storing Tokens Using `document.cookie` or `local.storage`
+
+Using `document.cookie`:
+
+```js
+export function get_expires_date_for_document_cookie(daysToExpire = 7) {    
+    const date = new Date();
+    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    const expires = `expires=${date.toUTCString()}`;
+    return expires
+}
+
+export function set_document_cookie(token) {
+    document.cookie = `access_token=${token}; ${get_expires_date_for_document_cookie()}; path=/; Secure; HttpOnly; SameSite=Strict`;
+}
+```
+
+Points to consider when using cookies:
+- Limited size of 4KB
+- Mitigate Cross-site Request Forgery (CSRF) with  SameSite cookie attribute (`SameSite=Lax` or `SameSite=Strict`)
+- Needs for Server-Side Validation and Refresh of Token.
+- Always use `Secure`, `HttpOnly`, and `SameSite` cookie flags to mitigate XSS and CSRF.
+- `Secure` flag:  encrypted transmission over HTTPS.
+- Set reasonable `expires` time.
+- Access token should expire quickly - Use refresh token to obtain a new one.
+- Use refresh tokens for long sessions.
+
+Using `localStorage`:
+
+```js
+localStorage.setItem('access_token', data.access);
+const token = localStorage.getItem('access_token');
+```
+
+Points to consider when using local storage:
+- Local storage or session storage can be used for temporary storage but is less secure compared to cookies for sensitive data like tokens (XSS vulnerability).
 
 ## NextJS getting started
 
