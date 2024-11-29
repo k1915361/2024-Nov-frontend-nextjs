@@ -9,7 +9,11 @@ export function BlogProvider({
   blogPromise,
 }) {
   return (
-    <BlogContext.Provider value={blogPromise}>{children}</BlogContext.Provider>
+    <BlogContext.Provider 
+      value={blogPromise}
+    >
+      {children}
+    </BlogContext.Provider>
   )
 }
  

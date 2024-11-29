@@ -5,6 +5,7 @@ import PageComponent from "../page_component";
 import { useUser } from '../context/UserContext';
 import { log } from "../_components/model_form";
 import { fetchData } from "./fetchData";
+import { getCookie } from "./refreshToken";
 
 export function get_expires_date_for_document_cookie(daysToExpire = 7) {    
     const date = new Date();
@@ -40,11 +41,27 @@ export default function Login() {
 
         try {
             const data = await fetchData(route, options)
-            log(data)
+            console.log('1')
+            console.log(data)
+            console.log(' 2document.cookie')
+            console.log(document.cookie)
 
             if (data.access) {
-                set_document_cookie('access_token', data.access)
-                set_document_cookie('refresh_token', data.refresh)
+                try {
+                    set_document_cookie('access_token', data.access)
+                } catch (error) {
+                    log(`Failed to store access token to cookie. It is likely already stored. ${error}`)                    
+                }
+
+                try {
+                    set_document_cookie('refresh_token', data.refresh)
+                } catch (error) {
+                    log(`Failed to store refresh token to cookie. It is likely already stored. ${error}`)                    
+                }
+                console.log(' 3document.cookie')
+                console.log(document.cookie)
+                setMessage("Successfully logged in.")
+                
             }
         } catch (err) {
             setMessage(err.message || "An error occurred")

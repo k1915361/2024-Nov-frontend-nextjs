@@ -4,26 +4,29 @@ export const fetchData = async (
     route
     , options
     , method = 'GET'
-    ) => {
-    const token = localStorage.getItem('access_token');
+) => {
+    
+    try {
+        const response = await fetch(`${API_ROOT}${route}`, {
+            method: method,
+            ...options,
+            headers: {
+                ...options.headers,
+                'Content-Type': 'application/json',
+            },
+            credentials: "include",
+        });
 
-    if (!token) {
-        throw new Error("No token found, please log in");        
+        if (!response.ok) {
+            console.log("Failed to fetch protected data")
+            return "Fetch Failed. Response not ok"
+        }
+        const result = await response.json()
+        return result;
+
+    } catch (error) {
+        console.error('Error:', error);
+        return "Fetch Error"
     }
-
-    const response = await fetch(`${API_ROOT}/${route}`, {
-        method: method,
-        ...options,
-        headers: {
-            ...options.headers,
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch protected data")
-    }
-        
-    return response.json();
+    return null
 };
