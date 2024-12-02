@@ -1,11 +1,26 @@
-'use client'
+'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();
 
+const userObjFormat = { username: '', email: '', token: '' }
+
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({ username: '', email: '', token: '' });
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        }
+    }, [user]);
 
     return (
         <UserContext.Provider value={{ user, setUser }}>

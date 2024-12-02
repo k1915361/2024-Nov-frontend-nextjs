@@ -1,5 +1,3 @@
-import { set_document_cookie } from "./page";
-
 export function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -16,9 +14,7 @@ export async function refreshToken() {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        const data = await response.json();
-        if (data.access_token) {
-            set_document_cookie('access_token', data.access_token)
-        }
+        await response.json();
+        
     }
 }
