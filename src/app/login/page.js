@@ -1,9 +1,17 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageComponent from "../page_component";
 import { useUser } from '../context/UserContext';
 import { fetchData } from "./fetchData";
+
+export async function checked_logged_in(route = '/api/login/check/') {
+    const options = {
+        method: 'GET',  
+    }
+    const data = await fetchData(route, options)
+    return data
+}
 
 export default function Login() {
     const [message, setMessage] = useState("")
@@ -38,9 +46,26 @@ export default function Login() {
 
     }
 
+    useEffect(() => {
+        async function f() {
+            const data = await checked_logged_in()
+            if (data == "Fetch Failed. Response not ok") {                
+                setUser({...user, username: ''})                
+                setMessage("Please login again - your login has expired.")
+            }
+            if (data?.username 
+                && data?.detail == "You are logged in." 
+                && data?.user_is_authenticated == true
+            ) {
+                setUser({...user, username: data.username})
+            }
+        }
+        f()
+    }, [])
+
     return (
         <PageComponent>
-            {user.username && 
+            {user?.username && 
                 <div>You are logged in as: {user.username}</div>
             }
             <form onSubmit={handleSubmit}>

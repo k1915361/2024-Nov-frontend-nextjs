@@ -1,0 +1,71 @@
+import PageComponent from "@/app/page_component";
+import { ColButtonLight, RowGap1, RowGap1Margin0 } from "../models/page";
+import { BtnPrimary, ColBorderLightSubtleMinHeight } from "../dataset/[id]/page";
+
+export function ColBorderLightSubtle({children, ...props}) {
+    return (
+        <ColBorderLightSubtleMinHeight 
+            style={{}} 
+            {...props}
+        >
+            {children}
+        </ColBorderLightSubtleMinHeight>
+    )
+}
+
+export function ColBtnPrimary({children, ...props}) {
+    return (
+        <button 
+            {...props}
+            className="col btn btn-primary"
+        >
+            {children}
+        </button>
+    )
+}
+
+export default function UserPreviousTasks() {
+    
+    return (
+        <PageComponent>
+            <div class="col p-1 mb-1 bg-body-tertiary rounded border border-light-subtle">
+                <h3>Previous RAIDO Tasks</h3>
+            </div>
+            <div class="row align-items-start gap-1">
+                <div class="row gap-1">
+                    <ColBorderLightSubtle>
+                        <RowGap1Margin0>
+                            <BtnPrimary>RAIDO Task 01</BtnPrimary>
+                            <BtnPrimary>RAIDO Task 02</BtnPrimary>
+                            <BtnPrimary>RAIDO Task 03</BtnPrimary>
+                        </RowGap1Margin0>
+                    </ColBorderLightSubtle>
+                    <ColBorderLightSubtle>
+                        <RowGap1Margin0>
+                            <BtnPrimary>Task Analysis</BtnPrimary>
+                            <BtnPrimary>Action 02</BtnPrimary>
+                            <BtnPrimary>Action 03</BtnPrimary>
+                        </RowGap1Margin0>
+                    </ColBorderLightSubtle>
+                    <ColBorderLightSubtle>
+                        Task Details/Report
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </ColBorderLightSubtle>
+                </div>
+                <RowGap1>
+                    <ColBtnPrimary>
+                        Reproduce
+                    </ColBtnPrimary>
+                    <ColBtnPrimary>
+                        Save
+                    </ColBtnPrimary>
+                    <ColBtnPrimary>
+                        Download
+                    </ColBtnPrimary>
+                </RowGap1>     
+            </div>
+        </PageComponent>
+    )
+}

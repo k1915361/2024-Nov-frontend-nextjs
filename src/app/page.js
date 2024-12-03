@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
-import ListModels from "./homepage/list_models";
-import ListDatasets from "./homepage/list_datasets";
+import ListModels from "./home/list_models";
+import ListDatasets from "./home/list_datasets";
 
 export const viewport = {
   colorScheme: 'light',

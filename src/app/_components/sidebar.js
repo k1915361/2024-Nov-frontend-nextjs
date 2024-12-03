@@ -75,11 +75,11 @@ export default function Sidebar({ children }) {
                         </DropDownItem>
                         <DropDownItem hrefName="profile">
                             <Icon bootstrapIcon='person-circle'/>
-                            Profile View                            
+                            Profile View
                         </DropDownItem>
-                        <DropDownItem hrefName="process-model-options/">                            
+                        <DropDownItem hrefName="process-model-options/">
                             <Icon bootstrapIcon='sliders2'/>
-                            Start a New Optimisation Task                            
+                            Start a New Optimisation Task
                         </DropDownItem>                        
                         <DropDownItem hrefName="previous-tasks/">
                             <Icon bootstrapIcon='clipboard2-check'/>
@@ -97,6 +97,10 @@ export default function Sidebar({ children }) {
                             <Icon bootstrapIcon='cloud-arrow-up'/>
                             Upload Models
                         </DropDownItem>
+                        <DropDownItem hrefName="login/">
+                            <Icon bootstrapIcon='door-open'/>
+                            Log In
+                        </DropDownItem>
                         <DropDownItem hrefName="logout/">
                             <Icon bootstrapIcon='door-closed'/>
                             Log Out
@@ -107,7 +111,7 @@ export default function Sidebar({ children }) {
                 id="navbarTogglerDemo01"
                 className="collapse navbar-collapse" 
                 >
-                    <ul className="navbar-nav mr-auto mb-2 mb-lg-0">                                                
+                    <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
                     </ul>
                 </div>
             </div>

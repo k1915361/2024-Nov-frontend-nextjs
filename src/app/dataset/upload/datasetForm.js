@@ -1,19 +1,18 @@
 'use client';
 
+import { API } from '@/app/home/list_models';
 import { useState } from 'react';
-import { API } from '../home/list_models';
 
 export function log(...args) {
     console.log(...args)
 }
 
-export default function ModelForm() {
+export default function DatasetForm() {
     const [formData, setFormData] = useState({
         name: '',
-        model_type: '',
         is_public: true,
         description: '',
-        model_zipfile: null,
+        dataset_zipfile: null,
     });
     const [message, setMessage] = useState("")
 
@@ -50,7 +49,7 @@ export default function ModelForm() {
         });
 
         try {
-            const response = await fetch(API + '/test_model_form_post/', {
+            const response = await fetch(API + '/dataset_form_post/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,
@@ -74,9 +73,9 @@ export default function ModelForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>Upload a Model</div>
+            <div>Upload a Dataset</div>
             <label 
-                htmlFor="id_model_zipfile" 
+                htmlFor="dataset_zipfile" 
                 className="form-label"
             >
                 Zip File (.zip / .rar / .7zip / .7z):
@@ -84,8 +83,8 @@ export default function ModelForm() {
             <input
                 type="file"
                 accept=".zip,.rar,.7zip,.7z"
-                name="model_zipfile"
-                id="id_model_zipfile"
+                name="dataset_zipfile"
+                id="dataset_zipfile"
                 onChange={handleFileChange}
                 className="form-control mb-1"
                 required
@@ -93,18 +92,9 @@ export default function ModelForm() {
             <input
                 type="text"
                 name="name"
-                placeholder="Model Name"
+                placeholder="Dataset Name"
                 className='form-control mb-1'
                 value={formData.name}
-                onChange={handleChange}
-                required
-            />
-            <input
-                type="text"
-                name="model_type"
-                placeholder="Model Type"
-                className='form-control mb-1'
-                value={formData.model_type}
                 onChange={handleChange}
                 required
             />

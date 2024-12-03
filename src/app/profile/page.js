@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import PageComponent from "../page_component";
 import UserClientInfo from "./profile";
+import UserProfile from "./userProfile";
 
 export const colBoxClass = "col p-3 mb-5 bg-body-tertiary rounded border border-light-subtle"
 
@@ -26,26 +27,27 @@ export default function UserProfilePage() {
     
     return (
         <PageComponent>
-            <div className="container">
-                <div className="row">
-                    <ColBox>
-                        Personal Info
-                        <Suspense fallback={<div>Loading user info...</div>}>
-                            <UserClientInfo/>
-                        </Suspense>                        
-                    </ColBox>
-                    <ColBox>
-                        Personal Analytics
-                    </ColBox>
-                    <ColBox>
-                        <RowBox>
-                            Profile Views
-                        </RowBox>
-                        <RowBox>
-                            Overall Green Index
-                        </RowBox>
-                    </ColBox>
-                </div>
+            <div className="row">
+                <ColBox>
+                    Personal Info
+                    <Suspense fallback={<div>Loading user info...</div>}>
+                        <UserClientInfo/>
+                    </Suspense>
+                    <Suspense fallback={<div>Loading user info...</div>}>
+                        <UserProfile/>
+                    </Suspense>
+                </ColBox>
+                <ColBox>
+                    Personal Analytics
+                </ColBox>
+                <ColBox>
+                    <RowBox>
+                        Profile Views
+                    </RowBox>
+                    <RowBox>
+                        Overall Green Index
+                    </RowBox>
+                </ColBox>
             </div>
         </PageComponent>
     )

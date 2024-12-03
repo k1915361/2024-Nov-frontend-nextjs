@@ -1,4 +1,4 @@
-import { API_ROOT } from "../homepage/list_models";
+import { API_ROOT } from "../home/list_models";
 
 export const fetchData = async (
     route
@@ -18,7 +18,7 @@ export const fetchData = async (
         });
 
         if (!response.ok) {
-            console.log("Failed to fetch protected data")
+            console.log("Failed to fetch protected data", response.json())
             return "Fetch Failed. Response not ok"
         }
         const result = await response.json()
