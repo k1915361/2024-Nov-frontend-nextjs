@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();
 
-const userObjFormat = { username: '', email: '', token: '' }
+const userObjFormat = { username: '', email: '', token: '', is_authenticated: false }
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);

@@ -60,7 +60,7 @@ export default function ModelForm() {
                 log('Form submitted successfully');
             } else {
                 const errorDetails = await response.json();
-                console.error(`Error details: ${errorDetails}`);
+                console.error(`Error details: ${JSON.stringify(errorDetails)}`);
                 console.error(`Form submission failed. status: ${response.status}`);
             }
             
@@ -79,11 +79,11 @@ export default function ModelForm() {
                 htmlFor="id_model_zipfile" 
                 className="form-label"
             >
-                Zip File (.zip / .rar / .7zip / .7z):
+                Zip File:
             </label>
             <input
                 type="file"
-                accept=".zip,.rar,.7zip,.7z"
+                accept=".zip"
                 name="model_zipfile"
                 id="id_model_zipfile"
                 onChange={handleFileChange}

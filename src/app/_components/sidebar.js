@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+import Username from "./username";
+
 export function Icon({ children, bootstrapIcon="list", width=16, height=16, fill="currentColor", viewBox="0 0 16 16", ...props}) {
     return (
         <i 
@@ -60,6 +63,11 @@ export default function Sidebar({ children }) {
                         </button>
                     </div>
                 </form>
+                <div>
+                    <Suspense>
+                        <Username/>
+                    </Suspense>
+                </div>
                 <div className="dropdown-center">
                     <button className="btn dropdown-toggle shadow-sm" 
                     type="button" 
@@ -77,19 +85,19 @@ export default function Sidebar({ children }) {
                             <Icon bootstrapIcon='person-circle'/>
                             Profile View
                         </DropDownItem>
-                        <DropDownItem hrefName="process-model-options/">
+                        <DropDownItem hrefName="user/final-task-analytics/">
                             <Icon bootstrapIcon='sliders2'/>
                             Start a New Optimisation Task
-                        </DropDownItem>                        
-                        <DropDownItem hrefName="previous-tasks/">
+                        </DropDownItem>
+                        <DropDownItem hrefName="user/previous-tasks/">
                             <Icon bootstrapIcon='clipboard2-check'/>
                             Previous Tasks
                         </DropDownItem>
-                        <DropDownItem hrefName="personal-model-repo/">
+                        <DropDownItem hrefName="user/models/">
                             <Icon bootstrapIcon='collection'/>
                             Personal Model Repo
                         </DropDownItem>
-                        <DropDownItem hrefName="personal-dataset-repo/">
+                        <DropDownItem hrefName="user/datasets/">
                             <Icon bootstrapIcon='database'/>
                             Personal Dataset Repo
                         </DropDownItem>
@@ -104,6 +112,12 @@ export default function Sidebar({ children }) {
                         <DropDownItem hrefName="logout/">
                             <Icon bootstrapIcon='door-closed'/>
                             Log Out
+                        </DropDownItem>
+                        <DropDownItem hrefName="user/final-task-analytics/">
+                            Final Task Analytics
+                        </DropDownItem>                       
+                        <DropDownItem hrefName="user/hitl-reinforced-feedback/">
+                            HITL Reinforced Feedback
                         </DropDownItem>
                     </ul>
                 </div>

@@ -37,7 +37,10 @@ export default function Login() {
         try {
             const data = await fetchData(route, options)
             
-            setUser({...user, username: data.username})
+            setUser({
+                ...user, 
+                username: data.username
+            })
             setMessage(`Successfully logged in.`)
             
         } catch (err) {

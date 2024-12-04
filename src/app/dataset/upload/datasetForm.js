@@ -78,11 +78,11 @@ export default function DatasetForm() {
                 htmlFor="dataset_zipfile" 
                 className="form-label"
             >
-                Zip File (.zip / .rar / .7zip / .7z):
+                Zip File:
             </label>
             <input
                 type="file"
-                accept=".zip,.rar,.7zip,.7z"
+                accept=".zip"
                 name="dataset_zipfile"
                 id="dataset_zipfile"
                 onChange={handleFileChange}
