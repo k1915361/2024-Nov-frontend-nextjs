@@ -9,22 +9,25 @@ export const fetchData = async (
     try {
         const response = await fetch(`${API_ROOT}${route}`, {
             method: method,
-            ...options,
             headers: {
-                ...options.headers,
                 'Content-Type': 'application/json',
+                ...options.headers,
             },            
             credentials: 'include',
+            ...options,
         });
 
         if (!response.ok) {
-            console.log("Failed to fetch protected data", response.json())
-            return "Fetch Failed. Response not ok"
+            const data = await response.json()
+            return data?.message || data
         }
-        const result = await response.json()
-        return result;
+        const data = await response.json()
+        return data?.message || data;
 
     } catch (error) {
+        if (error?.message) {
+            return error?.message
+        }
         console.error('Error:', error);
         return "Fetch Error"
     }

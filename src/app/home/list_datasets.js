@@ -1,5 +1,5 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
-import { TextSecondary } from "./list_models";
+import { BodyBorderLightSubtle, FontWeightMedium, TextSecondary } from "./list_models";
 
 export function isforked(dataset, prefix=" • ") {
     if (dataset.original_dataset) { 
@@ -28,10 +28,10 @@ export default async function ListDatasets({  }) {
         <div>
             <h1>Public Datasets</h1>
             { datasets.map((dataset) => 
-                <div key={dataset.id} className="p-1 my-1 bg-body rounded border border-light-subtle ">
-                    <div className="fw-medium">
+                <BodyBorderLightSubtle key={dataset.id}>
+                    <FontWeightMedium>
                         {dataset.name}
-                    </div>
+                    </FontWeightMedium>
                     <div>
                         <TextSecondary>
                             {dataset.username} 
@@ -46,7 +46,7 @@ export default async function ListDatasets({  }) {
                         > {isforked(dataset)}
                         </TextSecondary>
                     </div>
-                </div>
+                </BodyBorderLightSubtle>
                 )
             }
         </div>

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { API } from '../home/list_models';
+import CheckLogin from '../login/checkLogin';
 
 export function log(...args) {
     console.log(...args)
@@ -59,13 +60,11 @@ export default function ModelForm() {
             if (response.ok) {
                 log('Form submitted successfully');
             } else {
-                const errorDetails = await response.json();
-                console.error(`Error details: ${JSON.stringify(errorDetails)}`);
+                const data = await response.json();
+                setMessage(data?.message)
                 console.error(`Form submission failed. status: ${response.status}`);
             }
-            
             const result = await response.json();
-            setMessage(result?.message);
             log(result);
         } catch (error) {
             console.error('Error:', error);
@@ -74,6 +73,12 @@ export default function ModelForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+            <Suspense>
+                <CheckLogin>
+                    <br/>
+                    <br/>
+                </CheckLogin>
+            </Suspense>
             <div>Upload a Model</div>
             <label 
                 htmlFor="id_model_zipfile" 

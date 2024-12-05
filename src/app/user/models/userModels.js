@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText, ListItemBox, Text2ndarySmall } from "@/app/home/page";
+import { LinkText, Text2ndarySmall } from "@/app/home/page";
 import { ButtonLight } from "./page";
 
 
@@ -29,7 +29,7 @@ export default function UserModels() {
                         <LinkText>{model.name}</LinkText>
                         <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
                         <Text2ndarySmall>{model.original_model && ' • forked'}</Text2ndarySmall>
-                    </ButtonLight>                
+                    </ButtonLight>
                 )
             )}
 

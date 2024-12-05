@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ListModels from "./home/list_models";
 import ListDatasets from "./home/list_datasets";
+import ListModelsPages from './home/list_models_pages';
 
 export const viewport = {
   colorScheme: 'light',
@@ -60,6 +61,7 @@ export default function Home() {
         <a href='test/list-server-side'>Test List Server Side</a>
         <a href='test/blog-posts'>Test Blog Posts</a>
         <a href='test/public-models-datasets'>Test List Public Models and Datasets</a>
+        <ListModelsPages/>
         <ListModels/>
         <ListDatasets/>
           <div className={styles.ctas}>

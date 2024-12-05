@@ -119,6 +119,9 @@ export default function Sidebar({ children }) {
                         <DropDownItem hrefName="user/hitl-reinforced-feedback/">
                             HITL Reinforced Feedback
                         </DropDownItem>
+                        <DropDownItem hrefName="">
+                            Root
+                        </DropDownItem>
                     </ul>
                 </div>
                 <div 
