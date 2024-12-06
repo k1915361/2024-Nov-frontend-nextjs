@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ListModels from "./home/list_models";
 import ListDatasets from "./home/list_datasets";
-import ListModelsPages from './home/list_models_pages';
+import ListModelsPages from './user/models/pages/list_models_pages';
 
 export const viewport = {
   colorScheme: 'light',

@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../login/fetchData";
 
-export default function CheckLogin({children}) {
+export const textSecondary = "text-body-secondary"
+
+export default function UserOrGuestShowPublic({children, ...props}) {
     const route = '/api/user/'
     const [user, setUser] = useState([]);
 
@@ -18,15 +20,12 @@ export default function CheckLogin({children}) {
     }, []);
 
     return (
-        <div>
-            {user?.id && user?.username 
-            ? <></>
-            : 
-            <>
-                Please <a href='/login'>login</a> to use this page.
-            </>
+        <>
+            {!(user?.id) && 
+                <span className="text-body-secondary fs-" {...props}>Guest mode - showing public
+                    {children}
+                </span>
             }
-            {children}
-        </div>
+        </>
     )
 }

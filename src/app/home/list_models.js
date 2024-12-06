@@ -1,8 +1,6 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { ispublic } from "./list_datasets";
-
-export const API_ROOT = "http://127.0.0.1:8000"
-export const API = API_ROOT + "/polls"
+import { API_VIEW } from "../login/fetchData";
 
 export function isforked(model, prefix = "• ") {
     if (model.original_model) { 
@@ -25,6 +23,7 @@ export function BodyBorderLightSubtle({children, ...props}){
     return (
         <div
             className="p-1 my-1 bg-body rounded border border-light-subtle"
+            key={props.key}
             {...props}
         >
             {children}
@@ -65,8 +64,14 @@ export function ListModelItem({model}) {
     </>
 }
 
+export function ListModelItemBody({model}) {
+    return <BodyBorderLightSubtle key={model.id}>
+        <ListModelItem model={model}/>
+    </BodyBorderLightSubtle>
+}
+
 export default async function ListModels({  }) {
-    const data = await fetch(`${API}/models/`)
+    const data = await fetch(`${API_VIEW}/models/`)
     const datajson = await data.json()
     const models = datajson.models
  
@@ -74,11 +79,7 @@ export default async function ListModels({  }) {
         <div>
             <h1>Public Models</h1>
             { models.map((model) => 
-                <BodyBorderLightSubtle key={model.id}>
-                    <ListModelItem model={model}>
-
-                    </ListModelItem>
-                </BodyBorderLightSubtle>
+                <ListModelItemBody model={model}/>                
                 )
             }
         </div>

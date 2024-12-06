@@ -20,15 +20,9 @@ export default function Username() {
     return (
         <div>
             {(user?.id) ? 
-                <>
                 <div>{user.username}</div>
-            </>           
             :
-            <>
-                <div>
-                    Guest
-                </div>
-            </>
+                <div>Guest</div>            
             }
         </div>
     )
