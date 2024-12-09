@@ -13,7 +13,11 @@ export function PageNavBtn({ href, children, ...props }) {
 }
 
 export function getUrlSearchParams() {
-    return new URLSearchParams(window.location.search)
+        return new URLSearchParams(window.location.search)
+    try {
+    } catch {
+        const message = "This page's window and URL is not yet loaded, it will be loaded the second time or in a few loading."
+    }
 }
 
 export function maxint(num, min=1) {
@@ -35,7 +39,7 @@ export function useListPaginationState(route, param, namespace, route_per_page =
         };
     }
 
-    const initialPage = maxint(searchParams.get(param))
+    const initialPage = maxint(searchParams.get(param)) || 1
     const router = useRouter();
     const [pageNum, setPageNum] = useState(initialPage);
     const [list, setList] = useState([]);
@@ -48,6 +52,10 @@ export function useListPaginationState(route, param, namespace, route_per_page =
         const local_per_page = maxint(searchParams.get(local_per_page_param)) || global_per_page
         const response = await fetch(
             `${route}${page}${route_per_page}${global_per_page}&${local_per_page_param}=${local_per_page}`
+            ,{
+                method: 'GET',
+                credentials: 'include',
+            }
         );
         const data = await response.json()
 

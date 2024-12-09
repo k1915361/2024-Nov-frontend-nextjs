@@ -14,7 +14,7 @@ export default function ListDatasetsPages() {
     return (
         <div>
             <h1>Datasets</h1>            
-            { datasets?.map?.((dataset) => 
+            { datasets?.map?.((dataset) =>
                     <ListDatasetItemBody 
                         dataset={dataset} 
                         key={dataset.id}

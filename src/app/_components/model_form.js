@@ -1,8 +1,8 @@
 'use client';
 
 import { Suspense, useState } from 'react';
-import { API_VIEW } from '../home/list_models';
 import CheckLogin from '../login/checkLogin';
+import { API } from '../login/fetchData';
 
 export function log(...args) {
     console.log(...args)
@@ -51,7 +51,7 @@ export default function ModelForm() {
         });
 
         try {
-            const response = await fetch(API_VIEW + '/test_model_form_post/', {
+            const response = await fetch(API + '/model/upload/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

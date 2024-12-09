@@ -3,10 +3,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function PageComponent({children}) {
-  const blogPromise = fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
-  )
-  
+ 
   return (
     <div className={styles.page}>     
       <main className={styles.main}>

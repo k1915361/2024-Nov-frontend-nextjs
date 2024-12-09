@@ -1,6 +1,23 @@
 'use client';
 
+import { ListModelItemBody } from '@/app/home/list_models';
+import { API } from '@/app/login/fetchData';
+import PageComponent from '@/app/page_component';
 import { useState, useEffect } from 'react';
+
+export const API_MODEL_SEARCH = `${API}/model/search/?query=`
+
+export function Input({value, handleChange, ...props}){
+    return <input
+            type="text"
+            placeholder="Model Name"
+            className='form-control mb-1'
+            value={value}
+            onChange={handleChange}
+            required
+            {...props}
+        />
+}
 
 export default function LiveSearch() {
     const [query, setQuery] = useState('');
@@ -31,11 +48,12 @@ export default function LiveSearch() {
         const fetchResults = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`/api/search?query=${debouncedQuery}`);
+                const response = await fetch(`${API_MODEL_SEARCH}${debouncedQuery}`);
                 const data = await response.json();
-                setResults(data.results || []);
+
+                setResults(data.list || []);
             } catch (error) {
-                console.error('Error fetching search results:', error);
+                console.log('Error fetching search results:', error);
                 setResults([]);
             } finally {
                 setLoading(false);
@@ -45,21 +63,24 @@ export default function LiveSearch() {
         fetchResults();
     }, [debouncedQuery]);
 
+    function setEventQuery(e) {
+        setQuery(e.target.value)
+    }
+
     return (
-        <div>
-            <input
-                type="text"
+        <PageComponent>            
+            <Input
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={setEventQuery}
                 placeholder="Search..."
-                className="search-input"
             />
             {loading && <p>Loading...</p>}
             <ul className="search-results">
                 {results.map((result, index) => (
-                    <li key={index}>{result.name}</li>
+                    <ListModelItemBody key={result.id} model={result}/>
+                    // <li key={index}>{result.name}</li>
                 ))}
             </ul>
-        </div>
+        </PageComponent>
     );
 }

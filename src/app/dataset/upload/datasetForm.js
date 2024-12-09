@@ -1,6 +1,6 @@
 'use client';
 
-import { API_VIEW } from '@/app/home/list_models';
+import { API } from '@/app/login/fetchData';
 import { useState } from 'react';
 
 export function log(...args) {
@@ -49,12 +49,13 @@ export default function DatasetForm() {
         });
 
         try {
-            const response = await fetch(API_VIEW + '/dataset_form_post/', {
+            const response = await fetch(API + '/dataset/upload/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,
             });
 
+            console.log(response)
             if (response.ok) {
                 log('Form submitted successfully');
             } else {
