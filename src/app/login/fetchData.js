@@ -17,20 +17,14 @@ export const fetchData = async (
             credentials: 'include',
             ...options,
         });
-
         if (!response.ok) {
-            const data = await response.json()
-            return data?.message || data
+            return response
         }
         const data = await response.json()
-        return data?.message || data;
+        return data
 
     } catch (error) {
-        if (error?.message) {
-            return error?.message
-        }
-        console.error('Error:', error);
-        return "Fetch Error"
+        return error
     }
     return null
 };

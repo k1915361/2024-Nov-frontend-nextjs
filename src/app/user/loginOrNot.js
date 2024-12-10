@@ -21,7 +21,7 @@ export default function LoginOrNot() {
     return (
         <div>
             {!(user?.id) &&
-                <a href="login/" className="px-1 mx-1 link-dark link-offset-2 link-underline-opacity-0">                    
+                <a href="/login" className="px-1 mx-1 link-dark link-offset-2 link-underline-opacity-0">                    
                     <Icon bootstrapIcon='door-open'/>
                     Log In
                 </a>

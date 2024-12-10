@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Username from "./username";
-import LoginOrNot from "../user/loginOrNot";
+// import LoginOrNot from "../user/loginOrNot";
 
 export function Icon({ children, bootstrapIcon="list", width=16, height=16, fill="currentColor", viewBox="0 0 16 16", ...props}) {
     return (
@@ -71,7 +71,7 @@ export default function Sidebar({ children }) {
                     </div>
                     <div>
                         <Suspense>
-                            <LoginOrNot/>
+                            {/* <LoginOrNot/> */}
                         </Suspense>
                     </div>
                     <div className="dropdown-center">

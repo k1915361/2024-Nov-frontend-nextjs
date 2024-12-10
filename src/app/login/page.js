@@ -52,9 +52,10 @@ export default function Login() {
     useEffect(() => {
         async function f() {
             const data = await checked_logged_in()
-            if (data == "Fetch Failed. Response not ok") {                
+            
+            if (data?.status === 401) {
                 setUser({...user, username: ''})                
-                setMessage("Please login again - your login has expired.")
+                setMessage(`${data?.statusText}: Please login again - your login has expired.`)
             }
             if (data?.username 
                 && data?.detail == "You are logged in." 

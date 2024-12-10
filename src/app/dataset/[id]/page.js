@@ -13,8 +13,6 @@ export default async function Page({
             <Suspense>
                 <FetchDatasetClient id={id}/>
             </Suspense>
-            <div className="row p-1 mb-1 rounded border border-light-subtle">
-            </div>
         </PageComponent>
     )
 }

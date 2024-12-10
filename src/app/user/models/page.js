@@ -2,10 +2,11 @@ import PageComponent from "@/app/page_component";
 import { Suspense } from "react";
 import UserModels from "./userModels";
 
-export const btnLightClass = "btn btn-light border-light-subtle shadow-sm"
+export const marginEndBottom = " me-1 mb-1 "
+export const btnLightClass = `btn btn-light border-light-subtle shadow-sm ${marginEndBottom}`
 export const colBtnLightClass = `col ${btnLightClass}`
 export const colBorderClass = "col p-1 rounded border border-light-subtle"
-export const btnDangerClass = "btn btn-danger"
+export const btnDangerClass = `btn ${marginEndBottom} btn-danger`
 export const colBtnDangerClass = `col ${btnDangerClass}`
 
 export function LinkButtonLight({children, ...props}) {
@@ -45,6 +46,17 @@ export function ColButtonLight({children, ...props}) {
     return (
         <button 
             className={colBtnLightClass} 
+            {...props}
+        >
+            {children}
+        </button>
+    )
+}
+
+export function ButtonDanger({children, ...props}) {
+    return (
+        <button 
+            className={btnDangerClass} 
             {...props}
         >
             {children}
