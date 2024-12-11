@@ -26,5 +26,27 @@ export const fetchData = async (
     } catch (error) {
         return error
     }
-    return null
 };
+
+export const fetchResponse = async (
+    route
+    , options
+    , method = 'GET'
+    , API_root = API_ROOT
+) => {
+    try {
+        const response = await fetch(`${API_root}${route}`, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers,
+            },            
+            credentials: 'include',
+            ...options,
+        });
+        return response
+
+    } catch (error) {
+        return error
+    }
+}

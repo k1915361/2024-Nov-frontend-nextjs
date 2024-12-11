@@ -3,6 +3,7 @@
 import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
+import DownloadButton from "./download";
 
 export function strToDateToLocaleStr(date) {
     return (new Date(date)).toLocaleString()
@@ -14,7 +15,7 @@ export const statusCodeMessageMap = {
 }
 
 export function ModalDeleteButton({name, children}) {
-    return <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    return <button type="button" className="btn btn-danger mb-1 me-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
         {name}
         {children}
     </button>
@@ -50,6 +51,16 @@ export function DeleteModal({
     )
 }
 
+export function ResponseMessage({data}) {
+    if (data?.success === false || data?.status === 401 || data?.status === 404) {        
+        return (
+            <div>
+                <div>{data?.message} - {statusCodeMessageMap[data?.status]}</div>                
+            </div>
+        )
+    }
+}
+
 export default function FetchDatasetClient({id}) {
     const route = '/api/dataset/'
     const [data, setData] = useState();    
@@ -57,30 +68,19 @@ export default function FetchDatasetClient({id}) {
     useEffect(() => {
         async function f() {
             const data = await fetchData(`${route}${id}`, {})
-            if (data != "Fetch Error" && data != "Fetch Failed. Response not ok"){
-                setData(data)
-            }
+            setData(data)            
         }
         f();
     }, []);
 
     async function requestDeleteDataset() {
-        const options = {
-            method: 'DELETE'
-        }
-        const response = await fetchData(`${route}${id}`, options)
+        const response = await fetchData(`${route}${id}`, {}, 'DELETE')
         setData({...data, "deleteMessage": response?.message || response})
-    }
-
-    if (data?.success === false || data?.status === 401 || data?.status === 404) {
-        return <div>
-            <div>{statusCodeMessageMap[data?.status]}</div>
-            <div>{data?.message}</div>
-        </div>
-    }
+    }    
 
     return <div>
-        <div>{JSON.stringify(data?.deleteMessage)}</div>
+        <div>{data?.deleteMessage}</div>
+        <ResponseMessage data={data} />
         <h1>
             Dataset: {data?.name}
         </h1>
@@ -88,7 +88,7 @@ export default function FetchDatasetClient({id}) {
             User: {data?.username}
         </h6>
         <ButtonLight>Dataset Analysis</ButtonLight>
-        <ButtonLight>Cleaning</ButtonLight>            
+        <ButtonLight>Cleaning</ButtonLight>
         <ButtonLight>Cleaning</ButtonLight>
         <ButtonLight>Enrichment</ButtonLight>
         <ButtonLight>Data Curation</ButtonLight>
@@ -99,23 +99,26 @@ export default function FetchDatasetClient({id}) {
             Download / Export
         </ButtonLight>
         <ModalDeleteButton>
-            Delete Dataset            
-        </ModalDeleteButton>
+            Delete Dataset
+        </ModalDeleteButton>        
+        <DownloadButton id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
-        <div>
-            Created: {strToDateToLocaleStr(data?.created)}
+        <div>Created: {data?.created &&
+                strToDateToLocaleStr(data?.created)
+            }
         </div>
-        <div>
-            Updated: {strToDateToLocaleStr(data?.updated)}
-        </div>
-        <div>
-            {data?.is_public !== null &&
-                data?.is_public === true ? 'Public' : 'Private' 
+        <div>Updated: {data?.updated &&
+                strToDateToLocaleStr(data?.updated)
             }
         </div>
         <div>
-            {data?.original_dataset !== null &&
+            {data?.is_public &&
+                (data?.is_public === true ? 'Public' : 'Private')
+            }
+        </div>
+        <div>
+            {data?.original_dataset &&
                 `Original Dataset: ${data?.original_dataset}`
             }
         </div>
