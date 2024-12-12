@@ -22,15 +22,13 @@ export default function UserDatasets() {
     
     return (
         <>
-            {list?.length !== 0 && 
-                list?.map((dataset) => (
-                    <ButtonLight key={dataset.id}>
-                        <LinkText>{dataset.name}</LinkText>
-                        <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
-                        <Text2ndarySmall>{dataset.original_dataset && ' • forked'}</Text2ndarySmall>
-                    </ButtonLight>                
-                )
-            )}
+            {list?.map?.((dataset) => (
+                <ButtonLight key={dataset.id}>
+                    <LinkText>{dataset.name}</LinkText>
+                    <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
+                    <Text2ndarySmall>{dataset.original_dataset && ' • forked'}</Text2ndarySmall>
+                </ButtonLight>                
+            ))}
 
             {list?.length == 0 && 
                 <p>No List of User Datasets available.</p>

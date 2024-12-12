@@ -22,8 +22,7 @@ export default function TopModels() {
     return (
         <div>
             <ol>
-                {list?.length !== 0 && 
-                    list?.map((model) => (
+                {list?.map?.((model) => (
                         <ListItemBox key={model.id}>
                             <span>
                                 <LinkText>{model.name}</LinkText>

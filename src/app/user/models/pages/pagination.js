@@ -13,11 +13,7 @@ export function PageNavBtn({ href, children, ...props }) {
 }
 
 export function getUrlSearchParams() {
-        return new URLSearchParams(window.location.search)
-    try {
-    } catch {
-        const message = "This page's window and URL is not yet loaded, it will be loaded the second time or in a few loading."
-    }
+    return new URLSearchParams(window.location.search)    
 }
 
 export function maxint(num, min=1) {

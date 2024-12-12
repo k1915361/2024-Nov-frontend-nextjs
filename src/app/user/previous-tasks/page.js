@@ -28,11 +28,11 @@ export default function UserPreviousTasks() {
     
     return (
         <PageComponent>
-            <div class="col p-1 mb-1 bg-body-tertiary rounded border border-light-subtle">
+            <div className="col p-1 mb-1 bg-body-tertiary rounded border border-light-subtle">
                 <h3>Previous RAIDO Tasks</h3>
             </div>
-            <div class="row align-items-start gap-1">
-                <div class="row gap-1">
+            <div className="row align-items-start gap-1">
+                <div className="row gap-1">
                     <ColBorderLightSubtle>
                         <RowGap1Margin0>
                             <BtnPrimary>RAIDO Task 01</BtnPrimary>

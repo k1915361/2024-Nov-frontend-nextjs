@@ -23,15 +23,13 @@ export default function UserModels() {
     
     return (
         <>
-            {list?.length !== 0 && 
-                list?.map((model) => (
-                    <ButtonLight key={model.id}>
-                        <LinkText>{model.name}</LinkText>
-                        <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
-                        <Text2ndarySmall>{model.original_model && ' • forked'}</Text2ndarySmall>
-                    </ButtonLight>
-                )
-            )}
+            {list?.map?.((model) => (
+                <ButtonLight key={model.id}>
+                    <LinkText>{model.name}</LinkText>
+                    <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
+                    <Text2ndarySmall>{model.original_model && ' • forked'}</Text2ndarySmall>
+                </ButtonLight>
+            ))}
 
             {list?.length == 0 && 
                 <p>No List of User Models available.</p>

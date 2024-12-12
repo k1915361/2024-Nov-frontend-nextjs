@@ -22,7 +22,7 @@ export default function TopDatasets() {
     return (
         <div>
             <ol>
-                {list.length !== 0 && list.map((dataset) => (
+                {list?.length !== 0 && list?.map?.((dataset) => (
                     <ListItemBox key={dataset.id}>
                         <span>
                             <LinkText>{dataset.name}</LinkText>
@@ -34,7 +34,7 @@ export default function TopDatasets() {
                     </ListItemBox>                
                 ))}
 
-                {list.length == 0 && 
+                {list?.length == 0 && 
                     <p>No List of Top Datasets available.</p>
                 }
             </ol>

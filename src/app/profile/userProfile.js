@@ -20,6 +20,11 @@ export default function UserProfile() {
 
     return (
         <div>
+            {!user?.id && 
+                <div className="mt-2 mb-4"> 
+                    Guest mode - no user information.
+                </div>                
+            }
             <div>User ID: {user.id}</div>
             <div>Username: {user.username}</div>
             <div>Email: {user.email}</div>

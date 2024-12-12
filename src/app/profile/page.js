@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import PageComponent from "../page_component";
-import UserClientInfo from "./profile";
 import UserProfile from "./userProfile";
 
 export const colBoxClass = "col p-3 mb-5 bg-body-tertiary rounded border border-light-subtle"
@@ -30,9 +29,6 @@ export default function UserProfilePage() {
             <div className="row">
                 <ColBox>
                     Personal Info
-                    <Suspense fallback={<div>Loading user info...</div>}>
-                        <UserClientInfo/>
-                    </Suspense>
                     <Suspense fallback={<div>Loading user info...</div>}>
                         <UserProfile/>
                     </Suspense>
