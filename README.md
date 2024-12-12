@@ -1,3 +1,8 @@
+## Frontend Next JS Application
+
+This application is developed with the API server:  
+<https://github.com/k1915361/ku_django>
+
 ## Setting up NPX
 
 <https://nodejs.org/en/download/package-manager>
