@@ -13,7 +13,7 @@ export function Text2ndarySmall({children, ...props}) {
 
 export function LinkText({children, type = 'model', id = 0, ...props}) {
     return (
-        <a className="fw-semibold" href={`/${type}/?id=${id}`} {...props}>{ children }</a>
+        <a className="fw-semibold" href={`/${type}/${id}`} {...props}>{ children }</a>
     )
 }
 

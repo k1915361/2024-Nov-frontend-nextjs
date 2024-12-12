@@ -25,7 +25,7 @@ export default function TopModels() {
                 {list?.map?.((model) => (
                         <ListItemBox key={model.id}>
                             <span>
-                                <LinkText>{model.name}</LinkText>
+                                <LinkText id={model.id}>{model.name}</LinkText>
                                 <Text2ndarySmall> • {model.username}</Text2ndarySmall> 
                                 <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
                                 <Text2ndarySmall> • {model.is_public ? 'public' : 'private'}</Text2ndarySmall>

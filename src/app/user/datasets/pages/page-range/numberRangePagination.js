@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getUrlSearchParams, LoadingMessage, maxint } from "../pagination";
+import { getUrlSearchParams, LoadingMessage, maxint } from "../../../models/pages/pagination";
 
 export function PageNavBtn({ href, children, ...props }) {
     return (

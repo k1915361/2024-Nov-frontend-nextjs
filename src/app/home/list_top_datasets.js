@@ -25,7 +25,7 @@ export default function TopDatasets() {
                 {list?.length !== 0 && list?.map?.((dataset) => (
                     <ListItemBox key={dataset.id}>
                         <span>
-                            <LinkText>{dataset.name}</LinkText>
+                            <LinkText type="dataset" id={dataset.id}>{dataset.name}</LinkText>
                             <Text2ndarySmall> • {dataset.username}</Text2ndarySmall> 
                             <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
                             <Text2ndarySmall> • {dataset.is_public ? 'public' : 'private'}</Text2ndarySmall>

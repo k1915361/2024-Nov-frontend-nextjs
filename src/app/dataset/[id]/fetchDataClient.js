@@ -89,7 +89,6 @@ export default function FetchDatasetClient({id}) {
         </h6>
         <ButtonLight>Dataset Analysis</ButtonLight>
         <ButtonLight>Cleaning</ButtonLight>
-        <ButtonLight>Cleaning</ButtonLight>
         <ButtonLight>Enrichment</ButtonLight>
         <ButtonLight>Data Curation</ButtonLight>
         <ButtonLight>Balancing</ButtonLight>
