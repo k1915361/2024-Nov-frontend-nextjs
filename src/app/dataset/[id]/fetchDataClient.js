@@ -4,6 +4,7 @@ import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import DownloadButton from "./download";
+import { LinkText, LinkTextNormal } from "@/app/home/page";
 
 export function strToDateToLocaleStr(date) {
     return (new Date(date)).toLocaleString()
@@ -112,13 +113,15 @@ export default function FetchDatasetClient({id}) {
             }
         </div>
         <div>
-            {data?.is_public &&
+            {data?.is_public !== null && data?.is_public !== undefined &&
                 (data?.is_public === true ? 'Public' : 'Private')
             }
         </div>
         <div>
             {data?.original_dataset &&
-                `Original Dataset: ${data?.original_dataset}`
+                <LinkTextNormal id={data?.original_dataset} type='dataset'>                    
+                    Original Dataset
+                </LinkTextNormal>
             }
         </div>
     </div>

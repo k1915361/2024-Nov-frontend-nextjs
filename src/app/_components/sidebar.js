@@ -104,12 +104,8 @@ export default function Sidebar({ children }) {
                                 <Icon bootstrapIcon='collection'/>
                                 Personal Model Repo
                             </DropDownItem>
-                            <DropDownItem hrefName="user/datasets/">
-                                <Icon bootstrapIcon='database'/>
-                                Personal Dataset Repo
-                            </DropDownItem>
                             <DropDownItem hrefName="user/datasets/pages/page-range?page=1">
-                                Personal Dataset Repo v2
+                                Personal Dataset Repo
                             </DropDownItem>                            
                             <DropDownItem hrefName="model/upload/">
                                 <Icon bootstrapIcon='cloud-arrow-up'/>

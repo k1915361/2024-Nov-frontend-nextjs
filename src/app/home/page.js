@@ -17,6 +17,12 @@ export function LinkText({children, type = 'model', id = 0, ...props}) {
     )
 }
 
+export function LinkTextNormal({children, type = 'model', id = 0, ...props}) {
+    return (
+        <a className="" href={`/${type}/${id}`} {...props}>{ children }</a>
+    )
+}
+
 export function ListItemBox({children, type='model', ...props}) {
     return (
         <li style={{whiteSpace: "nowrap"}} {...props}>

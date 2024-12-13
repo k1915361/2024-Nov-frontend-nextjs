@@ -7,7 +7,7 @@ import { LinkListDatasetItemBody } from "@/app/home/list_datasets";
 import { RowGap0 } from "@/app/user/datasets/page";
 
 export default function ListDatasetsPages() {
-    const route = `${API}/datasets/page/test/?page=`
+    const route = `${API}/datasets/page/?page=`
     const param = 'page'
     const namespace = ''
     const {list: datasets, Pagination_} = useListPaginationState(route, param, namespace);
