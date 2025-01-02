@@ -8,7 +8,19 @@ export default function EventSourceClient() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        const eventSource = streamEventSource(`${API}/dataset/image/test-async-stream/`, setEvents);
+        const eventSource = new EventSource(`${API}/dataset/image/test-async-file-stream-json/`);
+
+        eventSource.onmessage = (event) => {
+            const data = event.data;
+            const img = new Image();
+            
+            if (data.file_data !== undefined) {
+                img.src = getJpegBase64(data.file_data);                            
+            } 
+
+            appendListState(setImages, img)
+            appendListState(setEvents, data)
+        }
 
         closeEventSourceOnError(eventSource)
     }, []);
