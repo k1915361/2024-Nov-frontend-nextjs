@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from 'react';
 import CheckLogin from '../login/checkLogin';
-import { API } from '../login/fetchData';
+import { API_HTTP } from '../login/fetchData';
 
 export function log(...args) {
     console.log(...args)
@@ -51,7 +51,7 @@ export default function ModelForm() {
         });
 
         try {
-            const response = await fetch(API + '/model/upload/', {
+            const response = await fetch(API_HTTP + '/model/upload/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

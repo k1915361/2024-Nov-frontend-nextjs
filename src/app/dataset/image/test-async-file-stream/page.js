@@ -1,6 +1,6 @@
 'use client'
 
-import { API } from "@/app/login/fetchData";
+import { API_HTTP } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
 
 export function streamEventSource(url, setEvents) {
@@ -33,7 +33,7 @@ export default function EventSourceClient() {
     const [images, setImages] = useState([]);
 
     useEffect(() => {
-        const eventSource = new EventSource(`${API}/dataset/image/test-async-file-stream/`);
+        const eventSource = new EventSource(`${API_HTTP}/dataset/image/test-async-file-stream/`);
 
         eventSource.onmessage = (event) => {
             const data = JSON.parse(event.data);
@@ -59,7 +59,7 @@ export default function EventSourceClient() {
                         {images[index].src !== '' &&
                             <img src={`${images[index].src}`}/>
                         }
-                        <div>Step {data.step}.</div> 
+                        <div>Step {data.step}</div> 
                         <div>Status: {data.status}</div> 
                     </div>
                 ))}

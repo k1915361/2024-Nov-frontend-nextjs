@@ -1,26 +1,26 @@
 'use client'
 
-import { API, API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
+import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
-import { closeEventSourceOnError, streamEventSource } from "../test-async-file-stream/page";
+import { appendListState } from "../test-async-file-stream/page";
+
+export function f({index, children, ...props}) {
+    return (
+        <div key={index} className="border border-light-subtle p-1 mb-1" {...props}>
+            {children}
+        </div>
+    )
+}
 
 export default function EventSourceClient() {
     const [events, setEvents] = useState([]);
-    const [images, setImages] = useState([]);
-
+    
     useEffect(() => {
         const socket = new WebSocket(`${API_ROOT_WEBSOCKET}/dataset/image/test-async-file-stream-json/`);
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data); 
 
-            const img = new Image();
-            
-            if (data.file_data !== undefined) {
-                img.src = getJpegBase64(data.file_data);                            
-            } 
-
-            appendListState(setImages, img)
             appendListState(setEvents, data)
         };
 
@@ -34,15 +34,15 @@ export default function EventSourceClient() {
     }, []);
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-            <h2>Streaming Events</h2>
-            <div style={{ maxHeight: "400px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}>
+        <div className="p-4">
+            <h2>Asynchronous WebSocket JSON</h2>
+            <div>
                 {events.map((data, index) => (
-                    <div key={index} style={{ marginBottom: "10px", padding: "5px", backgroundColor: "#f9f9f9" }}>
-                        {data.file_data !== '' &&
-                            <img src={`${data.file_data}`}/>
+                    <div key={index} className="border border-light-subtle p-1 mb-1">
+                        {data.image_url !== undefined &&
+                            <img src={`${data.image_url}`}/>
                         }
-                        <div>Step {data.step}.</div> 
+                        <div>Step {data.step}</div> 
                         <div>Status: {data.status}</div> 
                     </div>
                 ))}

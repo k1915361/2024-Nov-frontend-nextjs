@@ -1,6 +1,6 @@
 'use client';
 
-import { API } from '@/app/login/fetchData';
+import { API_HTTP } from '@/app/login/fetchData';
 import { useState } from 'react';
 
 export function log(...args) {
@@ -49,7 +49,7 @@ export default function DatasetForm() {
         });
 
         try {
-            const response = await fetch(API + '/dataset/upload/', {
+            const response = await fetch(API_HTTP + '/dataset/upload/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

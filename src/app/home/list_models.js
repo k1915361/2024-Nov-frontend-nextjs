@@ -1,6 +1,6 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { ispublic } from "./list_datasets";
-import { API, API_VIEW } from "../login/fetchData";
+import { API_HTTP, API_VIEW } from "../login/fetchData";
 
 export function isforked(model, prefix = "• ") {
     if (model.original_model) { 
@@ -72,7 +72,7 @@ export function ListModelItemBody({model}) {
 
 export function LinkListModelItemBody({model}) {
     return <a 
-        href={`${API}/model/${model.id}`} 
+        href={`${API_HTTP}/model/${model.id}`} 
         className="btn btn-outline"
     >
         <ListModelItemBody model={model}/>

@@ -1,11 +1,11 @@
 'use client'
 
 import { ListModelItemBody } from "../../../home/list_models";
-import { API } from "../../../login/fetchData";
+import { API_HTTP } from "../../../login/fetchData";
 import { useListPaginationState } from "./pagination";
 
 export default function ListModelsPages() {
-    const route = `${API}/user/models/page/?model_page=`
+    const route = `${API_HTTP}/user/models/page/?model_page=`
     const param = 'model_page'
     const namespace = 'model_'
     const {list: models, Pagination_} = useListPaginationState(route, param, namespace);

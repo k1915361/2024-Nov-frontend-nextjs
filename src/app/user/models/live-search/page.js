@@ -1,11 +1,11 @@
 'use client';
 
 import { ListModelItemBody } from '@/app/home/list_models';
-import { API } from '@/app/login/fetchData';
+import { API_HTTP } from '@/app/login/fetchData';
 import PageComponent from '@/app/page_component';
 import { useState, useEffect } from 'react';
 
-export const API_MODEL_SEARCH = `${API}/model/search/?query=`
+export const API_MODEL_SEARCH = `${API_HTTP}/model/search/?query=`
 
 export function Input({value, handleChange, ...props}){
     return <input

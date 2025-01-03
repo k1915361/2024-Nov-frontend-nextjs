@@ -1,7 +1,8 @@
 export const API_ROOT = "127.0.0.1:8000"
 export const API_ROOT_HTTP = "http://" + API_ROOT
 export const API_VIEW = API_ROOT_HTTP + "/polls"
-export const API = API_ROOT_HTTP + "/api"
+export const API_HTTP = API_ROOT_HTTP + "/api"
+export const API = API_ROOT + "/api"
 export const API_ROOT_WEBSOCKET = "ws://" + API
 
 export const fetchData = async (
