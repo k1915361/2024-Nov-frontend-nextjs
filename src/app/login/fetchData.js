@@ -5,6 +5,9 @@ export const API_HTTP = API_ROOT_HTTP + "/api"
 export const API = API_ROOT + "/api"
 export const API_ROOT_WEBSOCKET = "ws://" + API
 
+export const API_DATASET_ROOT = `${API_HTTP}/asset/user/dataset`;
+export const API_MODEL_ROOT = `${API_HTTP}/asset/user/model`;
+
 export const fetchData = async (
     route
     , options
