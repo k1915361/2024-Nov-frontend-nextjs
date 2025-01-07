@@ -16,6 +16,23 @@
   font-family: var(--font-geist-sans);
 }
 
+.page_full {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  justify-items: center;
+  min-height: 100svh;
+  padding: 8px;
+  gap: 0px;
+  font-family: var(--font-geist-sans);
+}
+
 @media (prefers-color-scheme: dark) {
   .page {
     --gray-rgb: 255, 255, 255;
@@ -31,6 +48,13 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  grid-row-start: 2;
+}
+
+.full_width_main {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
   grid-row-start: 2;
 }
 

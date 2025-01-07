@@ -37,3 +37,7 @@
   border-bottom: 0.1rem solid #eee;
   border-left: 0.1rem solid #eee;
 }
+
+.imageView {
+  width: 80%;
+}

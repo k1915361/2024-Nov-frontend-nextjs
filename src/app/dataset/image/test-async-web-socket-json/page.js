@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
 
+export const borderLightClassName = "border border-light-subtle p-1 mb-1"
+
 export function BorderLight({index, children, ...props}) {
     return (
-        <div key={index} className="border border-light-subtle p-1 mb-1" {...props}>
+        <div key={index} className={borderLightClassName} {...props}>
             {children}
         </div>
     )

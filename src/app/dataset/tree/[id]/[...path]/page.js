@@ -1,6 +1,9 @@
-import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
+import ViewDirectoryTree, { TitleRouteView } from "@/app/dataset/directoryTreeView"
 import { API_DATASET_ROOT } from "@/app/login/fetchData"
 import PageComponent from "@/app/page_component"
+import ViewTextFile from "./viewTextFile"
+import "@/app/dataset/table/styles.css"
+import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page"
 
 export const imageExtensions = ['.jpg', '.jpeg', '.png']
 export const fileExtensions = ['.yaml', '.txt', ...imageExtensions]
@@ -21,28 +24,20 @@ export default async function Page({
     const id = (await params).id
     const path = (await params).path.join('/')
 
-    fileExtensions.forEach(fileext => {
-        if (path.endsWith(fileext)) {
-            return <div>
-                --------
-                <img src={`${API_DATASET_ROOT}/${id}/${path}/`} />
-            </div>
-        }
-    });
-
     return (
         <PageComponent>
-            <br/>
-            {path.endsWith('.yaml') && ' yml '}
-            {path.endsWith('.txt') && ' txt '}
-            {path.endsWith('.jpg') && ' jpg '}
-            {path.endsWith('.jpeg') && ' jpeg '}
-            {path.endsWith('.png') && ' png '}
-            path: {`${id}/${path}`} 
-            <ViewDirectoryTree apiRoute={`${id}/${path}`}/>
-            {isText(path) && ' display text '}
-            {isImage(path) && 
-                <img src={`${API_DATASET_ROOT}/${id}/${path}/`} />
+            {(isText(path) || 
+            isImage(path)) && 
+                <TitleRouteView apiRoute={`${id}/${path}/`} />
+            }
+            {isText(path) && 
+                <ViewTextFile apiRoute={`${id}/${path}`} className={borderLightClassName}/>
+            }
+            {isImage(path) &&
+                <img className="imageView img-thumbnail" src={`${API_DATASET_ROOT}/${id}/${path}/`}/>
+            }
+            {!isText(path) && !isImage(path) &&
+                <ViewDirectoryTree apiRoute={`${id}/${path}`}/>
             }
         </PageComponent>
     )

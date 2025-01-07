@@ -43,6 +43,28 @@ export const folderIcon = <svg
         <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z" fill="currentColor"></path>
     </svg>
 
+export function TitleRouteView({apiRoute, children, Title='Datasets: '}) {
+    return (
+        <div>
+            <span className="fs-4">
+                <Icon bootstrapIcon='database-fill'/>
+                {Title} 
+            </span> <span>
+                {apiRoute}
+                {children}
+            </span>
+        </div>
+    )
+}
+
+export function FileRouteView({apiRoute, filename, children, baseApiRoute='/dataset/tree/', icon = folderIcon, target='_blank', className='dir', ...props}) {
+    return (
+        <a href={`${baseApiRoute}${apiRoute}/${filename}`} target={target} className={className} {...props}>
+            {icon} {filename} {children}
+        </a>
+    )
+}
+
 export default function ViewDirectoryTree({apiRoute, apiRoot=API_DATASET_ROOT, }) {
     const [tree, setTree] = useState({});
 
@@ -52,28 +74,29 @@ export default function ViewDirectoryTree({apiRoute, apiRoot=API_DATASET_ROOT, }
 
     return (
         <div>
-            <span>
-                <span className="fs-4">
-                    <Icon bootstrapIcon='database-fill'/>
-                    Datasets: 
-                </span> <span>
-                    {apiRoute}
-                </span>
-            </span>            
+            <TitleRouteView
+                apiRoute={apiRoute}
+            />
             <div className="list-group mb-1" >
                 {tree?.tree?.map?.((item, index) => 
                     item.is_dir 
                     ?
                         <div key={index} className="tree-item list-group-item">
-                            <a href={`/dataset/tree/${apiRoute}/${item.name}`} target="_blank" className="dir">
-                                {folderIcon} {item.name} 
-                            </a>
+                            <FileRouteView
+                                apiRoute={apiRoute}
+                                filename={item.name}
+                                icon={folderIcon}
+                            />
                         </div>
                     :
                         <div key={index} className="tree-item list-group-item">
-                            <a href={`/dataset/tree/${apiRoute}/${item.name}`} target="_blank" className="file">
-                            {fileIcon} {item.name} {item.size} B 
-                            </a>
+                            <FileRouteView
+                                apiRoute={apiRoute}
+                                filename={item.name}
+                                icon={fileIcon}
+                            >
+                                {item.size} B
+                            </FileRouteView>
                         </div>               
                 )}
             </div>

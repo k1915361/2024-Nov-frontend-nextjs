@@ -5,9 +5,9 @@ import styles from "./page.module.css";
 export default function PageComponent({children}) {
  
   return (
-    <div className={styles.page}>     
-      <main className={styles.main}>
-          {children}        
+    <div className={styles.page_full}>     
+      <main className={`${styles.full_width_main} container`}>
+          {children}
       </main>
       <footer className={styles.footer}>
         <a
