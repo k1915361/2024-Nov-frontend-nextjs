@@ -57,3 +57,23 @@ a {
 {
   white-space: nowrap;
 }
+
+progress {
+  text-align:center;
+  height: 1.5rem;
+  width: 100%;
+  -webkit-appearance: none;
+  border: none;
+}
+progress:before {
+  content: attr(data-label);
+  font-size: 0.8em;
+  vertical-align: 0
+}
+progress::-webkit-progress-bar {
+  background-color: #c9c9c9;
+}
+progress::-webkit-progress-value,
+progress::-moz-progress-bar {
+  background-color: blue;
+}
