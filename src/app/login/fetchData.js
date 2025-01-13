@@ -12,9 +12,10 @@ export const fetchData = async (
     route
     , options
     , method = 'GET'
+    , apiRoot = API_ROOT_HTTP
 ) => {   
     try {
-        const response = await fetch(`${API_ROOT}${route}`, {
+        const response = await fetch(`${apiRoot}${route}`, {
             method: method,
             headers: {
                 'Content-Type': 'application/json',
@@ -38,10 +39,10 @@ export const fetchResponse = async (
     route
     , options
     , method = 'GET'
-    , API_root = API_ROOT
+    , apiRoot = API_ROOT_HTTP
 ) => {
     try {
-        const response = await fetch(`${API_root}${route}`, {
+        const response = await fetch(`${apiRoot}${route}`, {
             method: method,
             headers: {
                 'Content-Type': 'application/json',

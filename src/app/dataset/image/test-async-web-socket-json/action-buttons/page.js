@@ -5,6 +5,7 @@ import { BorderLight, newWebSocketAndSetState } from "../page";
 import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/user/models/page";
 import { useState } from "react";
+import { ProgressBarView } from "../action-progress/actionProgressBarView";
 
 export function handleWebsocketEvents(setEvents, apiRoot=API_ROOT_WEBSOCKET, apiRoute='/dataset/image/test-async-file-stream-json/') {
     console.log(`${apiRoot}${apiRoute}`)
@@ -69,6 +70,7 @@ export default function EventSourceClient() {
                 buttonName='ActionE'
                 apiRoute='/dataset/image/test-async-file-stream-json/action-e'
             />
+            <ProgressBarView/>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { fetchData } from "@/app/login/fetchData"
+import { fetchData, fetchResponse } from "@/app/login/fetchData"
 import { ButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import DownloadButton from "./download";
@@ -69,7 +69,7 @@ export default function FetchDatasetClient({id}) {
     useEffect(() => {
         async function f() {
             const data = await fetchData(`${route}${id}`, {})
-            setData(data)            
+            setData(data)
         }
         f();
     }, []);

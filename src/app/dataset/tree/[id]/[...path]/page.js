@@ -4,60 +4,132 @@ import PageComponent from "@/app/page_component"
 import ViewTextFile from "./viewTextFile"
 import "@/app/dataset/table/styles.css"
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page"
-import ViewMarkdownFilePage from "../../markdown-view/[id]/[...path]/page"
 import { datasetTreeTextViewBaseRoute } from "../../text-view/[id]/[...path]/page"
 import { redirect } from "next/navigation"
 import { TitleRouteView } from "@/app/dataset/titleRouteView"
 
-export const imageExtensions = ['.jpg', '.jpeg', '.png']
-export const fileExtensions = ['.yaml', '.txt', ...imageExtensions]
-
-export function isImage(path) {
-    return imageExtensions.some((fileext) => {
-        return path.endsWith(fileext);
-    });
+export const isReadmeFile = {
+    'readme.roboflow.txt': true,
+    'readme.markdown': true,
+    'readme.mdown': true,
+    'readme.mkdn': true,
+    'readme.md': true,
+    'readme.txt': true,
+    'readme': true,
+    'readme.dataset.txt': true,
 }
 
-export function isText(path) {
-    return path.endsWith('.txt')
+export const isImage = {
+    'png': true,
+    'jpg': true,
+    'jpeg': true
 }
 
-export function isYaml(path) {
-    return path.endsWith('.yaml')
+export const isFile = {
+    'txt': true,
+    'yaml': true,
+    'png': true,
+    'jpg': true,
+    'jpeg': true
 }
 
-export function isMarkdown(path) {
-    return (path.endsWith('.md') 
-        || path.toLowerCase().includes('readme'))
+export const isReadableText = {
+    'txt': true,
+    'markdown': true,
+    'mdown': true,
+    'mkdn': true,
+    'md': true,
+    'readme': true,
+    'yaml': true
 }
+
+export const isKeyValueTreeMap = {
+    'yaml': true,
+    'json': true
+}
+
+export const isTreeMap = {
+    'yaml': true,
+    'json': true,
+    'xml': true,
+}
+
+export const isTextOrMarkdownOrReadme = {
+    'txt': true,
+    'md': true,
+    'readme': true
+}
+
+export const isOtherFile = {
+    'csv': true,
+    'json': true,
+    'md': true,
+    'readme': true,
+    'pdf': true,
+    'doc': true,
+    'docx': true,
+    'html': true,
+    'm4a': true,
+    'mp3': true,
+    'mp4': true,
+    'xlsx': true
+}
+
+export const isMarkup = {
+    'markdown': true,
+    'mdown': true,
+    'mkdn': true,
+    'md': true,
+    'textile': true,
+    'rdoc': true,
+    'org': true,
+    'creole': true,
+    'mediawiki': true,
+    'wiki': true,
+    'rst': true,
+    'asciidoc': true,
+    'adoc': true,
+    'asc': true,
+    'pod': true,
+}
+
+export function getFileExtension(path) {
+    return path.slice(path.lastIndexOf('.') + 1).toLowerCase()
+}
+
+export function getFileNameFromPath(path) {
+    return path.slice(path.lastIndexOf('/') + 1).toLowerCase()
+}
+
+export function arrayLast(array, index=1){
+    return array[array.length - index];
+};
 
 export default async function Page({
     params,
 }) {
     const id = (await params).id
-    const path = (await params).path.join('/')
+    const pathArray = (await params).path
+    const path = pathArray.join('/')
 
-    if (isMarkdown(path)) {
+    if (isReadmeFile[arrayLast(pathArray).toLowerCase()]) {
         redirect(`/${datasetTreeTextViewBaseRoute}${id}/${path}`)
     } 
 
+    const extension = getFileExtension(path);
+    
     return (
         <PageComponent>
-            {(isText(path) 
-            || isImage(path) 
-            || isYaml(path)) && 
+            {isFile[extension] && 
                 <TitleRouteView apiRoute={`${id}/${path}`} />
             }
-            {(isText(path) 
-            || isYaml(path)) && 
+            {isReadableText[extension] && 
                 <ViewTextFile apiRoute={`${id}/${path}`} className={borderLightClassName}/>
             }
-            {isImage(path) &&
+            {isImage[extension] &&
                 <img className="imageView img-thumbnail" src={`${API_DATASET_ROOT}/${id}/${path}/`}/>
             }
-            {(!isText(path) 
-            && !isImage(path) 
-            && !isYaml(path)) &&
+            {!isFile[extension] &&
                 <ViewDirectoryTree apiRoute={`${id}/${path}`}/>
             }
         </PageComponent>

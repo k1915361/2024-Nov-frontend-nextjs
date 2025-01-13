@@ -1,5 +1,5 @@
 import PageComponent from "@/app/page_component";
-import { isText, isYaml } from "../../../[id]/[...path]/page"
+import { getFileExtension, isReadableText } from "../../../[id]/[...path]/page"
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page";
 import { LinkButtonLight } from "@/app/user/models/page";
 import ViewTextFile from "../../../[id]/[...path]/viewTextFile";
@@ -14,10 +14,10 @@ export default async function ViewMarkdownFilePage({
 }) {
     const id = (await params).id
     const path = (await params).path.join('/')
+    const extension = getFileExtension(path);
 
-    if ((!isText(path)  
-        && !isYaml(path))) {
-        return <div>This file is not a text or yaml file.</div> 
+    if (!isReadableText[extension]) {
+        return <div>This file is not a readable text, readme, or markdown file.</div> 
     }
 
     return (
