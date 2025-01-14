@@ -9,10 +9,10 @@ export const colBorderClass = "col p-1 rounded border border-light-subtle"
 export const btnDangerClass = `btn ${marginEndBottom} btn-danger`
 export const colBtnDangerClass = `col ${btnDangerClass}`
 
-export function LinkButtonLight({children, ...props}) {
+export function LinkButtonLight({children, addClassName='', ...props}) {
     return ( 
         <a 
-            className={btnLightClass} 
+            className={`${btnLightClass} ${addClassName}`}
             {...props}
         >
             {children}

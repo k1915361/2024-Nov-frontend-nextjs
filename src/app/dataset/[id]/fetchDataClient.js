@@ -1,10 +1,14 @@
 'use client'
 
 import { fetchData, fetchResponse } from "@/app/login/fetchData"
-import { ButtonLight } from "@/app/user/models/page";
+import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import DownloadButton from "./download";
 import { LinkText, LinkTextNormal } from "@/app/home/page";
+import { datasetTreeBaseRoute } from "../tree/text-view/[id]/[...path]/page";
+import { datasetActionBaseRoute } from "../action/[id]/page";
+import { Icon } from "@/app/_components/sidebar";
+import Link from "next/link";
 
 export function strToDateToLocaleStr(date) {
     return (new Date(date)).toLocaleString()
@@ -62,6 +66,37 @@ export function ResponseMessage({data}) {
     }
 }
 
+export function removeDatasetDirectoryBasePath(path, source='asset/user/dataset/', target='') {
+    return path.replace(source, target)
+}
+
+export function DatasetDetail({data}) {
+    return (
+        <>
+            <div>Created: {data?.created &&
+                    strToDateToLocaleStr(data?.created)
+                }
+            </div>
+            <div>Updated: {data?.updated &&
+                    strToDateToLocaleStr(data?.updated)
+                }
+            </div>
+            <div>
+                {data?.is_public !== null && data?.is_public !== undefined &&
+                    (data?.is_public === true ? 'Public' : 'Private')
+                }
+            </div>
+            <div>
+                {data?.original_dataset &&
+                    <LinkTextNormal id={data?.original_dataset} type='dataset'>
+                        Original Dataset
+                    </LinkTextNormal>
+                }
+            </div>
+        </>
+    )
+}
+
 export default function FetchDatasetClient({id}) {
     const route = '/api/dataset/'
     const [data, setData] = useState();    
@@ -88,12 +123,20 @@ export default function FetchDatasetClient({id}) {
         <h6>
             User: {data?.username}
         </h6>
-        <ButtonLight>Dataset Analysis</ButtonLight>
-        <ButtonLight>Cleaning</ButtonLight>
-        <ButtonLight>Enrichment</ButtonLight>
-        <ButtonLight>Data Curation</ButtonLight>
-        <ButtonLight>Balancing</ButtonLight>
-        <ButtonLight>XAI</ButtonLight>
+        <LinkButtonLight addClassName=' active' href='' style={{ borderBottom: "3px solid black", }}>
+            Dataset card
+        </LinkButtonLight>
+
+        <LinkButtonLight>
+            <Icon bootstrapIcon='file-earmark-spreadsheet'/>
+            Viewer
+        </LinkButtonLight>
+        <LinkButtonLight href={`/${datasetTreeBaseRoute}${removeDatasetDirectoryBasePath(data?.dataset_directory || '')}`} >
+            Files
+        </LinkButtonLight>
+        <LinkButtonLight href={`/${datasetActionBaseRoute}${id}`} >
+            Actions
+        </LinkButtonLight>
         <div/>
         <ButtonLight>
             Download / Export
@@ -103,26 +146,8 @@ export default function FetchDatasetClient({id}) {
         </ModalDeleteButton>        
         <DownloadButton id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
+        
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
-        <div>Created: {data?.created &&
-                strToDateToLocaleStr(data?.created)
-            }
-        </div>
-        <div>Updated: {data?.updated &&
-                strToDateToLocaleStr(data?.updated)
-            }
-        </div>
-        <div>
-            {data?.is_public !== null && data?.is_public !== undefined &&
-                (data?.is_public === true ? 'Public' : 'Private')
-            }
-        </div>
-        <div>
-            {data?.original_dataset &&
-                <LinkTextNormal id={data?.original_dataset} type='dataset'>                    
-                    Original Dataset
-                </LinkTextNormal>
-            }
-        </div>
+        <DatasetDetail data={data}/>
     </div>
 }

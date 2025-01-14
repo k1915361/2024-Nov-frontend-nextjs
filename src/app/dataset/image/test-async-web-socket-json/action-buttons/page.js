@@ -48,7 +48,7 @@ export default function EventSourceClient() {
     return (
         <div className="p-4">
             <h2>Asynchronous WebSocket JSON</h2>
-            <ViewDirectoryTree api='1-20241120_154348-CS_dataset'/>
+            <ViewDirectoryTree apiRoute='1-20241120_154348-CS_dataset'/>
             <ActionResponseView buttonName='Action'/>
             <ActionResponseView
                 buttonName='ActionA'
