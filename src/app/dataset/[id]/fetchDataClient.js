@@ -1,22 +1,26 @@
 'use client'
 
-import { fetchData, fetchResponse } from "@/app/login/fetchData"
+import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import DownloadButton from "./download";
-import { LinkText, LinkTextNormal } from "@/app/home/page";
+import { LinkTextNormal } from "@/app/home/page";
 import { datasetTreeBaseRoute } from "../tree/text-view/[id]/[...path]/page";
 import { datasetActionBaseRoute } from "../action/[id]/page";
 import { Icon } from "@/app/_components/sidebar";
-import Link from "next/link";
-
-export function strToDateToLocaleStr(date) {
-    return (new Date(date)).toLocaleString()
-}
 
 export const statusCodeMessageMap = {
     401: 'Unauthorized',
     404: 'Not Found',
+}
+
+export const isPublic = {
+    true: 'Public',
+    false: 'Private'
+}
+
+export function strToDateToLocaleStr(date) {
+    return (new Date(date)).toLocaleString()
 }
 
 export function ModalDeleteButton({name, children}) {
@@ -70,31 +74,12 @@ export function removeDatasetDirectoryBasePath(path, source='asset/user/dataset/
     return path.replace(source, target)
 }
 
-export function DatasetDetail({data}) {
-    return (
-        <>
-            <div>Created: {data?.created &&
-                    strToDateToLocaleStr(data?.created)
-                }
-            </div>
-            <div>Updated: {data?.updated &&
-                    strToDateToLocaleStr(data?.updated)
-                }
-            </div>
-            <div>
-                {data?.is_public !== null && data?.is_public !== undefined &&
-                    (data?.is_public === true ? 'Public' : 'Private')
-                }
-            </div>
-            <div>
-                {data?.original_dataset &&
-                    <LinkTextNormal id={data?.original_dataset} type='dataset'>
-                        Original Dataset
-                    </LinkTextNormal>
-                }
-            </div>
-        </>
-    )
+export function get(v, fnction=(v)=>v, defaultValue='') {
+    return (v && fnction(v)) || defaultValue
+}
+
+export function isNotNullUndefined(v) {
+    return v !== null && v !== undefined
 }
 
 export default function FetchDatasetClient({id}) {
@@ -147,7 +132,24 @@ export default function FetchDatasetClient({id}) {
         <DownloadButton id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
         
-        <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
-        <DatasetDetail data={data}/>
+        <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />        
+        <div>Created: {
+                get(data?.created, strToDateToLocaleStr)
+            }
+        </div>
+        <div>Updated: {
+                get(data?.updated, strToDateToLocaleStr)
+            }
+        </div>
+        <div>
+            {isPublic[data?.is_public]}            
+        </div>
+        <div>
+            {data?.original_dataset &&
+                <LinkTextNormal id={data?.original_dataset} type='dataset'>
+                    Original Dataset
+                </LinkTextNormal>
+            }
+        </div>
     </div>
 }

@@ -7,7 +7,7 @@ export default async function ViewTextFile({apiRoute, apiRoot=API_DATASET_ROOT, 
     if (!response.ok) {
         return <div>{responseIssueMessage}</div>
     }
-    const text = (await response.text()).replace('<pre>', ' ').replace('</pre>', '')
+    const text = (await response.text()).replace('<pre>', '').replace('</pre>', '')
     
     return (
         <pre {...props} style={{ textWrap: "wrap"}} >

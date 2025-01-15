@@ -14,7 +14,7 @@ export const fetchData = async (
     , options
     , method = 'GET'
     , apiRoot = API_ROOT_HTTP
-) => {   
+) => { 
     try {
         const response = await fetch(`${apiRoot}${route}`, {
             method: method,

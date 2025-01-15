@@ -71,6 +71,17 @@ export default function EventSourceClient() {
                 apiRoute='/dataset/image/test-async-file-stream-json/action-e'
             />
             <ProgressBarView/>
+            <ProgressBarView 
+                apiRoute="/dataset/image/action-progress-action-a" buttonName="Start Task A"/>
+            <ProgressBarView buttonName="Start Task B" 
+                apiRoute="/dataset/image/action-progress-action-b"/>
+            <ProgressBarView buttonName="Start Task C" 
+                apiRoute="/dataset/image/action-progress-action-c"/>
+            <ProgressBarView buttonName="Start Task D" 
+                apiRoute="/dataset/image/action-progress-action-d"/>
+            <ProgressBarView buttonName="Start Task E" 
+                apiRoute="/dataset/image/action-progress-action-e"/>
+            
         </div>
     );
 }

@@ -30,26 +30,26 @@ export default async function Page(
                 buttonName='Dataset Analysis'
                 apiRoute='/dataset/image/test-async-file-stream-json/action-a'
             />
-            <DivActionResponseView
-                buttonName='Cleaning'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-b'
+            <ProgressBarView 
+                buttonName="Cleaning"
+                apiRoute="/dataset/image/action-progress"
             />
-            <DivActionResponseView
-                buttonName='Enrichment'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-c'
+            <ProgressBarView 
+                buttonName="Enrichment" 
+                apiRoute="/dataset/image/action-progress-action-b"
             />
-            <DivActionResponseView
-                buttonName='Data Curation'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-d'
+            <ProgressBarView 
+                buttonName="Data Curation" 
+                apiRoute="/dataset/image/action-progress-action-c"
             />
-            <DivActionResponseView
-                buttonName='Balancing'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-e'
+            <ProgressBarView 
+                buttonName="Balancing" 
+                apiRoute="/dataset/image/action-progress-action-d"
             />
-            <DivActionResponseView
-                buttonName='XAI'
+            <ProgressBarView 
+                buttonName="XAI" 
+                apiRoute="/dataset/image/action-progress-action-e"
             />
-            <ProgressBarView/>
         </PageComponent>
     )
 }

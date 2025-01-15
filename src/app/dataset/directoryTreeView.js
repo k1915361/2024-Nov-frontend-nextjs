@@ -45,7 +45,7 @@ export const folderIcon = <svg
         <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z" fill="currentColor"></path>
     </svg>
 
-export function FileRouteView({apiRoute, filename, children, baseApiRoute=datasetTreeBaseRoute, icon = folderIcon, target='_blank', className='dir', ...props}) {
+export function FileRouteView({apiRoute, filename, children, baseApiRoute=datasetTreeBaseRoute, icon = folderIcon, target='', className='dir', ...props}) {
     return (
         <a href={`/${baseApiRoute}${apiRoute}/${filename}`} target={target} className={className} {...props}>
             {icon} {filename} {children}

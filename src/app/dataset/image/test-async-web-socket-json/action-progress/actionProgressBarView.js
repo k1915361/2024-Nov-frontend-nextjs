@@ -1,6 +1,6 @@
 'use client'
 
-import { getFileExtension, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
+import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
 import { API_ROOT_WEBSOCKET, HTTP_STATIC_SERVER } from '@/app/login/fetchData';
 import { ButtonLight } from '@/app/user/models/page';
 import { useState, useEffect } from 'react';
@@ -18,12 +18,12 @@ export function ViewFileLink({href, name, children, changeDisplayNameFunction=re
     </a>
 }
 
-export function ProgressBarView({total_steps = 3}) {
+export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/action-progress', buttonName='Start Task'}) {
     const [progress, setProgress] = useState({ current: 0, total: 100 });
     const [ws, setWs] = useState(null);
 
     useEffect(() => {
-        const newWs = new WebSocket(`${API_ROOT_WEBSOCKET}/dataset/image/test-async-file-stream-json/action-progress`);
+        const newWs = new WebSocket(`${API_ROOT_WEBSOCKET}${apiRoute}`);
         setWs(newWs);
 
         newWs.onopen = () => {
@@ -60,15 +60,18 @@ export function ProgressBarView({total_steps = 3}) {
     return (
         <>
             <div>
-                <ButtonLight onClick={startTask}>Start Task</ButtonLight>
+                <ButtonLight onClick={startTask}>
+                    {buttonName}
+                </ButtonLight>
             </div>
 
             <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow={progressPercentage} aria-valuemin="0" aria-valuemax={progress.total}>
                 <div className="progress-bar" style={{width: `${progressPercentage}%`}}>{progressPercentage}%</div>
             </div>
-            {isReadableText[getFileExtension(progress?.result_url || '')] 
+            {(progress?.finished === true 
+                && isReadableText[getFileExtension(progress?.result_url || '')])
                 && <>
-                    <ViewFileLink href={progress?.result_url}/>                    
+                    <ViewFileLink href={progress?.result_url}/>
                     <ViewTextFileClientSide 
                         apiRoute={`${progress?.result_url}`} 
                         apiRoot='' 
@@ -76,6 +79,12 @@ export function ProgressBarView({total_steps = 3}) {
                         className={borderLightClassName}
                     />
                 </>
+            }
+            {(progress?.finished === true 
+                && isImage[getFileExtension(progress?.result_url || '')])
+                && 
+                    <img className="imageView img-thumbnail" src={progress?.result_url}/>
+                
             }
         </>
     );
