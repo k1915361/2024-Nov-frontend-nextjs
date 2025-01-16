@@ -1,10 +1,10 @@
 import PageComponent from "@/app/page_component";
 import { getFileExtension, isTextOrMarkdownOrReadme } from "../../../[id]/[...path]/page"
-import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page";
 import { API_DATASET_ROOT } from "@/app/login/fetchData";
 import { LinkButtonLight } from "@/app/user/models/page";
 import { datasetTreeTextViewBaseRoute } from "../../../text-view/[id]/[...path]/page";
 import { TitleRouteView } from "@/app/dataset/titleRouteView";
+import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils";
 
 export const responseIssueMessage = "Something wrong with data requesting: Data does not exist or deleted / Server is not available."
 

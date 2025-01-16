@@ -3,11 +3,11 @@
 import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
-import DownloadButton from "./download";
 import { LinkTextNormal } from "@/app/home/page";
 import { datasetTreeBaseRoute } from "../tree/text-view/[id]/[...path]/page";
 import { datasetActionBaseRoute } from "../action/[id]/page";
 import { Icon } from "@/app/_components/sidebar";
+import DownloadButtonClientSide from "./downloadClientSide";
 
 export const statusCodeMessageMap = {
     401: 'Unauthorized',
@@ -129,7 +129,7 @@ export default function FetchDatasetClient({id}) {
         <ModalDeleteButton>
             Delete Dataset
         </ModalDeleteButton>        
-        <DownloadButton id={id}/>
+        <DownloadButtonClientSide id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
         
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />        

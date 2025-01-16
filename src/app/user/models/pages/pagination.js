@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getUrlSearchParams } from "./paginationClient";
 
 export function PageNavBtn({ href, children, ...props }) {
     return (
@@ -12,12 +13,12 @@ export function PageNavBtn({ href, children, ...props }) {
     )
 }
 
-export function getUrlSearchParams() {
-    return new URLSearchParams(window.location.search)    
-}
-
 export function maxint(num, min=1) {
     return Math.max(parseInt(num), min)
+}
+
+export function minint(num, min=1) {
+    return Math.min(parseInt(num), min)
 }
 
 export function LoadingMessage() {

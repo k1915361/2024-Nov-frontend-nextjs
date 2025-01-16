@@ -1,7 +1,7 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { BodyBorderLightSubtle, FontWeightMedium, TextSecondary } from "./list_models";
-import { API_HTTP, API_VIEW } from "../login/fetchData";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"
+import { API_VIEW } from "../login/fetchData";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 export function isforked(dataset, prefix=" • ") {
     if (dataset.original_dataset) { 

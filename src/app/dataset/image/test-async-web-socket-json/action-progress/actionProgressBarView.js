@@ -4,8 +4,8 @@ import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[i
 import { API_ROOT_WEBSOCKET, HTTP_STATIC_SERVER } from '@/app/login/fetchData';
 import { ButtonLight } from '@/app/user/models/page';
 import { useState, useEffect } from 'react';
-import { borderLightClassName } from '../page';
 import ViewTextFileClientSide from '@/app/dataset/tree/[id]/[...path]/viewTextFileClientSide';
+import { borderLightClassName } from '../serverUtils';
 
 export function removeStaticServerBaseURL(url, source=HTTP_STATIC_SERVER+'/', target='') {
     return url.replace(source, target)

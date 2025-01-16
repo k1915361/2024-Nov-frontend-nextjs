@@ -43,6 +43,16 @@ export function ActionResponseView({buttonName, apiRoute}) {
     )
 }
 
+export function DivActionResponseView({buttonName, apiRoute, ...props}) {
+    return <div>
+        <ActionResponseView
+            buttonName={buttonName}
+            apiRoute={apiRoute}
+            {...props}
+        />
+    </div>
+}
+
 export default function EventSourceClient() {
 
     return (

@@ -1,6 +1,9 @@
+'use client'
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getUrlSearchParams, LoadingMessage, maxint } from "../../../models/pages/pagination";
+import { LoadingMessage, maxint } from "../../../models/pages/pagination";
+import { getUrlSearchParams } from "@/app/user/models/pages/paginationClient";
 
 export function PageNavBtn({ href, children, ...props }) {
     return (
@@ -13,9 +16,8 @@ export function PageNavBtn({ href, children, ...props }) {
     )
 }
 
-export function useListPaginationState(route, param, namespace, route_per_page = '&per_page=') {
+export function useListPaginationState(route, param, namespace, searchParams, route_per_page = '&per_page=') {
     const local_per_page_param = `${namespace}per_page`
-    const searchParams = getUrlSearchParams()
     
     if (!searchParams) {
         return {

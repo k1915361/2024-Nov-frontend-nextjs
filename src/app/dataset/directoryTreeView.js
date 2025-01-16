@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { Icon } from "../_components/sidebar";
 import { API_DATASET_ROOT } from "../login/fetchData";
 import { datasetTreeBaseRoute } from "./tree/text-view/[id]/[...path]/page";
 import { TitleRouteView } from "./titleRouteView";

@@ -2,12 +2,19 @@
 
 import { API_HTTP } from "@/app/login/fetchData";
 import { useEffectFetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DatasetInfo({id}) { 
     const [data, setData] = useState();
     const route = `dataset/${id}`
 
+    useEffect(() => {
+        fetchAndSetState(
+            `${API_HTTP}/${route}`, 
+            async (response) => setData(await response.json())
+        )
+    }, [])
+    
     useEffectFetchAndSetState(route, async (response) => setData(await response.json()), API_HTTP)
 
     return (

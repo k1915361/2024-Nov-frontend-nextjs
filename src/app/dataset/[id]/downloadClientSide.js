@@ -1,12 +1,10 @@
+'use client'
+
 import { fetchResponse} from '@/app/login/fetchData';
 import { ButtonLight } from '@/app/user/models/page';
 import React from 'react';
 
-/* Issue: document is only available on client side. 
- *  NextJS ReferenceError: document is not defined
-*/
-
-const DownloadButton = ({id, route='/api/dataset/download/'}) => {
+const DownloadButtonClientSide = ({id, route='/api/dataset/download/'}) => {
     const handleDownload = async () => {
         const response = await fetchResponse(`${route}${id}/`, {});
         if (!response.ok) {
@@ -32,8 +30,7 @@ const DownloadButton = ({id, route='/api/dataset/download/'}) => {
         document.body.appendChild(a);
         a.click();
         a.remove();
-        window.URL.revokeObjectURL(url);
-        
+        window.URL.revokeObjectURL(url);        
     };
 
     return (
@@ -43,4 +40,4 @@ const DownloadButton = ({id, route='/api/dataset/download/'}) => {
     );
 };
 
-export default DownloadButton;
+export default DownloadButtonClientSide;

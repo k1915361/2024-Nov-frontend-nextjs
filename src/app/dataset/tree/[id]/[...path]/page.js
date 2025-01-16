@@ -1,12 +1,14 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
 import { API_DATASET_ROOT } from "@/app/login/fetchData"
 import PageComponent from "@/app/page_component"
-import ViewTextFile from "./viewTextFile"
 import "@/app/dataset/table/styles.css"
-import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page"
 import { datasetTreeTextViewBaseRoute } from "../../text-view/[id]/[...path]/page"
 import { redirect } from "next/navigation"
 import { TitleRouteView } from "@/app/dataset/titleRouteView"
+import ViewTextFileClientSide from "./viewTextFileClientSide"
+import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils"
+
+export const imageThumbnailClass = "imageView img-thumbnail"
 
 export const isReadmeFile = {
     'readme.roboflow.txt': true,
@@ -94,7 +96,11 @@ export const isMarkup = {
 }
 
 export function getFileExtension(path) {
-    return path.slice(path.lastIndexOf('.') + 1).toLowerCase()
+    const lastDotIndex = path.lastIndexOf('.')
+    if (lastDotIndex === -1) {
+        return ""
+    }
+    return path.slice(lastDotIndex + 1).toLowerCase()
 }
 
 export function getFileNameFromPath(path) {
@@ -104,6 +110,34 @@ export function getFileNameFromPath(path) {
 export function arrayLast(array, index=1){
     return array[array.length - index];
 };
+
+export function FileView({apiRoute, extension, className, apiRoot=API_DATASET_ROOT, ...props }) {
+    if (extension === '') {
+        return 
+    }
+
+    if (isReadableText[extension]) {
+        return (
+            <ViewTextFileClientSide 
+                apiRoute={apiRoute} 
+                className={className || borderLightClassName}
+                {...props}
+            />
+        )
+    }
+
+    if (isImage[extension]) {
+        return (
+            <img 
+                className={className || imageThumbnailClass} 
+                src={`${apiRoot}/${apiRoute}/`} 
+                {...props}
+            />
+        )
+    }
+
+    return <div>Unsupported file type: {extension}</div>;    
+}
 
 export default async function Page({
     params,
@@ -117,21 +151,15 @@ export default async function Page({
     } 
 
     const extension = getFileExtension(path);
-    
+    const apiRoute = `${id}/${path}`
+
     return (
         <PageComponent>
-            {isFile[extension] && 
-                <TitleRouteView apiRoute={`${id}/${path}`} />
+            {isFile[extension] ? 
+                <TitleRouteView apiRoute={apiRoute} /> :
+                <ViewDirectoryTree apiRoute={apiRoute}/>
             }
-            {isReadableText[extension] && 
-                <ViewTextFile apiRoute={`${id}/${path}`} className={borderLightClassName}/>
-            }
-            {isImage[extension] &&
-                <img className="imageView img-thumbnail" src={`${API_DATASET_ROOT}/${id}/${path}/`}/>
-            }
-            {!isFile[extension] &&
-                <ViewDirectoryTree apiRoute={`${id}/${path}`}/>
-            }
+            {<FileView extension={extension} apiRoute={apiRoute}/>}
         </PageComponent>
     )
 }

@@ -1,9 +1,9 @@
 import PageComponent from "@/app/page_component";
 import { getFileExtension, isReadableText } from "../../../[id]/[...path]/page"
-import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/page";
 import { LinkButtonLight } from "@/app/user/models/page";
 import ViewTextFile from "../../../[id]/[...path]/viewTextFile";
 import { TitleRouteView } from "@/app/dataset/titleRouteView";
+import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils";
 
 export const datasetTreeBaseRoute = 'dataset/tree/'
 export const datasetTreeMarkdownViewBaseRoute = `${datasetTreeBaseRoute}markdown-view/`

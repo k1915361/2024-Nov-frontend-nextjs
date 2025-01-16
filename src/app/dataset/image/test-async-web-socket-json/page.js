@@ -4,8 +4,7 @@ import { API_DATASET_ROOT, API_HTTP, API_ROOT_WEBSOCKET, fetchData, fetchRespons
 import { useEffect, useState } from "react";
 import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
-
-export const borderLightClassName = "border border-light-subtle p-1 mb-1"
+import { borderLightClassName } from "./serverUtils";
 
 export function BorderLight({index, children, ...props}) {
     return (

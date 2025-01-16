@@ -3,7 +3,6 @@
 import { API_HTTP } from "../../../login/fetchData";
 import { ListDatasetItemBody } from "@/app/home/list_datasets";
 import { useListPaginationState } from "../../models/pages/pagination";
-import UserOrGuestShowPublic from "../../UserOrGuestShowPublicItemsMessage";
 
 export default function ListDatasetsPages() {
     const route = `${API_HTTP}/user/datasets/page/?dataset_page=`    

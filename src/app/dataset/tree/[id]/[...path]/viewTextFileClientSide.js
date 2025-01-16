@@ -15,6 +15,7 @@ export function fetchAndSetState(api, setState, fetchInit={}) {
     f();
 }
 
+/** @depricated since 16.01.2025. Highly discouraged from using this function. */
 export function useEffectFetchAndSetState(apiRoute, setText, apiRoot=API_DATASET_ROOT, apiSeparator = '/', fetchAndSetState_=fetchAndSetState) {
     useEffect(() => {
         fetchAndSetState_(
@@ -27,12 +28,12 @@ export function useEffectFetchAndSetState(apiRoute, setText, apiRoot=API_DATASET
 export default function ViewTextFileClientSide({apiRoute, apiRoot=API_DATASET_ROOT, apiSeparator = '/', ...props }) {
     const [text, setText] = useState('')
     
-    useEffectFetchAndSetState(
-        apiRoute, 
-        async (response) => setText((await response.text()).replace('<pre>', ' ').replace('</pre>', '')),
-        apiRoot=apiRoot,
-        apiSeparator=apiSeparator
-    )
+    useEffect(() => {
+        fetchAndSetState(
+            `${apiRoot}${apiSeparator}${apiRoute}`, 
+            async (response) => setText((await response.text()).replace('<pre>', ' ').replace('</pre>', ''))
+        )
+    }, [])    
     
     return (
         <pre {...props} style={{ textWrap: "wrap"}} >

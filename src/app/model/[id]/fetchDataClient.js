@@ -4,7 +4,7 @@ import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import { DeleteModal, ModalDeleteButton, ResponseMessage, strToDateToLocaleStr } from "@/app/dataset/[id]/fetchDataClient";
-import DownloadButton from "@/app/dataset/[id]/download";
+import DownloadButtonClientSide from "@/app/dataset/[id]/downloadClientSide";
 
 export default function FetchModelClient({id}) {
     const route = '/api/model/'
@@ -45,7 +45,7 @@ export default function FetchModelClient({id}) {
         <ModalDeleteButton>
             Delete Model
         </ModalDeleteButton>        
-        <DownloadButton id={id} route="/api/model/download/"/>
+        <DownloadButtonClientSide id={id} route="/api/model/download/"/>
         <DeleteModal onDelete={requestDeleteModel}/>
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
         <div>Created: {data?.created &&

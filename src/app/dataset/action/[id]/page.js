@@ -1,22 +1,9 @@
 import PageComponent from "@/app/page_component"
 import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
-import { ActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
-import { TitleRouteView } from "../../titleRouteView"
-import { useEffectFetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide"
-import { API_HTTP } from "@/app/login/fetchData"
+import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
 
 export const datasetActionBaseRoute = 'dataset/action/'
-
-export function DivActionResponseView({buttonName, apiRoute, ...props}) {
-    return <div>
-        <ActionResponseView
-            buttonName={buttonName}
-            apiRoute={apiRoute}
-            {...props}
-        />
-    </div>
-}
 
 export default async function Page(
     context
