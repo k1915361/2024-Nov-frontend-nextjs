@@ -1,6 +1,6 @@
 'use client'
 
-import { LinkListDatasetItemBody } from "@/app/home/list_datasets";
+import { LinkListDatasetItemBody } from "@/app/home/listDatasetItem";
 import { useListPaginationState } from "../models/pages/pagination";
 import { API_HTTP } from "@/app/login/fetchData";
 

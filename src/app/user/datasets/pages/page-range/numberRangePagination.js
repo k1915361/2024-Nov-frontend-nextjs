@@ -8,7 +8,7 @@ import { getUrlSearchParams } from "@/app/user/models/pages/paginationClient";
 export function PageNavBtn({ href, children, ...props }) {
     return (
         <button 
-            className="btn btn-outline-secondary  mx-1 mb-1"
+            className="btn btn-outline-secondary mx-1 mb-1 mt-1"
             {...props}
         >
             {children}
@@ -101,7 +101,7 @@ export function ActiveButton({children, isActive='', ...props}) {
 
     return <button 
         type="button" 
-        className={`btn ${isActive && 'active'} me-1 mb-1`}
+        className={`btn ${isActive && 'active'} me-1 mb-1 mt-1`}
         data-bs-toggle="button" 
         aria-pressed={`${isActive && 'true'}`}
         style={{width: "40px" }}
@@ -113,7 +113,7 @@ export function ActiveButton({children, isActive='', ...props}) {
 
 export function ElipsisIcon({children, text='...', ...props}) {
     return <button 
-        className="btn border-0 px-1 me-1 mb-1" 
+        className="btn border-0 px-1 me-1 mb-1 mt-1" 
         {...props}
         disabled={true}
     >
@@ -137,13 +137,14 @@ export function ElipsisIconOrPageButton({page, currPage, setCurrPage}){
         </ActiveButton>
 }
 
-export function PageRange({pageRange, currPage, setCurrPage}){
+export function PageRange({pageRange, currPage, setCurrPage, ...props}){
     return pageRange?.map((page) => 
         <ElipsisIconOrPageButton 
             key={page}
             page={page}
             currPage={currPage}
             setCurrPage={setCurrPage}
+            {...props}
         />
     )                
 }

@@ -2,12 +2,14 @@
 
 import { API_HTTP } from "@/app/login/fetchData";
 
-import { Pagination, useListPaginationState } from "./numberRangePagination";
-import { LinkListDatasetItemBody } from "@/app/home/list_datasets";
+import { useListPaginationState } from "./numberRangePagination";
 import { RowGap0 } from "@/app/user/datasets/page";
-// import { getUrlSearchParams } from "@/app/user/models/pages/paginationClient";
-import { useEffect, useState } from "react";
+import { LinkListDatasetItemBody } from "@/app/home/listDatasetItem";
 
+/** @deprecated. 
+ * This will be deleted after a git push.
+ * ReferenceError: `window` is not defined at `window.location.search`. 
+ * */
 export default function ListDatasetsPages() {
     const route = `${API_HTTP}/datasets/page/?page=`
     const param = 'page'

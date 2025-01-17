@@ -58,6 +58,10 @@ a {
   white-space: nowrap;
 }
 
+.disabled {
+  pointer-events: none
+}
+
 progress {
   text-align:center;
   height: 1.5rem;

@@ -2,6 +2,7 @@ import PageComponent from "@/app/page_component"
 import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
+import { API_HTTP } from "@/app/login/fetchData"
 
 export const datasetActionBaseRoute = 'dataset/action/'
 
@@ -37,6 +38,9 @@ export default async function Page(
                 buttonName="XAI" 
                 apiRoute="/dataset/image/action-progress-action-e"
             />
+            <div>
+                <a href={`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">Download CSV File</a>
+            </div>            
         </PageComponent>
     )
 }

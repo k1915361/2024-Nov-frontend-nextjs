@@ -1,8 +1,8 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
-import { ispublic } from "./list_datasets";
 import { API_HTTP, API_VIEW } from "../login/fetchData";
+import { ispublic } from "./listDatasetItem";
 
-export function isforked(model, prefix = "• ") {
+export function isModelForked(model, prefix = "• ") {
     if (model.original_model) { 
         return prefix + "forked"
     }
@@ -58,7 +58,7 @@ export function ListModelItem({model}) {
             > • { dayjs(model.updated).fromNow() } 
             </TextSecondary>
             <TextSecondary
-            > {isforked(model)}
+            > {isModelForked(model)}
             </TextSecondary>
         </div>
     </>

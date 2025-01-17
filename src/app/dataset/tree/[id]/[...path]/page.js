@@ -159,7 +159,7 @@ export default async function Page({
                 <TitleRouteView apiRoute={apiRoute} /> :
                 <ViewDirectoryTree apiRoute={apiRoute}/>
             }
-            {<FileView extension={extension} apiRoute={apiRoute}/>}
+            <FileView extension={extension} apiRoute={apiRoute}/>
         </PageComponent>
     )
 }

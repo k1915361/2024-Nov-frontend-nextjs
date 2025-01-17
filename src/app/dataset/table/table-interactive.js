@@ -7,6 +7,10 @@ export default function TabulateInteractive({ data, columns }) {
     const [sortColumn, setSortColumn] = useState(null);
     const [ascending, setAscending] = useState(true);
 
+    if (!columns) {
+        columns = Object.keys(data[0])
+    }
+
     const sortedData = [...data].sort((a, b) => {
         if (!sortColumn) return 0;
         if (a[sortColumn] < b[sortColumn]) return ascending ? -1 : 1;
@@ -31,7 +35,7 @@ export default function TabulateInteractive({ data, columns }) {
                     {columns.map((column) => (
                         <th
                             key={column}
-                            onClick={() => handleSort(column)}                            
+                            onClick={() => handleSort(column)}
                         >
                             {column}
                             {sortColumn === column && (ascending ? ' ▲' : ' ▼')}

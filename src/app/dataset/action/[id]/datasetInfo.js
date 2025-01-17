@@ -1,7 +1,7 @@
 'use client'
 
 import { API_HTTP } from "@/app/login/fetchData";
-import { useEffectFetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide";
+import { fetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide";
 import { useEffect, useState } from "react";
 
 export default function DatasetInfo({id}) { 
@@ -15,8 +15,6 @@ export default function DatasetInfo({id}) {
         )
     }, [])
     
-    useEffectFetchAndSetState(route, async (response) => setData(await response.json()), API_HTTP)
-
     return (
         <div>
             <h1>
