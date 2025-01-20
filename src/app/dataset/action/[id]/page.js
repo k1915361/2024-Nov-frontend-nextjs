@@ -3,6 +3,7 @@ import { ProgressBarView } from "../../image/test-async-web-socket-json/action-p
 import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
 import { API_HTTP } from "@/app/login/fetchData"
+import DatasetCsvView from "./datasetCsvView"
 
 export const datasetActionBaseRoute = 'dataset/action/'
 
@@ -39,8 +40,11 @@ export default async function Page(
                 apiRoute="/dataset/image/action-progress-action-e"
             />
             <div>
-                <a href={`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">Download CSV File</a>
-            </div>            
+                <a href={`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
+                    Download CSV File
+                </a>
+            </div>
+            <DatasetCsvView id={id}/>
         </PageComponent>
     )
 }

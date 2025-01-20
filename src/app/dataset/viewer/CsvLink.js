@@ -17,7 +17,7 @@ const csvDataExample = [
     ["Jane Doe", "25", "London"],
 ];
 
-function CSVLink({data, filename='data.csv'}) {
+function CSVLink({data, children, filename='data.csv'}) {
     const handleDownload = () => {
         downloadCSV(data, filename);
     };
@@ -26,8 +26,8 @@ function CSVLink({data, filename='data.csv'}) {
         <div>
             <ButtonLight
                 onClick={handleDownload}
-                >
-            Download CSV
+            >
+                {children || 'Download CSV'}
             </ButtonLight>           
         </div>
     );

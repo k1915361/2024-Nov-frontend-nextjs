@@ -5,23 +5,24 @@ import { useState, useEffect } from 'react';
 import CSVLink from './CsvLink';
 import { TabulateArray } from './tabulateArray';
 
-
-
-function MyComponent() {
+function CsvTableAndDownloadButton({apiAddress = `${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
     const [csvData, setCsvData] = useState(null);
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`);
+                const response = await fetch(apiAddress);
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status}.`);
                 }
                 const csvText = await response.text();
                 const rows = csvText.split('\n').map(row => row.split(','));
                 setCsvData(rows)
             } catch (error) {
-                console.error("Error fetching CSV data:", error);
+                if (error.toString() === "Error: HTTP error! status: 404.") {
+                    setMessage('This dataset does not have a CSV data.')
+            }
             }
         };
 
@@ -29,6 +30,9 @@ function MyComponent() {
     }, []);
 
     if (!csvData) {
+        if (message) {
+            return <div>{message}</div>
+        }
         return <div>Loading CSV data...</div>;
     }
 
@@ -42,4 +46,4 @@ function MyComponent() {
     );
 }
 
-export default MyComponent;
+export default CsvTableAndDownloadButton;

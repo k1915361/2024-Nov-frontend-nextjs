@@ -9,6 +9,8 @@ import { datasetActionBaseRoute } from "../action/[id]/page";
 import { Icon } from "@/app/_components/sidebar";
 import DownloadButtonClientSide from "./downloadClientSide";
 
+export const datasetViewerBaseRoute = 'dataset/viewer/'
+
 export const statusCodeMessageMap = {
     401: 'Unauthorized',
     404: 'Not Found',
@@ -112,9 +114,9 @@ export default function FetchDatasetClient({id}) {
             Dataset card
         </LinkButtonLight>
 
-        <LinkButtonLight>
+        <LinkButtonLight href={`/${datasetViewerBaseRoute}${id}`}>
             <Icon bootstrapIcon='file-earmark-spreadsheet'/>
-            Viewer
+            Viewer            
         </LinkButtonLight>
         <LinkButtonLight href={`/${datasetTreeBaseRoute}${removeDatasetDirectoryBasePath(data?.dataset_directory || '')}`} >
             Files
@@ -132,7 +134,7 @@ export default function FetchDatasetClient({id}) {
         <DownloadButtonClientSide id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
         
-        <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />        
+        <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
         <div>Created: {
                 get(data?.created, strToDateToLocaleStr)
             }
@@ -142,7 +144,7 @@ export default function FetchDatasetClient({id}) {
             }
         </div>
         <div>
-            {isPublic[data?.is_public]}            
+            {isPublic[data?.is_public]}
         </div>
         <div>
             {data?.original_dataset &&

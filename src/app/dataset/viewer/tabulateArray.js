@@ -1,6 +1,7 @@
 import { API_HTTP } from '@/app/login/fetchData';
 import { useState, useEffect } from 'react';
 import '@/app/dataset/table/styles.css'
+import { arrayLast } from '../tree/[id]/[...path]/page';
 
 export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
 	const [sortColumn, setSortColumn] = useState(null);
@@ -9,7 +10,6 @@ export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241
 	const [csvData, setCsvData] = useState(csv_data.slice(1))
 
 	const handleSort = (columnIndex) => {
-		console.log(columnIndex)
 		if (!csvData) {
 			return; 
 		}
@@ -20,7 +20,7 @@ export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241
 		sortedData.sort((rowA, rowB) => {
 			const valueA = rowA[columnIndex];
 			const valueB = rowB[columnIndex];
-			
+						
 			if (isNaN(valueA) || isNaN(valueB)) {
 				return valueA.localeCompare(valueB, undefined, { numeric: true }); 
 			} else {
@@ -46,7 +46,7 @@ export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241
 	}
 	
 	return (
-		<div className='table-container'>			
+		<div className='table-container'>
 			<table className='table_'>
 				<thead>
 					<tr>
