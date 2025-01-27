@@ -3,6 +3,7 @@ import PageComponent from "../page_component";
 import { ColBox, RowBox } from "../profile/page";
 import TopModels from "./list_top_models";
 import TopDatasets from "./list_top_datasets";
+import { LinkButtonLight } from "../user/models/page";
 
 
 export function Text2ndarySmall({children, ...props}) {
@@ -41,12 +42,18 @@ export default function HomePage() {
                     <Suspense fallback={<div>Loading...</div>}>
                         <TopModels/>
                     </Suspense>
+                    <LinkButtonLight href='/models/?page=1&per_page=4'>
+                        See More
+                    </LinkButtonLight>
                 </ColBox>
                 <ColBox>
                     <div>List of Top Datasets</div>
                     <Suspense fallback={<div>Loading...</div>}>
                         <TopDatasets/>
                     </Suspense>
+                    <LinkButtonLight href='/user/datasets/pages/page-range?page=1&per_page=4'>
+                        See More
+                    </LinkButtonLight>
                 </ColBox>
                 <ColBox>
                     <div>List of Top of Verified Energy Efficient Tools</div>

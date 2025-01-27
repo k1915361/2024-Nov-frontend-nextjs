@@ -72,11 +72,15 @@ export function ListModelItemBody({model}) {
 
 export function LinkListModelItemBody({model}) {
     return <a 
-        href={`${API_HTTP}/model/${model.id}`} 
+        href={`/model/${model.id}`} 
         className="btn btn-outline"
     >
         <ListModelItemBody model={model}/>
     </a>
+}
+
+export function LinkListModelItemBodyDatasetToModel({dataset}) {
+    return <LinkListModelItemBody model={dataset}/>
 }
 
 export default async function ListModels({  }) {

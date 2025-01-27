@@ -51,8 +51,8 @@ function ButtonLinkOutline({disabled, href, children, ...props}) {
 }
 
 /** Example of search parameter using Next's navigation */
-export default function DatasetPageRange() {
-    const route = `${API_HTTP}/datasets/page/?page=`
+export default function DatasetPageRange({namespace='datasets', LinkListItemBody=LinkListDatasetItemBody}) {
+    const route = `${API_HTTP}/${namespace}/page/?page=`
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -91,7 +91,7 @@ export default function DatasetPageRange() {
             <div>
                 <RowGap0>
                     {list?.map?.((dataset) => 
-                        <LinkListDatasetItemBody 
+                        <LinkListItemBody 
                             dataset={dataset} 
                             key={dataset.id}
                         />

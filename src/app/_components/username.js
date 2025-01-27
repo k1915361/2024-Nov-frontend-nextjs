@@ -1,29 +1,17 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { fetchData } from "../login/fetchData";
+import { useAuth } from "../context/AuthContext";
 
 export default function Username() {
-    const route = '/api/user/'
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        async function f() {
-            const data = await fetchData(route, {})
-            if (data != "Fetch Error" && data != "Fetch Failed. Response not ok") {
-                setUser(data)
-            }
-        }
-        f();
-    }, []);
+    const { user, logOut } = useAuth();
 
     return (
         <div>
-            {(user?.id) ? 
+            {(user?.id && user?.username) ? 
                 <div>{user.username}</div>
             :
-                <div>Guest</div>            
+                <div>Guest</div>
             }
         </div>
-    )
+    );
 }

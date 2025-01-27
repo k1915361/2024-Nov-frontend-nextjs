@@ -68,11 +68,6 @@ export default function Sidebar({ children }) {
                             <Username/>
                         </Suspense>
                     </div>
-                    <div>
-                        <Suspense>
-                            {/* <LoginOrNot/> */}
-                        </Suspense>
-                    </div>
                     <div className="dropdown-center">
                         <button 
                             className="btn dropdown-toggle shadow-sm" 

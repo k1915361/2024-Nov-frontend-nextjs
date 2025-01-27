@@ -5,7 +5,9 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const UserContext = createContext();
 
 const userObjFormat = { username: '', email: '', token: '', is_authenticated: false }
+export const guestUserObj = { username: '', email: '', token: '', is_authenticated: false }
 
+/** @deprecated */
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 

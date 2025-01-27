@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import PageComponent from "../page_component";
-import { useUser } from '../context/UserContext';
 import { fetchData } from "./fetchData";
+import { useAuth } from "../context/AuthContext";
 
 export async function checked_logged_in(route = '/api/login/check/') {
     const options = {
@@ -15,9 +15,10 @@ export async function checked_logged_in(route = '/api/login/check/') {
 
 export default function Login() {
     const [message, setMessage] = useState("")
-    const { user, setUser } = useUser();
+    const [username, setUsername] = useState("")    
     const route = '/api/token/login/cookie/'
-
+    const { user, logOut, updateUser } = useAuth();
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -37,16 +38,13 @@ export default function Login() {
         try {
             const data = await fetchData(route, options)
             
-            setUser({
-                ...user, 
-                username: data.username
-            })
-            setMessage(`Successfully logged in.`)
+            setUsername(data.username)
             
         } catch (err) {
             setMessage(err.message || "An error occurred")
         }
 
+        updateUser()
     }
 
     useEffect(() => {
@@ -54,14 +52,13 @@ export default function Login() {
             const data = await checked_logged_in()
             
             if (data?.status === 401) {
-                setUser({...user, username: ''})                
-                setMessage(`${data?.statusText}: Please login again - your login has expired.`)
+                setUsername('')
             }
             if (data?.username 
                 && data?.detail == "You are logged in." 
                 && data?.user_is_authenticated == true
             ) {
-                setUser({...user, username: data.username})
+                setUsername(data.username)
             }
         }
         f()
@@ -69,8 +66,8 @@ export default function Login() {
 
     return (
         <PageComponent>
-            {user?.username && 
-                <div>You are logged in as: {user.username}</div>
+            {username && 
+                <div>You are logged in as: {username}</div>
             }
             <form onSubmit={handleSubmit}>
                 <input
