@@ -42,6 +42,7 @@ export const fetchResponse = async (
     , method = 'GET'
     , apiRoot = API_ROOT_HTTP
 ) => {
+    console.log(`${apiRoot}${route}`)
     try {
         const response = await fetch(`${apiRoot}${route}`, {
             method: method,
@@ -57,4 +58,12 @@ export const fetchResponse = async (
     } catch (error) {
         return error
     }
+}
+
+export const fetchResponseObjectParameter = async (
+    route,
+    config = { options: {}, method: 'GET', apiRoot: API_ROOT_HTTP }
+) => {
+    const { options, method, apiRoot } = config;
+    return fetchResponse(route, options, method, apiRoot)
 }

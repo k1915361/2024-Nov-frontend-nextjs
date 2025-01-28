@@ -6,13 +6,18 @@ import { useEffect, useState } from "react";
 import CsvTableAndDownloadButton from "../../viewer/page";
 
 export function directoryBaseToApiBaseUrl(path, apiBaseUrl=API_HTTP) {
-    return path?.replace('asset/user/', apiBaseUrl+'/').replace('', '')
+    return path
+        ?.replace('asset/user/', apiBaseUrl+'/')
+        .replace('asset/', '')
 }
 
-export function TextLighter({children, ...props}) {
-    return <div className="fw-lighter" {...props}>
-        {children}
-    </div>
+export function CsvTableAndDownloadButtonComponent({directory}) {
+    return (
+        directory && 
+            <CsvTableAndDownloadButton 
+                apiAddress={`${API_HTTP}/${directoryBaseToApiBaseUrl(directory)}/.csv`}
+            />
+    )     
 }
 
 export default function DatasetCsvView({id}) { 
@@ -22,21 +27,15 @@ export default function DatasetCsvView({id}) {
     useEffect(() => {
         fetchAndSetState(
             `${API_HTTP}/${route}`, 
-            async (response) => setData(await response.json())
+            async (response) => setData(await response.json()),
+            {credentials: 'include'}
         )
     }, [])
     
     return (
         <div>
-            <TextLighter>
-                (Showing maximum of 50 rows of CSV file.)
-            </TextLighter>
             <div>
-                {data?.dataset_directory && 
-                    <CsvTableAndDownloadButton 
-                        apiAddress={`${directoryBaseToApiBaseUrl(data?.dataset_directory)}/.csv`}
-                    />
-                }
+                <CsvTableAndDownloadButtonComponent directory={data?.dataset_directory} />
             </div>
         </div>
     )

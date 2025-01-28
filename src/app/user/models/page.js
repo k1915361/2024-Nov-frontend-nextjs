@@ -42,6 +42,16 @@ export function ButtonLight({children, ...props}) {
     )
 }
 
+export function DivButtonLight({children, ...props}) {
+    return ( 
+        <div>
+            <ButtonLight {...props}>
+                {children}
+            </ButtonLight>
+        </div>
+    )
+}
+
 export function ColButtonLight({children, ...props}) {
     return (
         <button 
@@ -145,7 +155,7 @@ export default function UserModelRepo() {
                     Delete Model
                 </ColButtonDanger>
                 <ColButtonLight>
-                    Download / Export
+                    Fork
                 </ColButtonLight>
             </RowGap1>
         </div>

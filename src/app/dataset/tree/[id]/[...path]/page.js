@@ -1,5 +1,5 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
-import { API_DATASET_ROOT } from "@/app/login/fetchData"
+import { API_DATASET_ROOT, API_HTTP } from "@/app/login/fetchData"
 import PageComponent from "@/app/page_component"
 import "@/app/dataset/table/styles.css"
 import { datasetTreeTextViewBaseRoute } from "../../text-view/[id]/[...path]/page"
@@ -111,7 +111,7 @@ export function arrayLast(array, index=1){
     return array[array.length - index];
 };
 
-export function FileView({apiRoute, extension, className, apiRoot=API_DATASET_ROOT, ...props }) {
+export function FileView({apiRoute, extension, className, apiRoot=API_HTTP, ...props }) {
     if (extension === '') {
         return 
     }
@@ -139,6 +139,10 @@ export function FileView({apiRoute, extension, className, apiRoot=API_DATASET_RO
     return <div>Unsupported file type: {extension}</div>;    
 }
 
+export function filePathToApiUrlServerSide(str) {
+    return str.replace('asset/', 'tree/')
+}
+
 export default async function Page({
     params,
 }) {
@@ -149,10 +153,10 @@ export default async function Page({
     if (isReadmeFile[arrayLast(pathArray).toLowerCase()]) {
         redirect(`/${datasetTreeTextViewBaseRoute}${id}/${path}`)
     } 
-
+    const id_ = `${id}/`.replace('asset/', 'tree/')
     const extension = getFileExtension(path);
-    const apiRoute = `${id}/${path}`
-
+    const apiRoute = `${id_}${path}`
+    
     return (
         <PageComponent>
             {isFile[extension] ? 

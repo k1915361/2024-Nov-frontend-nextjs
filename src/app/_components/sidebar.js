@@ -105,6 +105,10 @@ export default function Sidebar({ children }) {
                                 <Icon bootstrapIcon='cloud-arrow-up'/>
                                 Upload Models
                             </DropDownItem>
+                            <DropDownItem hrefName="dataset/upload/">
+                                <Icon bootstrapIcon='cloud-arrow-up'/>
+                                Upload Datasets
+                            </DropDownItem>
                             <DropDownItem hrefName="login/">
                                 <Icon bootstrapIcon='door-open'/>
                                 Log In

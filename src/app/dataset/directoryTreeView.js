@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { API_DATASET_ROOT } from "../login/fetchData";
+import { API_DATASET_ROOT, API_HTTP } from "../login/fetchData";
 import { datasetTreeBaseRoute } from "./tree/text-view/[id]/[...path]/page";
 import { TitleRouteView } from "./titleRouteView";
 
 export function getDirectoryTree(api, setState) {
     async function f() {
-        const response = await fetch(api, {})
+        const response = await fetch(api, {credentials: 'include'})
         if (!response.ok) {
             console.log('Response not ok', response);
             return 
@@ -52,8 +52,13 @@ export function FileRouteView({apiRoute, filename, children, baseApiRoute=datase
     )
 }
 
-export default function ViewDirectoryTree({apiRoute, apiRoot=API_DATASET_ROOT, }) {
+export function filePathToApiUrl(str) {
+    return str.replace('asset/', 'tree/')
+}
+
+export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, }) {
     const [tree, setTree] = useState({});
+    apiRoute = filePathToApiUrl(apiRoute)
 
     useEffect(() => {
         getDirectoryTree(`${apiRoot}/${apiRoute}`, setTree);

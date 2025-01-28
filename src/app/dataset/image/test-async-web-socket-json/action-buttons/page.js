@@ -38,7 +38,7 @@ export function ActionResponseView({buttonName, apiRoute}) {
                         <div>Status: {data.status}</div> 
                     </BorderLight>
                 ))}
-            </div>
+            </div>            
         </>
     )
 }

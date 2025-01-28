@@ -12,7 +12,7 @@ function CsvTableAndDownloadButton({apiAddress = `${API_HTTP}/dataset/1-20241107
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(apiAddress);
+                const response = await fetch(apiAddress, {credentials: 'include'});
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}.`);
                 }

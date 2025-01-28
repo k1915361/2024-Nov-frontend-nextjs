@@ -40,7 +40,7 @@ export default function FetchModelClient({id}) {
         <ButtonLight>XAI</ButtonLight>
         <div/>
         <ButtonLight>
-            Download / Export
+            Fork
         </ButtonLight>
         <ModalDeleteButton>
             Delete Model

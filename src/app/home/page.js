@@ -32,13 +32,84 @@ export function ListItemBox({children, type='model', ...props}) {
     )
 }
 
+export function ListItemDivBox({children, type='model', ...props}) {
+    return (
+        <div style={{whiteSpace: "nowrap"}} {...props}>
+            {children}
+        </div>
+    )
+}
+
+export function Row({children, ...props}) {
+    return (
+        <div className="row" {...props}>
+            {children}
+        </div>
+    )
+}
+
 export default function HomePage() {
     
     return (
         <PageComponent>
-            <div className="row">
+            <Row>
                 <ColBox>
-                    <div>List of Top Models</div>
+                    <RowBox>
+                        <h5>
+                            General Info About This Platform
+                        </h5>
+                        <div>
+                            This platform enables storing large datasets and models. We offer tools to empower researchers working with models and datasets, helping with dataset Cleaning, Analysis, Enrichment, Data Curation, Balancing, Explainable AI (XAI), along with model training and model tools.
+                        </div>
+                    </RowBox>
+                    <RowBox>
+                        <h5>List of Top of Verified Energy Efficient Tools</h5>
+                        <ol>
+                            <ListItemBox>
+                                <LinkText>
+                                    Plant Disease Detection Tool
+                                </LinkText>
+                            </ListItemBox>
+                            <ListItemBox>
+                                <LinkText>
+                                    Tool B
+                                </LinkText>
+                            </ListItemBox>
+                            <ListItemBox>
+                                <LinkText>
+                                    Tool C
+                                </LinkText>
+                            </ListItemBox>
+                        </ol>
+                    </RowBox>
+                </ColBox>
+                <ColBox>
+                    <RowBox>
+                        <h5>News</h5>
+                            <LinkText href='/news/dataset/cleaning'>
+                                Dataset Cleaning
+                            </LinkText>
+                            <LinkText href='/news/dataset/analysis'>
+                                Dataset Analysis
+                            </LinkText>
+                            <LinkText href='/news/dataset/enrichment'>
+                                Dataset Enrichment
+                            </LinkText>
+                            <LinkText href='/news/dataset/curation'>
+                                Data Curation
+                            </LinkText>
+                            <LinkText href='/news/dataset/balancing'>
+                                Data Balancing
+                            </LinkText>
+                            <LinkText href='/news/dataset/explainable-ai'>
+                                Explainable AI (XAI)
+                            </LinkText>
+                    </RowBox>
+                </ColBox>
+            </Row>
+            <Row>
+                <ColBox>
+                    <h5>List of Top Models</h5>
                     <Suspense fallback={<div>Loading...</div>}>
                         <TopModels/>
                     </Suspense>
@@ -47,7 +118,7 @@ export default function HomePage() {
                     </LinkButtonLight>
                 </ColBox>
                 <ColBox>
-                    <div>List of Top Datasets</div>
+                    <h5>List of Top Datasets</h5>
                     <Suspense fallback={<div>Loading...</div>}>
                         <TopDatasets/>
                     </Suspense>
@@ -55,35 +126,7 @@ export default function HomePage() {
                         See More
                     </LinkButtonLight>
                 </ColBox>
-                <ColBox>
-                    <div>List of Top of Verified Energy Efficient Tools</div>
-                    <ol>
-                        <ListItemBox>
-                            <LinkText>
-                                Plant Disease Detection Tool
-                            </LinkText>
-                        </ListItemBox>
-                        <ListItemBox>
-                            <LinkText>
-                                Tool B
-                            </LinkText>
-                        </ListItemBox>
-                        <ListItemBox>
-                            <LinkText>
-                                Tool C
-                            </LinkText>
-                        </ListItemBox>
-                    </ol>
-                </ColBox>
-                <ColBox>
-                    <RowBox>
-                        News
-                    </RowBox>
-                    <RowBox>
-                        General Info about the platform
-                    </RowBox>
-                </ColBox>
-            </div>
+            </Row>
         </PageComponent>
     )
 }

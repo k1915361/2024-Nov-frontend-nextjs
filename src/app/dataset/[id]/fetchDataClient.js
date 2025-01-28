@@ -125,9 +125,9 @@ export default function FetchDatasetClient({id}) {
             Actions
         </LinkButtonLight>
         <div/>
-        <ButtonLight>
-            Download / Export
-        </ButtonLight>
+        <LinkButtonLight href={`/dataset/fork/${id}`}>
+            Fork
+        </LinkButtonLight>
         <ModalDeleteButton>
             Delete Dataset
         </ModalDeleteButton>        

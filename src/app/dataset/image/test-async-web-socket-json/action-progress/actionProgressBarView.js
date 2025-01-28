@@ -2,10 +2,13 @@
 
 import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
 import { API_ROOT_WEBSOCKET, HTTP_STATIC_SERVER } from '@/app/login/fetchData';
-import { ButtonLight } from '@/app/user/models/page';
+import { ButtonLight, DivButtonLight } from '@/app/user/models/page';
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/tree/[id]/[...path]/viewTextFileClientSide';
 import { borderLightClassName } from '../serverUtils';
+import { Text2ndarySmall } from '@/app/home/page';
+import { TextSecondary } from '@/app/home/list_models';
+import { TextLighter } from '@/app/dataset/viewer/tabulateArray';
 
 export function removeStaticServerBaseURL(url, source=HTTP_STATIC_SERVER+'/', target='') {
     return url.replace(source, target)
@@ -78,14 +81,24 @@ export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/actio
                         apiSeparator='' 
                         className={borderLightClassName}
                     />
+                    <TextLighter>Result Dataset expires and is deleted from server in 24 hours:</TextLighter>
+                    <DivButtonLight>
+                        Download Result 
+                    </DivButtonLight> 
                 </>
             }
             {(progress?.finished === true 
                 && isImage[getFileExtension(progress?.result_url || '')])
                 && 
+                <>
                     <img className="imageView img-thumbnail" src={progress?.result_url}/>
+                    <TextLighter>Result Dataset expires and is deleted from server in 24 hours:</TextLighter>
+                    <DivButtonLight>
+                        Download Result 
+                    </DivButtonLight>
+                </>
                 
-            }
+            }                
         </>
     );
 

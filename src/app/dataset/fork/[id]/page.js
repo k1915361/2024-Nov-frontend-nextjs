@@ -1,5 +1,5 @@
 import PageComponent from "@/app/page_component"
-import DatasetInfoAndCsvView from "../../action/[id]/datasetInfoAndCsvView"
+import PageClient from "./pageClient"
 
 export default async function Page(
     context
@@ -8,7 +8,8 @@ export default async function Page(
 
     return (
         <PageComponent>
-            <DatasetInfoAndCsvView id={id} />
+            <h5>Fork a dataset.</h5>
+            <PageClient id={id} />
         </PageComponent>
     )
 }

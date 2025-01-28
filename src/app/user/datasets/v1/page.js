@@ -42,7 +42,7 @@ export default function UserDatasetRepo() {
                     Delete Dataset
                 </ColButtonDanger>
                 <ColButtonLight>
-                    Download / Export
+                    Fork
                 </ColButtonLight>
             </RowGap1>
         </div>

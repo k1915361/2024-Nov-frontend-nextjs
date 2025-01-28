@@ -3,6 +3,12 @@ import { useState, useEffect } from 'react';
 import '@/app/dataset/table/styles.css'
 import { arrayLast } from '../tree/[id]/[...path]/page';
 
+export function TextLighter({children, ...props}) {
+    return <div className="fw-lighter" {...props}>
+        {children}
+    </div>
+}
+
 export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
 	const [sortColumn, setSortColumn] = useState(null);
 	const [sortOrder, setSortOrder] = useState('asc');
@@ -47,6 +53,9 @@ export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241
 	
 	return (
 		<div className='table-container'>
+			<TextLighter>
+                (Showing maximum of 50 rows of CSV file.)
+            </TextLighter>
 			<table className='table_'>
 				<thead>
 					<tr>

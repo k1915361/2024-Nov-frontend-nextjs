@@ -9,7 +9,7 @@ export default function PageComponent({children}) {
       <main className={`${styles.full_width_main} container`}>
           {children}
       </main>
-      <footer className={styles.footer}>
+      <footer className={`${styles.footer} container-fluid border-top p-4`} >
         <a
           href="#"
           target="_blank"
