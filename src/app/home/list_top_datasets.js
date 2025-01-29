@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LinkText, ListItemBox, ListItemDivBox, Text2ndarySmall } from "./page";
+import { LinkDark, ListItemDivBox, Text2ndarySmall } from "./page";
 import { fetchData } from "../login/fetchData";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { borderLightShadowClassname } from "./list_top_models";
@@ -27,7 +27,7 @@ export default function TopDatasets() {
                     <ListItemDivBox key={dataset.id} className={borderLightShadowClassname}>
                         <span>
                             <span>{index+1}. </span>
-                            <LinkText type="dataset" id={dataset.id}>{dataset.name}</LinkText>
+                            <LinkDark type="dataset" id={dataset.id} href={`/dataset/${dataset.id}`}>{dataset.name}</LinkDark>
                             <Text2ndarySmall> • {dataset.username}</Text2ndarySmall> 
                             <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
                             <Text2ndarySmall> • {dataset.is_public ? 'public' : 'private'}</Text2ndarySmall>

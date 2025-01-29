@@ -1,14 +1,13 @@
 'use client'
 
-import Username from "@/app/_components/username";
 import { ifLoadingOrErrorDisplay, useFetchExperimental } from "../../tree/[id]/[...path]/viewTextFileClientSide";
 import DatasetForkForm from "./datasetForkForm";
 import { useAuth } from "@/app/context/AuthContext";
-import DatasetInfo, { DatasetInfoComponent } from "../../action/[id]/datasetInfo";
+import { DatasetInfoComponent } from "../../action/[id]/datasetInfo";
 
 export default function PageClient({id}) {
     const apiRoute = `dataset/${id}`
-    const { user, logOut } = useAuth();
+    const { user } = useAuth();
 
     const { data, loading, error } = useFetchExperimental(apiRoute);
 
@@ -18,10 +17,10 @@ export default function PageClient({id}) {
     }
 
     if (user.username === data.username) {
-        return <div>
+        return <PageComponent>
             <h2>You already own this dataset.</h2>
             <DatasetInfoComponent data={data}/>
-        </div>
+        </PageComponent>
     }
 
     return (

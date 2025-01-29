@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
+import { LinkDark } from './home/page';
 
 export default function PageComponent({children}) {
  
@@ -10,10 +11,10 @@ export default function PageComponent({children}) {
           {children}
       </main>
       <footer className={`${styles.footer} container-fluid border-top p-4`} >
-        <a
+        <LinkDark
           href="#"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer"          
         >
           <Image
             aria-hidden
@@ -23,8 +24,8 @@ export default function PageComponent({children}) {
             height={16}
           />
           About
-        </a>
-        <a
+        </LinkDark>
+        <LinkDark
           href="#"
           target="_blank"
           rel="noopener noreferrer"
@@ -37,8 +38,8 @@ export default function PageComponent({children}) {
             height={16}
           />
           T&C
-        </a>
-        <a
+        </LinkDark>
+        <LinkDark
           href="#"
           target="_blank"
           rel="noopener noreferrer"
@@ -51,7 +52,7 @@ export default function PageComponent({children}) {
             height={16}
           />
           Home
-        </a>
+        </LinkDark>
       </footer>
     </div>
   );

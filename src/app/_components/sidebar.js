@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Username from "./username";
+import { BorderRoundShadowIcon, LinkDark, LinkDarkNoUnderline, LinkTextBlackNoUnderline } from "../home/page";
 
 export function Icon({ children, bootstrapIcon="list", width=16, height=16, fill="currentColor", viewBox="0 0 16 16", ...props}) {
     return (
@@ -16,11 +17,11 @@ export function Icon({ children, bootstrapIcon="list", width=16, height=16, fill
     )
 }
 
-export function DropDownItem({ children, hrefName='', ...props }) {
+export function DropDownItem({ children, href, ...props }) {
     return (
         <li className="nav-item">
             <a 
-                href={`/${hrefName}`} 
+                href={`${href}`} 
                 className="dropdown-item" 
                 {...props}
             >
@@ -30,23 +31,108 @@ export function DropDownItem({ children, hrefName='', ...props }) {
     )
 }
 
+export function DisplayFlexContentCenterBorder({ children, ...props }) {
+    return (
+        <div className="d-flex justify-content-center border border-light-subtle " {...props}>
+            {children}
+        </div>
+    )
+}
+
+export function NavbarExpandLarge({ children, ...props }) {
+    return (
+        <nav className="navbar navbar-expand-lg" {...props}>
+            {children}
+        </nav>
+    )
+}
+
+export function ContainerFluidGap1({ children, ...props }) {
+    return (    
+        <div className="container-fluid gap-1" {...props}>
+            {children}
+        </div>
+    )
+}
+
+export function SmallShadowRound({ children, overrideClassname, ...props }) {
+    return (    
+        <div 
+            className={`shadow-sm rounded p-2 ${overrideClassname}`} 
+            {...props}
+        >
+            {children}
+        </div>
+    )
+}
+
+export function IconText({ children, overrideClassname, ...props }) {
+    return (
+        <span 
+            className={`ms-1 ${overrideClassname}`} 
+            style={{
+                fontSize: '13px',
+                fontWeight: '500',
+            }} {...props}
+        >
+            {children}
+        </span> 
+    )
+}
+
+export function MarginStart1({ children, overrideClassname, ...props }) {
+    return (
+        <span className={`ms-1 ${overrideClassname}`} {...props}>
+            {children}
+        </span> 
+    )
+}
+
+export function LinkDarkNoUnderlineIcon({ children, overrideClassname, href, bootstrapIcon, ...props }) {
+    return (
+        <LinkDarkNoUnderline 
+            href={href}
+            overrideClassname={`mx-2 ${overrideClassname}`}             
+            {...props}
+        >
+            <Icon bootstrapIcon={bootstrapIcon}/>
+                {children}
+        </LinkDarkNoUnderline> 
+    )
+}
+
+export function LinkDarkNoUnderlineIconText({ children, overrideClassname, href, bootstrapIcon, textProps, ...props }) {
+    return (
+        <LinkDarkNoUnderlineIcon 
+        href={href}
+        overrideClassname={`shadow-sm rounded p-2 ${overrideClassname}`}
+        bootstrapIcon={bootstrapIcon}
+        {...props}
+        >
+            <IconText {...textProps}>
+                {children}
+            </IconText>
+        </LinkDarkNoUnderlineIcon> 
+    )
+}
+
+
 export default function Sidebar({ children }) {
 
     return (
     <>
-        <div className="d-flex justify-content-center border border-light-subtle ">
-            <nav className="navbar navbar-expand-lg">
-                <div className="container-fluid gap-1">
+        <DisplayFlexContentCenterBorder>
+            <NavbarExpandLarge>
+                <ContainerFluidGap1>
                     <div className="d-flex me-3">
                         <a href="/home/" 
-                        className="link-underline-dark link-underline-opacity-0"
+                            className="link-dark text-dark link-underline-dark link-underline-opacity-0"
                         >
-                            <h4>
-                                😊
-                                <span className="fw-lighter fs-6">
-                                    logo
+                            <SmallShadowRound>
+                                😊 <span className="ms-1 fw-bold fs-6">
+                                    Logo
                                 </span>
-                            </h4>
+                            </SmallShadowRound>
                         </a>
                     </div>
                     <form className="d-flex" role="search">
@@ -63,6 +149,45 @@ export default function Sidebar({ children }) {
                             </button>
                         </div>
                     </form>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/home" 
+                        bootstrapIcon='house'
+                    >
+                        Home
+                    </LinkDarkNoUnderlineIconText>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/profile"                         
+                        bootstrapIcon='person-circle'
+                    >
+                        Profile
+                    </LinkDarkNoUnderlineIconText>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/user/final-task-analytics/" 
+                        overrideClassname='ms-2'
+                        bootstrapIcon='sliders2'
+                    >
+                        Start 
+                        a New Optimisation Task
+                    </LinkDarkNoUnderlineIconText>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/user/previous-tasks/"
+                        bootstrapIcon='clipboard2-check'
+                    >
+                        Previous
+                        Tasks
+                    </LinkDarkNoUnderlineIconText>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/user/models/"
+                        bootstrapIcon='collection'
+                    >
+                        My Models
+                    </LinkDarkNoUnderlineIconText>
+                    <LinkDarkNoUnderlineIconText 
+                        href="/user/datasets/pages/page-range?page=1"
+                        bootstrapIcon='collection'
+                    >
+                        My Datasets                        
+                    </LinkDarkNoUnderlineIconText>
                     <div>
                         <Suspense>
                             <Username/>
@@ -78,52 +203,30 @@ export default function Sidebar({ children }) {
                             <Icon bootstrapIcon='list'/>
                         </button>
                         <ul className="dropdown-menu dropdown-menu-end">
-                            <DropDownItem hrefName="home">
-                                <Icon bootstrapIcon='house'/>
-                                Home
-                            </DropDownItem>
-                            <DropDownItem hrefName="profile">
-                                <Icon bootstrapIcon='person-circle'/>
-                                Profile View
-                            </DropDownItem>
-                            <DropDownItem hrefName="user/final-task-analytics/">
-                                <Icon bootstrapIcon='sliders2'/>
-                                Start a New Optimisation Task
-                            </DropDownItem>
-                            <DropDownItem hrefName="user/previous-tasks/">
-                                <Icon bootstrapIcon='clipboard2-check'/>
-                                Previous Tasks
-                            </DropDownItem>
-                            <DropDownItem hrefName="user/models/">
-                                <Icon bootstrapIcon='collection'/>
-                                Personal Model Repo
-                            </DropDownItem>
-                            <DropDownItem hrefName="user/datasets/pages/page-range?page=1">
-                                Personal Dataset Repo
-                            </DropDownItem>                            
-                            <DropDownItem hrefName="model/upload/">
+                            
+                            <DropDownItem href="/model/upload/">
                                 <Icon bootstrapIcon='cloud-arrow-up'/>
                                 Upload Models
                             </DropDownItem>
-                            <DropDownItem hrefName="dataset/upload/">
+                            <DropDownItem href="/dataset/upload/">
                                 <Icon bootstrapIcon='cloud-arrow-up'/>
                                 Upload Datasets
                             </DropDownItem>
-                            <DropDownItem hrefName="login/">
+                            <DropDownItem href="/login/">
                                 <Icon bootstrapIcon='door-open'/>
                                 Log In
                             </DropDownItem>
-                            <DropDownItem hrefName="logout/">
+                            <DropDownItem href="/logout/">
                                 <Icon bootstrapIcon='door-closed'/>
                                 Log Out
                             </DropDownItem>
-                            <DropDownItem hrefName="user/final-task-analytics/">
+                            <DropDownItem href="/user/final-task-analytics/">
                                 Final Task Analytics
                             </DropDownItem>                       
-                            <DropDownItem hrefName="user/hitl-reinforced-feedback/">
+                            <DropDownItem href="/user/hitl-reinforced-feedback/">
                                 HITL Reinforced Feedback
                             </DropDownItem>
-                            <DropDownItem hrefName="">
+                            <DropDownItem href="/">
                                 Root
                             </DropDownItem>
                         </ul>
@@ -135,9 +238,9 @@ export default function Sidebar({ children }) {
                         <ul className="navbar-nav mr-auto mb-2 mb-lg-0">
                         </ul>
                     </div>
-                </div>
-            </nav>
-        </div>
+                </ContainerFluidGap1>
+            </NavbarExpandLarge>
+        </DisplayFlexContentCenterBorder>
     </>
     );
 }

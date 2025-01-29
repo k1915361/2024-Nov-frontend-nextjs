@@ -1,17 +1,18 @@
 'use client'
 
 import { useAuth } from "../context/AuthContext";
+import { SmallShadowRound } from "./sidebar";
 
 export default function Username() {
-    const { user, logOut } = useAuth();
+    const { user } = useAuth();
 
     return (
-        <div>
+        <SmallShadowRound overrideClassname='fw-medium'>
             {(user?.id && user?.username) ? 
-                <div>{user.username}</div>
-            :
-                <div>Guest</div>
-            }
-        </div>
+                user.username
+                :
+                'Guest'
+            }            
+        </SmallShadowRound>
     );
 }

@@ -8,7 +8,7 @@ export default async function Page(
 
     return (
         <PageComponent>
-            <h5>Fork a dataset.</h5>
+            <h5>Fork a dataset</h5>
             <PageClient id={id} />
         </PageComponent>
     )

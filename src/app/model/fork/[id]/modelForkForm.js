@@ -1,12 +1,13 @@
 import { API_HTTP } from "@/app/login/fetchData";
 import { useState } from "react";
 
-export default function DatasetForkForm({dataset_id, dataset}) {
+export default function ModelForkForm({model_id, model, loggedInUser}) {
     const [formData, setFormData] = useState({
-        dataset_id: dataset_id,
-        name: dataset.name,
-        is_public: dataset.is_public,
-        description: dataset.description,        
+        model_id: model_id,
+        name: model.name,
+        is_public: model.is_public,
+        model_type: model.model_type,
+        description: model.description,
     });
     const [message, setMessage] = useState("")
 
@@ -24,15 +25,7 @@ export default function DatasetForkForm({dataset_id, dataset}) {
             ...prev,
             [name]: checked
         }));
-    }
-
-    const handleFileChange = (e) => {
-        const { name, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: files[0]
-        }));
-    }
+    }    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,7 +36,7 @@ export default function DatasetForkForm({dataset_id, dataset}) {
         });
 
         try {
-            const response = await fetch(API_HTTP + '/dataset/fork/', {
+            const response = await fetch(API_HTTP + '/model/fork/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,
@@ -69,9 +62,18 @@ export default function DatasetForkForm({dataset_id, dataset}) {
             <input
                 type="text"
                 name="name"
-                placeholder="Dataset Name"
+                placeholder="Model Name"
                 className='form-control mb-1'
                 value={formData.name}
+                onChange={handleChange}
+                required
+            />
+            <input
+                type="text"
+                name="model_type"
+                placeholder="Model Type"
+                className='form-control mb-1'
+                value={formData.model_type}
                 onChange={handleChange}
                 required
             />
@@ -88,13 +90,18 @@ export default function DatasetForkForm({dataset_id, dataset}) {
             <textarea
                 name="description"
                 placeholder="Description (optional)"
-                value={formData.dataset_description}
+                value={formData.model_description}
                 className='form-control mb-1'
                 onChange={handleChange}
             />
+            {!loggedInUser &&
+                <div>
+                Please login to fork.
+            </div>}
             <button 
                 type="submit"
                 className='btn btn-primary'
+                disabled={!loggedInUser}
             >
                 Fork
             </button>

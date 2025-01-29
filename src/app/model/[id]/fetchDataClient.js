@@ -1,7 +1,7 @@
 'use client'
 
 import { fetchData } from "@/app/login/fetchData"
-import { ButtonLight } from "@/app/user/models/page";
+import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import { DeleteModal, ModalDeleteButton, ResponseMessage, strToDateToLocaleStr } from "@/app/dataset/[id]/fetchDataClient";
 import DownloadButtonClientSide from "@/app/dataset/[id]/downloadClientSide";
@@ -39,12 +39,12 @@ export default function FetchModelClient({id}) {
         <ButtonLight>Balancing</ButtonLight>
         <ButtonLight>XAI</ButtonLight>
         <div/>
-        <ButtonLight>
+        <LinkButtonLight href={`/model/fork/${id}`}>
             Fork
-        </ButtonLight>
+        </LinkButtonLight>
         <ModalDeleteButton>
             Delete Model
-        </ModalDeleteButton>        
+        </ModalDeleteButton>
         <DownloadButtonClientSide id={id} route="/api/model/download/"/>
         <DeleteModal onDelete={requestDeleteModel}/>
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { LinkText, ListItemBox, ListItemDivBox, Text2ndarySmall } from "./page";
+import { LinkDark, ListItemDivBox, Text2ndarySmall } from "./page";
 import { fetchData } from "../login/fetchData";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 
@@ -28,7 +28,7 @@ export default function TopModels() {
                     <ListItemDivBox key={model.id} className={borderLightShadowClassname}>
                         <span>
                             <span>{index+1}. </span>
-                            <LinkText id={model.id}>{model.name}</LinkText>
+                            <LinkDark href={`/model/${model.id}`}>{model.name}</LinkDark>
                             <Text2ndarySmall> • {model.username}</Text2ndarySmall> 
                             <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
                             <Text2ndarySmall> • {model.is_public ? 'public' : 'private'}</Text2ndarySmall>
