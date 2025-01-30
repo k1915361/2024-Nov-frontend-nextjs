@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CsvTableAndDownloadButtonComponent } from "./datasetCsvView";
-import { fetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide";
+import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { DatasetInfoComponent } from "./datasetInfo";
 import { API_HTTP } from "@/app/login/fetchData";
 

@@ -1,10 +1,10 @@
 'use client'
 
 import { useAuth } from "@/app/context/AuthContext";
-import { ifLoadingOrErrorDisplay, useFetchExperimental } from "@/app/dataset/tree/[id]/[...path]/viewTextFileClientSide";
 import ModelForkForm from "./modelForkForm";
 import PageComponent from "@/app/page_component";
-import { UsernameAndDatasetNameLinks } from "./component";
+import { UsernameAndModelNameLinks } from "./component";
+import { ifLoadingOrErrorDisplay, useFetch } from "@/app/_components/useFetch";
 
 export function ModelInfoComponent({data}) { 
     return (
@@ -32,11 +32,11 @@ export function isEmptyObject(obj) {
     return JSON.stringify(obj) === '{}';
 }
 
-export default function PageClient({id}) {
+export default function ModelForkPageClientSide({id}) {
     const apiRoute = `model/${id}`
     const { user } = useAuth();
 
-    const { data, loading, error } = useFetchExperimental(apiRoute);
+    const { data, loading, error } = useFetch(apiRoute);
 
     const display = ifLoadingOrErrorDisplay(loading, error)
     if (display) {
@@ -46,23 +46,25 @@ export default function PageClient({id}) {
     if (user.username === data.username) {
         return <PageComponent>
             <h2>You already own this model.</h2>
-            <UsernameAndDatasetNameLinks data={data} />
+            <UsernameAndModelNameLinks 
+                data={data} 
+                id={id}
+            />
             <ModelInfoComponent data={data}/>
         </PageComponent>
     }
 
     return (
-        <div >
-            <UsernameAndDatasetNameLinks 
+        <div>
+            <UsernameAndModelNameLinks 
                 data={data} 
                 id={id}
             />
             <PageComponent>
-                place content here
                 <ModelForkForm 
                     model_id={id} 
                     model={data}
-                    loggedInUser={!isEmptyObject(user)}
+                    loggedInUser={user?.username}
                 />
             </PageComponent>
             <div className="container">

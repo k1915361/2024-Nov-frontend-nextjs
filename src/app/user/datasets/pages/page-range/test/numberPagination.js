@@ -40,11 +40,11 @@ const handleFetchListPage = async (
     setTotalPages(data.num_pages)
 }
 
-function ButtonLinkOutline({disabled, href, children, ...props}) {
+function ButtonLightShadowOutline({disabled, href, children, ...props}) {
     return <Link 
         href={href} 
         {...props}
-        className={`btn btn-outline-secondary mx-1 text-dark ${disabled && 'disabled'}`}
+        className={`btn btn-light shadow-sm mx-1 text-dark ${disabled && 'disabled'}`}
     >
         {children}
     </Link>
@@ -101,23 +101,23 @@ export default function DatasetPageRange({namespace='datasets', LinkListItemBody
 
             <div>
                 <span>
-                    <ButtonLinkOutline 
+                    <ButtonLightShadowOutline 
                         disabled={!hasPrevious}
                         href={goPreviousPage} 
                     >
                         Previous
-                    </ButtonLinkOutline>
+                    </ButtonLightShadowOutline>
                     <PageRange 
                         pageRange={pageRange}
                         currPage={page}
                         setCurrPage={setPage}
                     />
-                    <ButtonLinkOutline 
+                    <ButtonLightShadowOutline 
                         disabled={!hasNext}
                         href={goNextPage} 
                     >
                         Next
-                    </ButtonLinkOutline>
+                    </ButtonLightShadowOutline>
                 </span>
             </div>
         </div>

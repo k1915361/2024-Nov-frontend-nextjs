@@ -1,12 +1,12 @@
 'use client'
 
-import { useFetchExperimental } from "../../tree/[id]/[...path]/viewTextFileClientSide";
 import { DatasetInfoComponent } from "./datasetInfo";
 import { CsvTableAndDownloadButtonComponent } from "./datasetCsvView";
+import { useFetch } from "@/app/_components/useFetch";
 
 export default function TestExperimentalUseFetch({id}) { 
     const route = `dataset/${id}`
-    const {data, error, loading } = useFetchExperimental(route)
+    const {data, error, loading } = useFetch(route)
 
     if (loading) {
         return <div>Loading...</div>;

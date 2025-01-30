@@ -6,8 +6,8 @@ export const API_HTTP = API_ROOT_HTTP + "/api"
 export const API = API_ROOT + "/api"
 export const API_ROOT_WEBSOCKET = "ws://" + API
 
-export const API_DATASET_ROOT = `${API_HTTP}/asset/user/dataset`;
-export const API_MODEL_ROOT = `${API_HTTP}/asset/user/model`;
+export const API_DATASET_ROOT = `${API_HTTP}/asset/dataset`;
+export const API_MODEL_ROOT = `${API_HTTP}/asset/model`;
 
 export const fetchData = async (
     route
@@ -36,6 +36,7 @@ export const fetchData = async (
     }
 };
 
+/** Pass undefined to keep default parameter values like f(route, options, undefined, apiRoot) */
 export const fetchResponse = async (
     route
     , options

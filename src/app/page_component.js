@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
-import { LinkDark } from './home/page';
+import { LinkDark } from "./_components/components";
 
 export default function PageComponent({children}) {
  

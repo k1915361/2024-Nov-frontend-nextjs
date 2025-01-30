@@ -1,13 +1,13 @@
-import { Icon } from "../_components/sidebar";
+import { Icon } from "../_components/components";
 
-export function TitleRouteView({apiRoute, children, Title='Datasets: '}) {
+export function TitleRouteView({apiRoute, children, title='Datasets: '}) {
     return (
         <div>
             <span className="fs-4">
                 <Icon bootstrapIcon='database-fill'/>
-                {Title} 
+                {title} 
             </span> <span>
-                {apiRoute}
+                {decodeURIComponent(apiRoute)}
                 {children}
             </span>
         </div>

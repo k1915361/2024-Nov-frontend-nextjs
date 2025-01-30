@@ -2,10 +2,10 @@ import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
 import { API_DATASET_ROOT, API_HTTP } from "@/app/login/fetchData"
 import PageComponent from "@/app/page_component"
 import "@/app/dataset/table/styles.css"
-import { datasetTreeTextViewBaseRoute } from "../../text-view/[id]/[...path]/page"
+import { datasetTreeTextViewBaseRoute } from "../../../blob/text-view/[id]/[...path]/page"
 import { redirect } from "next/navigation"
 import { TitleRouteView } from "@/app/dataset/titleRouteView"
-import ViewTextFileClientSide from "./viewTextFileClientSide"
+import ViewTextFileClientSide from "../../../blob/[id]/[...path]/viewTextFileClientSide"
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils"
 
 export const imageThumbnailClass = "imageView img-thumbnail"
@@ -32,7 +32,8 @@ export const isFile = {
     'yaml': true,
     'png': true,
     'jpg': true,
-    'jpeg': true
+    'jpeg': true,
+    'json': true,
 }
 
 export const isReadableText = {
@@ -42,7 +43,8 @@ export const isReadableText = {
     'mkdn': true,
     'md': true,
     'readme': true,
-    'yaml': true
+    'yaml': true,
+    'json': true,
 }
 
 export const isKeyValueTreeMap = {
@@ -111,7 +113,7 @@ export function arrayLast(array, index=1){
     return array[array.length - index];
 };
 
-export function FileView({apiRoute, extension, className, apiRoot=API_HTTP, ...props }) {
+export function FileView({apiRoute, extension, className, apiBaseRoute='dataset/blob/', apiRoot=API_HTTP, ...props }) {
     if (extension === '') {
         return 
     }
@@ -119,7 +121,7 @@ export function FileView({apiRoute, extension, className, apiRoot=API_HTTP, ...p
     if (isReadableText[extension]) {
         return (
             <ViewTextFileClientSide 
-                apiRoute={apiRoute} 
+                apiRoute={`${apiBaseRoute}${apiRoute}`} 
                 className={className || borderLightClassName}
                 {...props}
             />
@@ -143,6 +145,8 @@ export function filePathToApiUrlServerSide(str) {
     return str.replace('asset/', 'tree/')
 }
 
+export const datasetBlobBaseRoute = 'dataset/blob/'
+
 export default async function Page({
     params,
 }) {
@@ -159,11 +163,12 @@ export default async function Page({
     
     return (
         <PageComponent>
+            - [id]/[...path]/page - {apiRoute} --
             {isFile[extension] ? 
                 <TitleRouteView apiRoute={apiRoute} /> :
-                <ViewDirectoryTree apiRoute={apiRoute}/>
+                <ViewDirectoryTree apiRoute={apiRoute} apiType="dataset" />
             }
-            <FileView extension={extension} apiRoute={apiRoute}/>
+            <FileView extension={extension} apiRoute={apiRoute} apiBaseRoute={datasetBlobBaseRoute} />
         </PageComponent>
     )
 }

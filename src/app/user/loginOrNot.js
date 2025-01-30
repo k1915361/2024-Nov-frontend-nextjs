@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchData } from "../login/fetchData";
-import { Icon } from "../_components/sidebar";
+import { Icon } from "../_components/components";
 
 export default function LoginOrNot() {
     const route = '/api/user/'

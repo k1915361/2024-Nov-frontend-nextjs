@@ -98,10 +98,9 @@ export function useListPaginationState(route, param, namespace, searchParams, ro
 }
 
 export function ActiveButton({children, isActive='', ...props}) {
-
     return <button 
         type="button" 
-        className={`btn ${isActive && 'active'} me-1 mb-1 mt-1`}
+        className={`btn ${isActive && 'border btn-light fw-medium'}  shadow-sm me-1 mb-1 mt-1`}
         data-bs-toggle="button" 
         aria-pressed={`${isActive && 'true'}`}
         style={{width: "40px" }}

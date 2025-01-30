@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { API_DATASET_ROOT, API_HTTP } from "../login/fetchData";
-import { datasetTreeBaseRoute } from "./tree/text-view/[id]/[...path]/page";
+import {  API_HTTP } from "../login/fetchData";
 import { TitleRouteView } from "./titleRouteView";
+import { ifLoadingOrErrorDisplay, useFetch } from "../_components/useFetch";
 
 export function getDirectoryTree(api, setState) {
     async function f() {
@@ -44,7 +44,7 @@ export const folderIcon = <svg
         <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z" fill="currentColor"></path>
     </svg>
 
-export function FileRouteView({apiRoute, filename, children, baseApiRoute=datasetTreeBaseRoute, icon = folderIcon, target='', className='dir', ...props}) {
+export function FileRouteView({apiRoute, filename, children, baseApiRoute='', icon = folderIcon, target='', className='dir', ...props}) {
     return (
         <a href={`/${baseApiRoute}${apiRoute}/${filename}`} target={target} className={className} {...props}>
             {icon} {filename} {children}
@@ -56,18 +56,23 @@ export function filePathToApiUrl(str) {
     return str.replace('asset/', 'tree/')
 }
 
-export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, }) {
-    const [tree, setTree] = useState({});
+export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, apiType='dataset', routeTitle}) {
+    apiRoute = decodeURIComponent(apiRoute)
     apiRoute = filePathToApiUrl(apiRoute)
+    
+    const { data: tree, loading, error } = useFetch(`${apiType}/tree/${apiRoute}`)
 
-    useEffect(() => {
-        getDirectoryTree(`${apiRoot}/${apiRoute}`, setTree);
-    }, [])
+    const display = ifLoadingOrErrorDisplay(loading, error)
+    if (display) return display;
 
     return (
         <div>
+            --ViewDirectoryTree-- {`${apiRoot}/${apiType}/tree/${apiRoute}`}
+            <br/>
+            --ViewDirectoryTree-- {`${apiRoot}/${apiType}/blob/${apiRoute}`}
             <TitleRouteView
                 apiRoute={apiRoute}
+                title={routeTitle}
             />
             <div className="list-group mb-1" >
                 {tree?.tree?.map?.((item, index) => 
@@ -75,6 +80,7 @@ export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, }) {
                     ?
                         <div key={index} className="tree-item list-group-item">
                             <FileRouteView
+                                baseApiRoute={`${apiType}/tree/`}
                                 apiRoute={apiRoute}
                                 filename={item.name}
                                 icon={folderIcon}
@@ -83,6 +89,7 @@ export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, }) {
                     :
                         <div key={index} className="tree-item list-group-item">
                             <FileRouteView
+                                baseApiRoute={`${apiType}/blob/`}
                                 apiRoute={apiRoute}
                                 filename={item.name}
                                 icon={fileIcon}

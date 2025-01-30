@@ -1,7 +1,7 @@
 'use client'
 
 import { API_HTTP } from "@/app/login/fetchData";
-import { fetchAndSetState } from "../../tree/[id]/[...path]/viewTextFileClientSide";
+import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { useEffect, useState } from "react";
 import CsvTableAndDownloadButton from "../../viewer/page";
 

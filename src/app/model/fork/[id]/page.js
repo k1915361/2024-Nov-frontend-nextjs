@@ -1,4 +1,4 @@
-import PageClient from "./pageClient"
+import ModelForkPageClientSide from "./pageClient"
 
 export default async function Page(
     context
@@ -7,7 +7,7 @@ export default async function Page(
 
     return (
         <>
-            <PageClient id={id} />        
+            <ModelForkPageClientSide id={id} />        
         </>
     )
 }

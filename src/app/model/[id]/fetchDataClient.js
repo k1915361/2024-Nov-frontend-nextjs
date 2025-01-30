@@ -1,14 +1,20 @@
 'use client'
 
 import { fetchData } from "@/app/login/fetchData"
-import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
+import { LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
 import { DeleteModal, ModalDeleteButton, ResponseMessage, strToDateToLocaleStr } from "@/app/dataset/[id]/fetchDataClient";
 import DownloadButtonClientSide from "@/app/dataset/[id]/downloadClientSide";
+import { useAuth } from "@/app/context/AuthContext";
+import { isEmptyObject } from "../fork/[id]/pageClient";
+import { modelActionBaseRoute } from "../action/[id]/page";
+
+export const modelTreeBaseRoute = 'model/tree/'
 
 export default function FetchModelClient({id}) {
     const route = '/api/model/'
-    const [data, setData] = useState();    
+    const [data, setData] = useState();
+    const { user } = useAuth();
     
     useEffect(() => {
         async function f() {
@@ -32,19 +38,26 @@ export default function FetchModelClient({id}) {
         <h6>
             User: {data?.username}
         </h6>
-        <ButtonLight>Model Analysis</ButtonLight>
-        <ButtonLight>Cleaning</ButtonLight>
-        <ButtonLight>Enrichment</ButtonLight>
-        <ButtonLight>Data Curation</ButtonLight>
-        <ButtonLight>Balancing</ButtonLight>
-        <ButtonLight>XAI</ButtonLight>
         <div/>
-        <LinkButtonLight href={`/model/fork/${id}`}>
-            Fork
+        <LinkButtonLight addClassName=' active' href='' style={{ borderBottom: "3px solid black", }}>
+            Model card
         </LinkButtonLight>
-        <ModalDeleteButton>
-            Delete Model
-        </ModalDeleteButton>
+        <LinkButtonLight href={`/${modelTreeBaseRoute}${removeModelDirectoryBasePath(data?.model_directory || '')}`} >
+            Files
+        </LinkButtonLight>
+        {!isEmptyObject(user) &&
+            <>
+                <LinkButtonLight href={`/${modelActionBaseRoute}${id}`} >
+                    Actions
+                </LinkButtonLight>
+                <LinkButtonLight href={`/model/fork/${id}`}>
+                    Fork
+                </LinkButtonLight>
+                <ModalDeleteButton>
+                    Delete Model
+                </ModalDeleteButton>
+            </>
+        }
         <DownloadButtonClientSide id={id} route="/api/model/download/"/>
         <DeleteModal onDelete={requestDeleteModel}/>
         <div dangerouslySetInnerHTML={{ __html: data?.markdown }} />
@@ -67,4 +80,8 @@ export default function FetchModelClient({id}) {
             }
         </div>
     </div>
+}
+
+export function removeModelDirectoryBasePath(path, source='asset/model/', target='') {
+    return path.replace(source, target)
 }

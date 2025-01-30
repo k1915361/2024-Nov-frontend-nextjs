@@ -1,7 +1,9 @@
+import { BoldHeading4 } from "@/app/_components/components";
 import { API_HTTP } from "@/app/login/fetchData";
+import { ButtonLight } from "@/app/user/models/page";
 import { useState } from "react";
 
-export default function DatasetForkForm({dataset_id, dataset}) {
+export default function DatasetForkForm({dataset_id, dataset, loggedInUser}) {
     const [formData, setFormData] = useState({
         dataset_id: dataset_id,
         name: dataset.name,
@@ -92,12 +94,17 @@ export default function DatasetForkForm({dataset_id, dataset}) {
                 className='form-control mb-1'
                 onChange={handleChange}
             />
-            <button 
+            {!loggedInUser &&
+                <BoldHeading4>
+                    Please login to fork.
+                </BoldHeading4>
+            }
+            <ButtonLight
                 type="submit"
-                className='btn btn-primary'
+                disabled={!loggedInUser}
             >
                 Fork
-            </button>
+            </ButtonLight>            
             <div>
                 {message}
             </div>

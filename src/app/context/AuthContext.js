@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
                     console.log("Logout successful")
                     setUser(null); 
                 }
-            }            
+            }
         } catch (error) {
             console.error("Logout failed with network error:", error);
         }

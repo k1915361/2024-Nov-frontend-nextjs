@@ -1,4 +1,6 @@
+import { BoldHeading4 } from "@/app/_components/components";
 import { API_HTTP } from "@/app/login/fetchData";
+import { ButtonLight } from "@/app/user/models/page";
 import { useState } from "react";
 
 export default function ModelForkForm({model_id, model, loggedInUser}) {
@@ -95,16 +97,16 @@ export default function ModelForkForm({model_id, model, loggedInUser}) {
                 onChange={handleChange}
             />
             {!loggedInUser &&
-                <div>
-                Please login to fork.
-            </div>}
-            <button 
+                <BoldHeading4>
+                    Please login to fork.
+                </BoldHeading4>
+            }
+            <ButtonLight 
                 type="submit"
-                className='btn btn-primary'
                 disabled={!loggedInUser}
             >
                 Fork
-            </button>
+            </ButtonLight>
             <div>
                 {message}
             </div>

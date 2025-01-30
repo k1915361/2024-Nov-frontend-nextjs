@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText, Text2ndarySmall } from "@/app/home/page";
+import { LinkText } from "@/app/_components/components";
+import { Text2ndarySmall } from "@/app/_components/components";
 import { ButtonLight } from "./page";
 
 

@@ -3,11 +3,13 @@
 import { fetchData } from "@/app/login/fetchData"
 import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
 import { useEffect, useState } from "react";
-import { LinkTextNormal } from "@/app/home/page";
-import { datasetTreeBaseRoute } from "../tree/text-view/[id]/[...path]/page";
+import { LinkTextNormal } from "@/app/_components/components";
+import { datasetTreeBaseRoute } from "../blob/text-view/[id]/[...path]/page";
 import { datasetActionBaseRoute } from "../action/[id]/page";
-import { Icon } from "@/app/_components/sidebar";
+import { Icon } from "@/app/_components/components";
 import DownloadButtonClientSide from "./downloadClientSide";
+import { useAuth } from "@/app/context/AuthContext";
+import { isEmptyObject } from "@/app/model/fork/[id]/pageClient";
 
 export const datasetViewerBaseRoute = 'dataset/viewer/'
 
@@ -72,7 +74,7 @@ export function ResponseMessage({data}) {
     }
 }
 
-export function removeDatasetDirectoryBasePath(path, source='asset/user/dataset/', target='') {
+export function removeDatasetDirectoryBasePath(path, source='asset/dataset/', target='') {
     return path.replace(source, target)
 }
 
@@ -86,7 +88,8 @@ export function isNotNullUndefined(v) {
 
 export default function FetchDatasetClient({id}) {
     const route = '/api/dataset/'
-    const [data, setData] = useState();    
+    const [data, setData] = useState();
+    const { user } = useAuth();
     
     useEffect(() => {
         async function f() {
@@ -121,16 +124,20 @@ export default function FetchDatasetClient({id}) {
         <LinkButtonLight href={`/${datasetTreeBaseRoute}${removeDatasetDirectoryBasePath(data?.dataset_directory || '')}`} >
             Files
         </LinkButtonLight>
-        <LinkButtonLight href={`/${datasetActionBaseRoute}${id}`} >
-            Actions
-        </LinkButtonLight>
-        <div/>
-        <LinkButtonLight href={`/dataset/fork/${id}`}>
-            Fork
-        </LinkButtonLight>
-        <ModalDeleteButton>
-            Delete Dataset
-        </ModalDeleteButton>        
+        {!user?.username &&
+            <>
+                <LinkButtonLight href={`/${datasetActionBaseRoute}${id}`} >
+                    Actions
+                </LinkButtonLight>
+                <div/>
+                <LinkButtonLight href={`/dataset/fork/${id}`}>
+                    Fork
+                </LinkButtonLight>
+                <ModalDeleteButton>
+                    Delete Dataset
+                </ModalDeleteButton>        
+            </>
+        }
         <DownloadButtonClientSide id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>
         

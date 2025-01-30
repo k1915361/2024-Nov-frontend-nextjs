@@ -4,10 +4,6 @@ import { Suspense, useState } from 'react';
 import CheckLogin from '../login/checkLogin';
 import { API_HTTP } from '../login/fetchData';
 
-export function log(...args) {
-    console.log(...args)
-}
-
 export default function ModelForm() {
     const [formData, setFormData] = useState({
         name: '',
@@ -58,14 +54,14 @@ export default function ModelForm() {
             });
 
             if (response.ok) {
-                log('Form submitted successfully');
+                console.log('Form submitted successfully');
             } else {
                 const data = await response.json();
                 setMessage(data?.message)
                 console.error(`Form submission failed. status: ${response.status}`);
             }
             const result = await response.json();
-            log(result);
+            console.log(result);
         } catch (error) {
             console.error('Error:', error);
         }

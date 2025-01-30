@@ -1,5 +1,5 @@
+import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
 import PageComponent from "@/app/page_component"
-import ViewDirectoryTree from "../../directoryTreeView"
 
 export default async function Page({
     params,
@@ -8,7 +8,7 @@ export default async function Page({
 
     return (
         <PageComponent>
-            <ViewDirectoryTree apiRoute={id} apiType="dataset"/>
+            <ViewDirectoryTree apiRoute={id} apiType="model"/>
         </PageComponent>
     )
 }

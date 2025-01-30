@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { LinkDark, ListItemDivBox, Text2ndarySmall } from "./page";
+import { LinkDark, ListItemDivBox } from "../_components/components";
+import { Text2ndarySmall } from "../_components/components";
 import { fetchData } from "../login/fetchData";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 

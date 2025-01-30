@@ -1,7 +1,8 @@
 'use client'
 
 import { useAuth } from "../context/AuthContext";
-import { SmallShadowRound } from "./sidebar";
+import { LinkDarkNoUnderline } from "./components";
+import { SmallShadowRound } from "./components";
 
 export default function Username() {
     const { user } = useAuth();
@@ -9,9 +10,17 @@ export default function Username() {
     return (
         <SmallShadowRound overrideClassname='fw-medium'>
             {(user?.id && user?.username) ? 
-                user.username
+                <LinkDarkNoUnderline
+                    href='/profile'
+                >
+                    user.username
+                </LinkDarkNoUnderline>
                 :
-                'Guest'
+                <LinkDarkNoUnderline
+                    href='/login'
+                >
+                    Guest
+                </LinkDarkNoUnderline>
             }            
         </SmallShadowRound>
     );
