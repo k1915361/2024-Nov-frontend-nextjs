@@ -1,6 +1,6 @@
 'use client'
 
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import DatasetsPaginator from "./datasetsPaginator";
 
 export function RowGap0({children, ...props}) {

@@ -2,12 +2,12 @@
 
 import { ListModelItemBody } from '@/app/home/list_models';
 import { API_HTTP } from '@/app/login/fetchData';
-import PageComponent from '@/app/page_component';
+import PageComponent from '@/app/pageComponent';
 import { useState, useEffect } from 'react';
 
 export const API_MODEL_SEARCH = `${API_HTTP}/model/search/?query=`
 
-export function Input({value, handleChange, ...props}){
+export function LiveSearchInput({value, handleChange, ...props}){
     return <input
             type="text"
             placeholder="Model Name"
@@ -69,7 +69,7 @@ export default function LiveSearch() {
 
     return (
         <PageComponent>            
-            <Input
+            <LiveSearchInput
                 value={query}
                 onChange={setEventQuery}
                 placeholder="Search..."

@@ -5,7 +5,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import { DatasetInfoComponent } from "../../action/[id]/datasetInfo";
 import { ifLoadingOrErrorDisplay, useFetch } from "@/app/_components/useFetch";
 import { UsernameAndModelNameLinks } from "@/app/model/fork/[id]/component";
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 
 export default function DatasetPageClient({id}) {
     const apiRoute = `dataset/${id}`

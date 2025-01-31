@@ -1,6 +1,6 @@
 'use client'
 
-import PageComponent from "../../page_component";
+import PageComponent from "../../pageComponent";
 import { fetchData } from "../fetchData";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { ColButtonLight, RowGap1, RowGap1Margin0 } from "../models/page";
 import { BtnPrimary, ColBorderLightSubtleMinHeight } from "../dataset/[id]/page";
 

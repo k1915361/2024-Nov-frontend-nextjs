@@ -5,11 +5,13 @@ import { Suspense } from "react"
 export default async function Page({
   params,
 }) {  
-    const { id, path } = (await params)
+    const { username, modelname, path } = (await params)
       
     return (
         <PageComponent>
-            {id}
+            {username}
+            <br/>
+            {modelname}
             <br/>
             {path}
             <Suspense>

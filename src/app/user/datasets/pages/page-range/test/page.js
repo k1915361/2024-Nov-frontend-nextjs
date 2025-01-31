@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import DatasetPageRange from "./numberPagination";
 
 export default function DatasetPageRangeView() {

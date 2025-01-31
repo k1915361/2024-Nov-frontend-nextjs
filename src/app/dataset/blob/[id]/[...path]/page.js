@@ -1,6 +1,6 @@
 import { arrayLast, datasetBlobBaseRoute, FileView, getFileExtension, isFile, isReadmeFile } from "@/app/dataset/tree/[id]/[...path]/page"
 import { datasetTreeTextViewBaseRoute } from "../../text-view/[id]/[...path]/page"
-import PageComponent from "@/app/page_component"
+import PageComponent from "@/app/pageComponent"
 import { TitleRouteView } from "@/app/dataset/titleRouteView"
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
 import { redirect } from "next/navigation"

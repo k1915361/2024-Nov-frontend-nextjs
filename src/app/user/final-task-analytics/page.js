@@ -1,4 +1,4 @@
-const { default: PageComponent } = require("@/app/page_component");
+const { default: PageComponent } = require("@/app/pageComponent");
 const { RowGap1 } = require("../models/page");
 
 export function f() {

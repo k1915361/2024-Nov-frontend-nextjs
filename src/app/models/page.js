@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import ModelsPageRange from "./ModelPageRange";
 
 export default function ModelsPagesView() {

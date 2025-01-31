@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/app/context/AuthContext";
 import ModelForkForm from "./modelForkForm";
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { UsernameAndModelNameLinks } from "./component";
 import { ifLoadingOrErrorDisplay, useFetch } from "@/app/_components/useFetch";
 

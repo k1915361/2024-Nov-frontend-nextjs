@@ -3,7 +3,7 @@
 import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { fetchResponse } from "../login/fetchData";
-import PageComponent from "../page_component";
+import PageComponent from "../pageComponent";
 import { useAuth } from "../context/AuthContext";
 
 export async function check_log_in_state(route = '/api/token/check-login/cookie/') {

@@ -73,7 +73,9 @@ Creating a new Next.js app in /home/user/Documents/ku-frontend-nextjs.
 
 ## Using stylesheets from examplary websites 
 
-<https://chatgpt.com/>
+<https://chatgpt.com/>  
+<https://huggingface.co/>
+
 
 Follow the website link above, inspect, look at `html > head > link`, and stylesheets.
 

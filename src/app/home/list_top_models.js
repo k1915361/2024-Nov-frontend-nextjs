@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { LinkDark, ListItemDivBox } from "../_components/components";
+import { LinkDark, ListItemDivBox, OverviewCardWrapper } from "../_components/components";
 import { Text2ndarySmall } from "../_components/components";
 import { fetchData } from "../login/fetchData";
 import dayjs from "@/app/_components/dayjsRelativeTime";
+import 'tailwindcss'
 
-export const borderLightShadowClassname = 'border border-light-subtle ms-0 m-3 p-2 rounded shadow-sm'
+export const borderLightShadowClassname = 'flex items-center justify-between gap-4 p-2 rounded-lg bg-linear-to-r from-gray-100 to-gray-50 shadow-sm ms-0 m-3 p-2 py-3 border-1 border-gray-200'
 
 export default function TopModels() {
     const route = '/api/top-models/'
@@ -26,7 +27,7 @@ export default function TopModels() {
         <div>
             <div>
                 {list?.map?.((model, index) => (
-                    <ListItemDivBox key={model.id} className={borderLightShadowClassname}>
+                    <OverviewCardWrapper key={model.id}>
                         <span>
                             <span>{index+1}. </span>
                             <LinkDark href={`/model/${model.id}`}>{model.name}</LinkDark>
@@ -35,7 +36,7 @@ export default function TopModels() {
                             <Text2ndarySmall> • {model.is_public ? 'public' : 'private'}</Text2ndarySmall>
                             <Text2ndarySmall>{model.original_model && ' • forked'}</Text2ndarySmall>                            
                         </span>
-                    </ListItemDivBox>                
+                    </OverviewCardWrapper>                
                     
                     )
                 )}

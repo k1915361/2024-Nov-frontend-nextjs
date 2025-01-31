@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component"
+import PageComponent from "@/app/pageComponent"
 
 export function ColBorderLightSubtleMinHeight({children, ...props}) {
   return (

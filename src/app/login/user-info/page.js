@@ -1,4 +1,4 @@
-import PageComponent from "../../page_component";
+import PageComponent from "../../pageComponent";
 import { fetchData } from "../fetchData";
 
 export async function testUserInfoRequset() {

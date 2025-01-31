@@ -1,5 +1,5 @@
 import { refreshToken } from "@/app/login/refreshToken";
-import PageComponent from "../../page_component";
+import PageComponent from "../../pageComponent";
 
 export default async function TestRefreshToken({  }) {
     

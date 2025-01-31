@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { RowGap1 } from "../models/page";
 
 export default function UserHITLReinforcedFeedback() {

@@ -1,13 +1,12 @@
 import { Suspense } from "react";
-import PageComponent from "../page_component";
+import PageComponent from "../pageComponent";
 import { ColBox } from "../profile/page";
 import TopModels from "./list_top_models";
 import TopDatasets from "./list_top_datasets";
 import { LinkButtonLight } from "../user/models/page";
 import { Grid, Row, ColBorderRoundShadow, ListItemBox, LinkDark } from "../_components/components";
 
-export default function HomePage() {
-    
+export default function HomePage() {    
     return (
         <PageComponent>
             <Grid>

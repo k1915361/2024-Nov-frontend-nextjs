@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { Suspense } from "react";
 import UserDatasets from "./userDatasets";
 import { ButtonLight, ColBorderLight, ColButtonDanger, ColButtonLight, ColLinkButtonLight, LinkButtonLight, RowGap1, RowGap1Margin0 } from "../models/page";

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Username from "./username";
-import { ContainerFluidGap1, DisplayFlexContentCenterBorder, DropDownItem, Icon, LinkDarkNoUnderlineIconText, LogoIconText, LogoText, NavbarExpandLarge, SmallShadowRound } from "./components";
+import { ButtonBorderLightGray, ContainerFluidGap1, DisplayFlexContentCenterBorder, DropDownItem, Icon, Input, LinkDarkNoUnderlineIconText, LogoIconText, LogoText, NavbarExpandLarge, SmallShadowRound } from "./components";
 
 export default function Sidebar({ children }) {
     return (
@@ -20,19 +20,18 @@ export default function Sidebar({ children }) {
                             </LogoText>
                         </a>
                     </div>
-                    <form className="d-flex" role="search">
-                        <div className="input-group ">
-                            <div className="form">
-                                <input 
+                    <form className="" role="search">
+                        <div className="relative w-full flex items-center">
+                            <div className="relative inline-block flex-1 lg:max-w-sm mr-2 sm:mr-4 md:mr-3 xl:mr-6 ">
+                                <Input
                                     type="search" 
                                     id="form1" 
-                                    className="form-control border-light-subtle shadow-sm" 
                                     placeholder="Search models, datasets, users..."
                                 />
                             </div>
-                            <button type="submit" className="btn shadow-sm">
-                                <Icon bootstrapIcon='search'/>
-                            </button>
+                            <ButtonBorderLightGray type="submit">
+                                <Icon bootstrapIcon='search' />
+                            </ButtonBorderLightGray>                            
                         </div>
                     </form>
                     <LinkDarkNoUnderlineIconText 

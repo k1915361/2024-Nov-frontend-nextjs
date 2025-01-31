@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LinkDark, ListItemDivBox } from "../_components/components";
+import { LinkDark, ListItemDivBox, OverviewCardWrapper } from "../_components/components";
 import { Text2ndarySmall } from "../_components/components";
 import { fetchData } from "../login/fetchData";
 import dayjs from "@/app/_components/dayjsRelativeTime";
@@ -25,7 +25,7 @@ export default function TopDatasets() {
         <div>
             <div>
                 {list?.length !== 0 && list?.map?.((dataset, index) => (
-                    <ListItemDivBox key={dataset.id} className={borderLightShadowClassname}>
+                    <OverviewCardWrapper key={dataset.id} >
                         <span>
                             <span>{index+1}. </span>
                             <LinkDark type="dataset" id={dataset.id} href={`/dataset/${dataset.id}`}>{dataset.name}</LinkDark>
@@ -34,7 +34,7 @@ export default function TopDatasets() {
                             <Text2ndarySmall> • {dataset.is_public ? 'public' : 'private'}</Text2ndarySmall>
                             <Text2ndarySmall>{dataset.original_dataset && ' • forked'}</Text2ndarySmall>                            
                         </span>
-                    </ListItemDivBox>                
+                    </OverviewCardWrapper>                
                 ))}
 
                 {list?.length == 0 && 

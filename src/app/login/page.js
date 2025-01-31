@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import PageComponent from "../page_component";
+import PageComponent from "../pageComponent";
 import { fetchData } from "./fetchData";
 import { useAuth } from "../context/AuthContext";
 

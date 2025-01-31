@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import ListDatasetsPages from "./list_datasets_pages";
 
 export default function DatasetsPages() {

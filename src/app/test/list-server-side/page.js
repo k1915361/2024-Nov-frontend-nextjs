@@ -1,5 +1,5 @@
 import TestListServerSideDataFetch from "../../home/TestListServerSideDataFetch";
-import PageComponent from "../../page_component";
+import PageComponent from "../../pageComponent";
 
 export default async function TestListServerSideDataFetchPage({  }) {
 

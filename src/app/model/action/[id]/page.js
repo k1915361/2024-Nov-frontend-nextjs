@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component"
+import PageComponent from "@/app/pageComponent"
 import { API_HTTP } from "@/app/login/fetchData"
 import { ProgressBarView } from "@/app/dataset/image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "@/app/dataset/image/test-async-web-socket-json/action-buttons/page"

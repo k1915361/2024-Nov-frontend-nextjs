@@ -1,5 +1,5 @@
 import ListModelsPages from "@/app/user/models/pages/list_models_pages";
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 
 export default function ModelsPages() {
 

@@ -1,6 +1,6 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
 import { API_DATASET_ROOT, API_HTTP } from "@/app/login/fetchData"
-import PageComponent from "@/app/page_component"
+import PageComponent from "@/app/pageComponent"
 import "@/app/dataset/table/styles.css"
 import { datasetTreeTextViewBaseRoute } from "../../../blob/text-view/[id]/[...path]/page"
 import { redirect } from "next/navigation"

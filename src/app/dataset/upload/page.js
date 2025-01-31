@@ -1,5 +1,5 @@
 
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import DatasetForm from "./datasetForm";
 
 export default function ModelUploadPage() {

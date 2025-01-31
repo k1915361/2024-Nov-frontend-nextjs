@@ -1,5 +1,5 @@
 import { BlogPosts } from "@/app/blog-posts";
-import PageComponent from "../../page_component";
+import PageComponent from "../../pageComponent";
 import { BlogProvider } from "@/app/blog-context";
 
 export default async function TestListServerSideDataFetchPage({  }) {

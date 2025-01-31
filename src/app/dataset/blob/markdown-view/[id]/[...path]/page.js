@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { getFileExtension, isTextOrMarkdownOrReadme } from "../../../../tree/[id]/[...path]/page"
 import { API_HTTP } from "@/app/login/fetchData";
 import { LinkButtonLight } from "@/app/user/models/page";

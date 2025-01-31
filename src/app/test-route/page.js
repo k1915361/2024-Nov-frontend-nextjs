@@ -1,4 +1,4 @@
-import PageComponent from "../page_component";
+import PageComponent from "../pageComponent";
 
 export default function TestPageRoute() {
     return (

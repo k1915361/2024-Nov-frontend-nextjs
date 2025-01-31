@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import PageComponent from "../page_component";
+import PageComponent from "../pageComponent";
 import UserProfile from "./userProfile";
 
 export const colBoxClass = "col p-3 mb-5 rounded me-3"

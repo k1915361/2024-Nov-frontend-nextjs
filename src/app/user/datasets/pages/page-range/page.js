@@ -1,5 +1,5 @@
 
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import DatasetPageRange from "./test/numberPagination";
 
 export default function ModelsPages() {

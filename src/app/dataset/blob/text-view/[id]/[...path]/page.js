@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component";
+import PageComponent from "@/app/pageComponent";
 import { getFileExtension, isReadableText } from "../../../../tree/[id]/[...path]/page"
 import { LinkButtonLight } from "@/app/user/models/page";
 import ViewTextFile from "../../../[id]/[...path]/viewTextFile";

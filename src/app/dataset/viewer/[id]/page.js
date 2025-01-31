@@ -1,4 +1,4 @@
-import PageComponent from "@/app/page_component"
+import PageComponent from "@/app/pageComponent"
 import DatasetInfoAndCsvView from "../../action/[id]/datasetInfoAndCsvView"
 
 export default async function Page(
