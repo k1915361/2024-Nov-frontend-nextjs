@@ -1,10 +1,16 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { API_HTTP, API_VIEW } from "../login/fetchData";
 import { ispublic } from "./listDatasetItem";
+import { DotSeparator } from "../_components/components";
 
-export function isModelForked(model, prefix = "• ") {
-    if (model.original_model) { 
-        return prefix + "forked"
+export function isModelForked(model, Prefix = DotSeparator) {
+    if (model.original_model) {         
+        return <>
+            <Prefix/> 
+            <span>
+                forked
+            </span>
+        </>
     }
 }
 
@@ -42,24 +48,37 @@ export function FontWeightMedium({children, ...props}){
     )
 }
 
-export function ListModelItem({model}) {
+export function modelUsernameComponent(model, isUsernameVisible=true, Separator = DotSeparator) {
+    if (isUsernameVisible){
+        return (
+            <>
+                <span>
+                    {model.username}
+                </span> 
+            </>
+        )
+    }
+}
+
+export function ListModelItem({model, index='', href, isPublicSignVisible=true, isUsernameVisible=true}) {
     return <>
-        <FontWeightMedium>
-            {model.name}
-        </FontWeightMedium>
-        <div>
-            <TextSecondary> 
-                {model.username} 
-            </TextSecondary> 
-            <TextSecondary
-            > • {ispublic(model)}
-            </TextSecondary>
-            <TextSecondary
-            > • { dayjs(model.updated).fromNow() } 
-            </TextSecondary>
-            <TextSecondary
-            > {isModelForked(model)}
-            </TextSecondary>
+        <header className="flex items-center mb-0.5">
+            <a href={href} className="text-md truncate text-black dark:group-hover/repo:text-yellow-500 group-hover/repo:text-red-600 text-smd">
+                {index} {model.name}
+            </a>
+        </header>        
+        <div className="mr-1 flex items-center overflow-hidden whitespace-nowrap text-sm leading-tight text-gray-400">
+            {modelUsernameComponent(model, isUsernameVisible)}
+            {(isUsernameVisible && isPublicSignVisible) &&
+                <DotSeparator/>
+            }
+            <span> {ispublic(model, isPublicSignVisible)} </span>
+            <span> 
+                {dayjs(model.updated).fromNow()} 
+            </span>
+            <span> 
+                {isModelForked(model)}
+            </span>
         </div>
     </>
 }

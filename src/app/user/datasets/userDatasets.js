@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText, ListItemBox } from "@/app/_components/components";
+import { LinkText, ListItemBox, OverviewCardWrapper } from "@/app/_components/components";
 import { Text2ndarySmall } from "@/app/_components/components";
-import { ButtonLight } from "../models/page";
+import { ButtonLight, LinkButtonLight } from "../models/page";
+import { ListDatasetItem } from "@/app/home/listDatasetItem";
 
 export default function UserDatasets() {
     const route = '/api/user/datasets/'
@@ -23,13 +24,26 @@ export default function UserDatasets() {
     
     return (
         <>
-            {list?.map?.((dataset) => (
-                <ButtonLight key={dataset.id}>
-                    <LinkText>{dataset.name}</LinkText>
-                    <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
-                    <Text2ndarySmall>{dataset.original_dataset && ' • forked'}</Text2ndarySmall>
-                </ButtonLight>                
-            ))}
+            {list?.length && list?.length != 0 &&
+                <>
+                    <h5>My Datasets</h5>
+
+                    {list?.map?.((dataset) => (
+                        <OverviewCardWrapper key={dataset.id}>
+                            <ListDatasetItem 
+                                dataset={dataset} 
+                                href={`/dataset/${dataset.id}`} 
+                                isPublicSignVisible={false}
+                                isUsernameVisible={false}
+                            />
+                        </OverviewCardWrapper>
+                    ))}
+
+                    <LinkButtonLight href='/user/datasets/?page=1&per_page=4'>
+                        See More
+                    </LinkButtonLight>
+                </>
+            }
 
             {list?.length == 0 && 
                 <p>No List of User Datasets available.</p>

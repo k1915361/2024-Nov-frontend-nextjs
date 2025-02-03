@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LinkDark, ListItemDivBox, OverviewCardWrapper } from "../_components/components";
-import { Text2ndarySmall } from "../_components/components";
+import { OverviewCardWrapper } from "../_components/components";
 import { fetchData } from "../login/fetchData";
-import dayjs from "@/app/_components/dayjsRelativeTime";
-import { borderLightShadowClassname } from "./list_top_models";
+import { ListDatasetItem } from "./listDatasetItem";
 
 export default function TopDatasets() {
     const route = '/api/top-datasets/'
@@ -25,15 +23,14 @@ export default function TopDatasets() {
         <div>
             <div>
                 {list?.length !== 0 && list?.map?.((dataset, index) => (
-                    <OverviewCardWrapper key={dataset.id} >
-                        <span>
-                            <span>{index+1}. </span>
-                            <LinkDark type="dataset" id={dataset.id} href={`/dataset/${dataset.id}`}>{dataset.name}</LinkDark>
-                            <Text2ndarySmall> • {dataset.username}</Text2ndarySmall> 
-                            <Text2ndarySmall> • {dayjs(dataset.updated).fromNow()}</Text2ndarySmall>
-                            <Text2ndarySmall> • {dataset.is_public ? 'public' : 'private'}</Text2ndarySmall>
-                            <Text2ndarySmall>{dataset.original_dataset && ' • forked'}</Text2ndarySmall>                            
-                        </span>
+                    <OverviewCardWrapper 
+                        key={dataset.id} 
+                    >
+                        <ListDatasetItem 
+                            dataset={dataset} 
+                            index={`${index+1}.`} 
+                            href={`/dataset/${dataset.id}`} 
+                        />
                     </OverviewCardWrapper>                
                 ))}
 

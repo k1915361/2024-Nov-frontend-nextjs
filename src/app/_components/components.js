@@ -1,3 +1,4 @@
+
 export function Text2ndarySmall({ children, ...props }) {
     return (
         <span className="text-body-secondary text-sm" {...props}>{children}</span>
@@ -20,10 +21,10 @@ export function LinkDark({ children, href, ...props }) {
     );
 }
 
-export function LinkGrayHoverUnderline({ children, href, ...props }) {
+export function LinkGrayHoverUnderline({ children, addClassname='', href, ...props }) {
     return (
         <a
-            className="text-gray-500 hover:underline"
+            className={`text-gray-500 hover:underline  ${addClassname}`}
             href={href}
             {...props}
         >
@@ -105,33 +106,56 @@ export function ListItemBox({ children, type = 'model', ...props }) {
     );
 }
 
-export function ListItemDivBox({ children, type = 'model', ...props }) {
-    return (
-        <div style={{ whiteSpace: "nowrap" }} {...props}>
-            {children}
-        </div>
-    );
-}
-
 export function OverviewCardWrapper({ children, ...props }) {
     return (
-        <div className='flex items-center justify-between gap-4 p-2 rounded-lg 
-            bg-linear-to-r from-gray-50 to-white shadow-sm ms-0 m-3 py-3 
-            border-1 border-gray-100' style={{ whiteSpace: "nowrap" }} {...props}>
-            {children}
-        </div>
-    );
-}
-
-export function ButtonBorderLightGray({ children, ...props }) {
-    return (
-        <div className='p-2 px-3 rounded-lg ms-0 border-1 border-gray-200 text-gray-500 hover:text-gray-700 focus:outline-none'  
+        <div className='items-center justify-between gap-4 p-2 rounded-lg truncate
+            bg-linear-to-r from-gray-50 to-white shadow-2xs ms-0 my-2 
+            border-1 border-gray-100 hover:bg-gray-50 in-hover:bg-gray-50' 
             style={{ whiteSpace: "nowrap" }} 
             {...props}
         >
             {children}
         </div>
     );
+}
+
+export function ButtonBorderLight({ children, addClassname='', ...props }) {
+    return (
+        <button 
+            className={`py-2 px-3 ms-0 border-1 border-gray-100 rounded
+                text-gray-500 hover:text-gray-700 focus:outline-none 
+                ${addClassname}`
+            } 
+            style={{ whiteSpace: "nowrap" }} 
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
+
+export function FlexContainer({ children, ...props }) {
+    return (
+        <div
+            className={`flex gap-1 text-sm flex-wrap mt-1.5 mb-5`}
+            {...props}
+        >
+            {children}
+        </div>
+
+    )
+}
+
+export const boolHiddenMap = {
+    true: 'hidden',
+    false: '',
+}
+
+export function HiddenFlexContainer({hidden=true}){
+    return (
+        <div className={`mb-4 flex items-center justify-between ${hidden && 'lg:'}${boolHiddenMap[hidden]} `}>
+        </div> 
+    )
 }
 
 export function Input({ children, ...props }) {
@@ -171,17 +195,9 @@ export function Grid({ children, ...props }) {
     );
 }
 
-export function BorderRound({ children, ...props }) {
+export function ColumnCard({ children, ...props }) {
     return (
-        <div className="border rounded m-1 p-3" {...props}>
-            {children}
-        </div>
-    );
-}
-
-export function ColBorderRoundShadow({ children, ...props }) {
-    return (
-        <div className="col border border-light-subtle rounded m-1 p-3 shadow-sm"
+        <div className="col border-1 border-gray-100 rounded m-1 p-3 shadow-2xs"
             {...props}
         >
             {children}
@@ -189,25 +205,6 @@ export function ColBorderRoundShadow({ children, ...props }) {
     );
 }
 
-export function BorderRoundShadow({ children, ...props }) {
-    return (
-        <div className="border border-light-subtle rounded m-1 p-3 shadow-sm"
-            {...props}
-        >
-            {children}
-        </div>
-    );
-}
-
-export function BorderRoundShadowIcon({ children, overrideClassname, ...props }) {
-    return (
-        <div className={`border border-light-subtle rounded m-0 p-2 shadow-sm ${overrideClassname}`}
-            {...props}
-        >
-            {children}
-        </div>
-    );
-}
 export function Icon({ children, bootstrapIcon = "list", width = 16, height = 16, fill = "currentColor", viewBox = "0 0 16 16", ...props }) {
     return (
         <i
@@ -239,34 +236,15 @@ export function DropDownItem({ children, href, ...props }) {
 
 export function DisplayFlexContentCenterBorder({ children, ...props }) {
     return (
-        <div className="border-b border-gray-100 d-flex justify-content-center border border-light-subtle" {...props}>
+        <header className="border-b border-gray-100" {...props}>
             {children}
-        </div>
+        </header>
     );
 }
 
-export function NavbarExpandLarge({ children, ...props }) {
+export function WidthFullContainerFlex({ children, ...props }) {
     return (
-        <nav className="navbar navbar-expand-lg" {...props}>
-            {children}
-        </nav>
-    );
-}
-
-export function ContainerFluidGap1({ children, ...props }) {
-    return (
-        <div className="container-fluid gap-1" {...props}>
-            {children}
-        </div>
-    );
-}
-
-export function SmallShadowRound({ children, overrideClassname, ...props }) {
-    return (
-        <div
-            className={`shadow-sm rounded p-2 ${overrideClassname}`}
-            {...props}
-        >
+        <div className="w-full px-4 container flex flex-wrap items-center" {...props}>
             {children}
         </div>
     );
@@ -275,20 +253,9 @@ export function SmallShadowRound({ children, overrideClassname, ...props }) {
 export function IconText({ children, overrideClassname, ...props }) {
     return (
         <span
-            className={`ms-1 ${overrideClassname}`}
-            style={{
-                fontSize: '0.8rem',
-                fontWeight: '500',
-            }} {...props}
+            className={`ms-1 ${overrideClassname}`}             
+            {...props}
         >
-            {children}
-        </span>
-    );
-}
-
-export function MarginStart1({ children, overrideClassname, ...props }) {
-    return (
-        <span className={`ms-1 ${overrideClassname}`} {...props}>
             {children}
         </span>
     );
@@ -307,15 +274,31 @@ export function LinkDarkNoUnderlineIcon({ children, overrideClassname, href, boo
     );
 }
 
+/** param='': IMPORTANT NOTE: 
+ * Giving an empty string prevents undefined values and technical issues: e.g. HTML render Server-Client mismatch. 
+ * */
+export function BorderLight({ children, addClassname='', ...props }) {
+    return (
+        <div
+            className={`border-1 border-gray-100 w-full rounded-sm p-2 dark:bg-gray-850 ${addClassname}`}
+            {...props}
+        >
+            {children}
+        </div>
+    )
+}
+
 export function LinkDarkNoUnderlineIconText({ children, overrideClassname, href, bootstrapIcon, textProps, ...props }) {
     return (
         <LinkDarkNoUnderlineIcon
             href={href}
-            overrideClassname={`rounded p-2 ${overrideClassname}`}
+            overrideClassname={`flex rounded p-1 text-nowrap ${overrideClassname}`}
             bootstrapIcon={bootstrapIcon}
             {...props}
         >
-            <IconText {...textProps}>
+            <IconText 
+                {...textProps}
+            >
                 {children}
             </IconText>
         </LinkDarkNoUnderlineIcon>
@@ -362,3 +345,41 @@ export function DynamicTagComponent({ children, overrideClassname, Tag='span', .
         </Tag>
     )
 }
+
+export function BadgeButton({children, selected=false}) {
+    
+    return (
+        <button 
+            className={`flex items-center whitespace-nowrap rounded px-2 
+            ${selected ? 
+                'bg-black text-white dark:bg-gray-800' : 
+                'text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-900 dark:hover:text-gray-300'
+            } 
+            `}
+        >
+                {children}
+        </button>
+    )
+} 
+
+export function DotSeparator() {    
+    return (
+        <span className="px-1 text-gray-300 dark:text-gray-300">•</span>
+    )
+}
+export function ColInvisibleBox({ children, ...props }) {
+    return (
+        <div className={colInvisibleBoxClass} {...props}>
+            {children}
+        </div>
+    );
+}export const colInvisibleBoxClass = "col p-3 mb-5 rounded me-3";
+export const rowBoxClass = "row p-3 mb-5 bg-body rounded border border-light-subtle";
+export function RowBox({ children, ...props }) {
+    return (
+        <div className={rowBoxClass} {...props}>
+            {children}
+        </div>
+    );
+}
+

@@ -1,11 +1,12 @@
 'use client'
 
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
-import { BorderLight, newWebSocketAndSetState } from "../page";
+import { newWebSocketAndSetState } from "../page";
 import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/user/models/page";
 import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
+import { BorderLight } from "@/app/_components/components";
 
 export function handleWebsocketEvents(setEvents, apiRoot=API_ROOT_WEBSOCKET, apiRoute='/dataset/image/test-async-file-stream-json/') {
     console.log(`${apiRoot}${apiRoute}`)

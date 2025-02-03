@@ -4,15 +4,7 @@ import { API_DATASET_ROOT, API_HTTP, API_ROOT_WEBSOCKET, fetchData, fetchRespons
 import { useEffect, useState } from "react";
 import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
-import { borderLightClassName } from "./serverUtils";
-
-export function BorderLight({index, children, ...props}) {
-    return (
-        <div key={index} className={borderLightClassName} {...props}>
-            {children}
-        </div>
-    )
-}
+import { BorderLight } from "@/app/_components/components";
 
 export function newWebSocketAndSetState(api, setState) {
     const socket = new WebSocket(api);

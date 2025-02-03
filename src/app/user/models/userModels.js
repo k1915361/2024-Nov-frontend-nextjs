@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText } from "@/app/_components/components";
+import { LinkText, OverviewCardWrapper } from "@/app/_components/components";
 import { Text2ndarySmall } from "@/app/_components/components";
-import { ButtonLight } from "./page";
+import { ButtonLight, LinkButtonLight } from "./page";
+import { ListModelItem } from "@/app/home/list_models";
 
 
 export default function UserModels() {
@@ -24,13 +25,24 @@ export default function UserModels() {
     
     return (
         <>
-            {list?.map?.((model) => (
-                <ButtonLight key={model.id}>
-                    <LinkText>{model.name}</LinkText>
-                    <Text2ndarySmall> • {dayjs(model.updated).fromNow()}</Text2ndarySmall>
-                    <Text2ndarySmall>{model.original_model && ' • forked'}</Text2ndarySmall>
-                </ButtonLight>
-            ))}
+            {list?.length && list?.length != 0 &&
+                <>
+                    <h5>My Models</h5>
+
+                    {list?.map?.((model) => (
+                        <OverviewCardWrapper key={model.id}>
+                            <ListModelItem model={model} href={`/model/${model.id}`} 
+                                isPublicSignVisible={false}
+                                isUsernameVisible={false}                                
+                            />
+                        </OverviewCardWrapper>
+                    ))}
+
+                    <LinkButtonLight href='/user/models/?page=1&per_page=4'>
+                        See More
+                    </LinkButtonLight>
+                </>
+            }
 
             {list?.length == 0 && 
                 <p>No List of User Models available.</p>

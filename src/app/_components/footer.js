@@ -8,7 +8,8 @@ export default function Footer({ }){
                 <LinkGrayHoverUnderline
                     href="#"
                     target="_blank"
-                    rel="noopener noreferrer flex items-center justify-between"
+                    addClassname="flex justify-between gap-2"
+                    rel="noopener noreferrer"
                 >
                     <Image
                         aria-hidden
@@ -17,8 +18,7 @@ export default function Footer({ }){
                         width={16}
                         height={16}
                         className="hover:underline"
-                    />
-                        <HoverUnderline>
+                    /> <HoverUnderline>
                             About
                         </HoverUnderline>
                 </LinkGrayHoverUnderline>
@@ -26,6 +26,7 @@ export default function Footer({ }){
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
+                    addClassname="flex justify-between gap-2"
                 >
                     <Image
                         aria-hidden
@@ -33,8 +34,7 @@ export default function Footer({ }){
                         alt="Window icon"
                         width={16}
                         height={16}
-                    />
-                    <HoverUnderline>
+                    /> <HoverUnderline>
                         T&C
                     </HoverUnderline>
                 </LinkGrayHoverUnderline>
@@ -42,6 +42,7 @@ export default function Footer({ }){
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
+                    addClassname="flex justify-between gap-2"
                 >
                     <Image
                         aria-hidden
@@ -49,8 +50,7 @@ export default function Footer({ }){
                         alt="Globe icon"
                         width={16}
                         height={16}
-                    />
-                    <HoverUnderline>
+                    /> <HoverUnderline>
                         Home
                     </HoverUnderline>
                 </LinkGrayHoverUnderline>
