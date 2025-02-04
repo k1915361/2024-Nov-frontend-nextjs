@@ -7,9 +7,10 @@ export default function HeaderNavBar({ children }) {
     <>
         <DisplayFlexContentCenterBorder>
             <WidthFullContainerFlex>
-                <div className="d-flex me-3">
+                <div className="d-flex mx-1 me-3">
                     <a href="/home/" 
                         className="link-dark text-dark link-underline-dark link-underline-opacity-0"
+                        title="Home"
                     >
                         <LogoIconText className="fw-bold" style={{fontSize:'1.3rem'}}>
                             😊 
@@ -50,8 +51,9 @@ export default function HeaderNavBar({ children }) {
                 <LinkDarkNoUnderlineIconText 
                     href="/user/final-task-analytics/"                         
                     bootstrapIcon='sliders2'
+                    title='Start a New Optimisation Task'
                 >
-                    Start a New Optimisation Task
+                    New Task
                 </LinkDarkNoUnderlineIconText>
                 <LinkDarkNoUnderlineIconText 
                     href="/user/previous-tasks/"
@@ -62,21 +64,21 @@ export default function HeaderNavBar({ children }) {
                 <LinkDarkNoUnderlineIconText 
                     href="/user/models/"
                     bootstrapIcon='collection'
+                    title="Personal Model Repo"
                 >
                     My Models
                 </LinkDarkNoUnderlineIconText>
                 <LinkDarkNoUnderlineIconText 
                     href="/user/datasets/pages/page-range?page=1"
                     bootstrapIcon='collection'
+                    title="Personal Dataset Repo"
                 >
                     My Datasets
                 </LinkDarkNoUnderlineIconText>
-                <div>
-                    <Suspense>
-                        <Username/>
-                    </Suspense>
-                </div>
-                <div className="dropdown-center">
+                <Suspense>
+                    <Username/>
+                </Suspense>
+                <div className="dropdown-center mx-1">
                     <ButtonBorderLight 
                         addClassname="dropdown-toggle " 
                         type="button" 

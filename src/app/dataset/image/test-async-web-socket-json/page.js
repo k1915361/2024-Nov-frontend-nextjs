@@ -4,7 +4,7 @@ import { API_DATASET_ROOT, API_HTTP, API_ROOT_WEBSOCKET, fetchData, fetchRespons
 import { useEffect, useState } from "react";
 import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
-import { BorderLight } from "@/app/_components/components";
+import { BorderLightFullWidth } from "@/app/_components/components";
 
 export function newWebSocketAndSetState(api, setState) {
     const socket = new WebSocket(api);
@@ -60,13 +60,13 @@ export default function EventSourceClient() {
             <ViewDirectoryTree api='1-20241120_154348-CS_dataset'/>
             <div>
                 {events.map((data, index) => (
-                    <BorderLight key={index}>
+                    <BorderLightFullWidth key={index}>
                         {data.image_url !== undefined &&
                             <img src={`${data.image_url}`}/>
                         }
                         <div>Step {data.step}</div> 
                         <div>Status: {data.status}</div> 
-                    </BorderLight>
+                    </BorderLightFullWidth>
                 ))}
             </div>
             <div>

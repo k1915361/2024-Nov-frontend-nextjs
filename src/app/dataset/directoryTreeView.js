@@ -67,9 +67,6 @@ export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, apiType='
 
     return (
         <div>
-            --ViewDirectoryTree-- {`${apiRoot}/${apiType}/tree/${apiRoute}`}
-            <br/>
-            --ViewDirectoryTree-- {`${apiRoot}/${apiType}/blob/${apiRoute}`}
             <TitleRouteView
                 apiRoute={apiRoute}
                 title={routeTitle}

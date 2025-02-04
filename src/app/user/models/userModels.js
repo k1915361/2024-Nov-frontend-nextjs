@@ -1,13 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText, OverviewCardWrapper } from "@/app/_components/components";
-import { Text2ndarySmall } from "@/app/_components/components";
-import { ButtonLight, LinkButtonLight } from "./page";
+import { OverviewCardWrapper } from "@/app/_components/components";
+import { LinkButtonLight } from "./page";
 import { ListModelItem } from "@/app/home/list_models";
-
 
 export default function UserModels() {
     const route = '/api/user/models/'

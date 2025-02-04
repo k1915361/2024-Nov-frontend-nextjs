@@ -2,17 +2,8 @@
 
 import PageComponent from "@/app/pageComponent";
 import DatasetsPaginator from "./datasetsPaginator";
-
-export function RowGap0({children, ...props}) {
-    return (
-        <div 
-            className="row gap-0" 
-            {...props}
-        >
-            {children}
-        </div>        
-    )
-}
+import { RowGap0 } from "@/app/_components/components";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 
 export default function UserDatasetRepo() {
 

@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { PageRange } from "../numberRangePagination"
-import { RowGap0 } from "../../../page"
+import { RowGap0 } from "@/app/_components/components"
 import { LinkListDatasetItemBody } from "@/app/home/listDatasetItem"
 
 const handleFetchListPage = async (

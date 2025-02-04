@@ -244,7 +244,7 @@ export function DisplayFlexContentCenterBorder({ children, ...props }) {
 
 export function WidthFullContainerFlex({ children, ...props }) {
     return (
-        <div className="w-full px-4 container flex flex-wrap items-center" {...props}>
+        <div className="w-full px-4 container flex flex-wrap items-center py-1 gap-y-1" {...props}>
             {children}
         </div>
     );
@@ -277,10 +277,21 @@ export function LinkDarkNoUnderlineIcon({ children, overrideClassname, href, boo
 /** param='': IMPORTANT NOTE: 
  * Giving an empty string prevents undefined values and technical issues: e.g. HTML render Server-Client mismatch. 
  * */
-export function BorderLight({ children, addClassname='', ...props }) {
+export function BorderLightFullWidth({ children, addClassname='', ...props }) {
     return (
         <div
             className={`border-1 border-gray-100 w-full rounded-sm p-2 dark:bg-gray-850 ${addClassname}`}
+            {...props}
+        >
+            {children}
+        </div>
+    )
+}
+
+export function BorderLight({ children, addClassname='', ...props }) {
+    return (
+        <div
+            className={`border-1 border-gray-100 rounded-sm p-2 dark:bg-gray-850 ${addClassname}`}
             {...props}
         >
             {children}
@@ -382,4 +393,40 @@ export function RowBox({ children, ...props }) {
         </div>
     );
 }
+export function RowGap0({ children, ...props }) {
+    return (
+        <div
+            className="row gap-0"
+            {...props}
+        >
+            {children}
+        </div>
+    );
+}
 
+export function EmptyComponent({...props}) { 
+    return (
+        <></>
+    )
+}
+
+export function MainFlexColumnContainer({children, ...props}) {
+    return (
+        <main 
+            className={`flex flex-1 flex-col`} 
+            {...props}
+        >
+            {children}
+        </main>
+    )
+}
+
+export function DivFlexColumnGridContainer({children, ...props}) {
+    return (
+        <div className='container relative flex flex-col lg:grid lg:space-y-0 w-full lg:grid-cols-10 md:flex-1 md:grid-rows-full md:gap-6'
+            {...props}
+        >
+            {children}
+        </div>
+    )
+}

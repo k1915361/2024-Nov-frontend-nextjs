@@ -4,7 +4,7 @@ import { HoverUnderline, LinkDark, LinkGrayHoverUnderline } from "./components";
 export default function Footer({ }){
     return (
         <footer className={`b-12 mb-2 flex border-t border-gray-100 md:h-14`} >
-            <nav className='container relative flex flex-col justify-between space-y-2 py-6 text-gray-500 *:max-md:self-start md:flex-row md:items-center md:space-y-0 md:py-0 md:text-sm'>
+            <nav className='container relative flex flex-col justify-between space-y-5 gap-y-3 py-4 text-gray-500 *:max-md:self-start md:flex-row md:items-center md:space-y-1 md:py-2 md:text-sm'>
                 <LinkGrayHoverUnderline
                     href="#"
                     target="_blank"

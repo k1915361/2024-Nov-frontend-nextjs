@@ -3,7 +3,7 @@
 import { API_HTTP } from "@/app/login/fetchData";
 
 import { useListPaginationState } from "./numberRangePagination";
-import { RowGap0 } from "@/app/user/datasets/page";
+import { RowGap0 } from "@/app/_components/components";
 import { LinkListDatasetItemBody } from "@/app/home/listDatasetItem";
 
 /** @deprecated. 

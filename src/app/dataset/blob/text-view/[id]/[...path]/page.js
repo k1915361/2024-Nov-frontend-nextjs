@@ -23,7 +23,7 @@ export default async function ViewMarkdownFilePage({
     return (
         <PageComponent>
             <TitleRouteView apiRoute={`${id}/${path}`} />            
-            <ViewTextFile apiRoute={`${id}/${path}`} className={borderLightClassName}/>
+            <ViewTextFile apiRoute={`/${id}/${path}/`} className={borderLightClassName}/>
             <LinkButtonLight href={`/${datasetTreeMarkdownViewBaseRoute}${id}/${path}`}>
                 Markdown view
             </LinkButtonLight>

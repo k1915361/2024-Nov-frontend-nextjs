@@ -6,7 +6,7 @@ import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/user/models/page";
 import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
-import { BorderLight } from "@/app/_components/components";
+import { BorderLightFullWidth } from "@/app/_components/components";
 
 export function handleWebsocketEvents(setEvents, apiRoot=API_ROOT_WEBSOCKET, apiRoute='/dataset/image/test-async-file-stream-json/') {
     console.log(`${apiRoot}${apiRoute}`)
@@ -31,13 +31,13 @@ export function ActionResponseView({buttonName, apiRoute}) {
             </ButtonLight>
             <div>
                 {events.map((data, index) => (
-                    <BorderLight key={index}>
+                    <BorderLightFullWidth key={index}>
                         {data.image_url !== undefined &&
                             <img src={`${data.image_url}`}/>
                         }
                         <div>Step {data.step}</div> 
                         <div>Status: {data.status}</div> 
-                    </BorderLight>
+                    </BorderLightFullWidth>
                 ))}
             </div>            
         </>
