@@ -1,10 +1,12 @@
 import Image from "next/image";
-import { HoverUnderline, LinkDark, LinkGrayHoverUnderline } from "./components";
+import { ButtonBorderLight, HoverUnderline, LinkDark, LinkGrayHoverUnderline } from "./components";
+import ThemeSwitchButton from "./themeSwitchButton";
 
 export default function Footer({ }){
     return (
-        <footer className={`b-12 mb-2 flex border-t border-gray-100 md:h-14`} >
+        <footer className={`b-12 mb-2 mt-5 flex border-t border-gray-100 md:h-14`} >
             <nav className='container relative flex flex-col justify-between space-y-5 gap-y-3 py-4 text-gray-500 *:max-md:self-start md:flex-row md:items-center md:space-y-1 md:py-2 md:text-sm'>
+                <ThemeSwitchButton/>                
                 <LinkGrayHoverUnderline
                     href="#"
                     target="_blank"

@@ -25,7 +25,6 @@ export default function UserModels() {
             {list?.length && list?.length != 0 &&
                 <>
                     <h5>My Models</h5>
-
                     {list?.map?.((model) => (
                         <OverviewCardWrapper key={model.id}>
                             <ListModelItem model={model} href={`/model/${model.id}`} 
@@ -40,11 +39,9 @@ export default function UserModels() {
                     </LinkButtonLight>
                 </>
             }
-
             {list?.length == 0 && 
                 <p>No List of User Models available.</p>
-            }
-            
+            }            
         </>
     );
 }

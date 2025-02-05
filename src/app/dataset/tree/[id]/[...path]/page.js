@@ -163,7 +163,6 @@ export default async function Page({
     
     return (
         <PageComponent>
-            - [id]/[...path]/page - {apiRoute} --
             {isFile[extension] ? 
                 <TitleRouteView apiRoute={apiRoute} /> :
                 <ViewDirectoryTree apiRoute={apiRoute} apiType="dataset" />

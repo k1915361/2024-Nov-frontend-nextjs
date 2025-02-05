@@ -429,4 +429,90 @@ export function DivFlexColumnGridContainer({children, ...props}) {
             {children}
         </div>
     )
+}export const downloadIcon = <svg className="" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" role="img" width="1em" height="1em" viewBox="0 0 32 32">
+    <path fill="currentColor" d="M26 24v4H6v-4H4v4a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2v-4zm0-10l-1.41-1.41L17 20.17V2h-2v18.17l-7.59-7.58L6 14l10 10l10-10z">
+    </path>
+</svg>;
+export const folderIcon = <svg
+    className="flex-none me-2 text-blue-400 fill-current mt-1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+    width="1em"
+    height="1em"
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 24 24"
+>
+    <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z" fill="currentColor"></path>
+</svg>;
+export const fileIcon = <svg
+    className="flex-none me-2 text-gray-300 fill-current mt-1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+    width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"
+>
+    <path d="M25.7 9.3l-7-7A.908.908 0 0 0 18 2H8a2.006 2.006 0 0 0-2 2v24a2.006 2.006 0 0 0 2 2h16a2.006 2.006 0 0 0 2-2V10a.908.908 0 0 0-.3-.7zM18 4.4l5.6 5.6H18zM24 28H8V4h8v6a2.006 2.006 0 0 0 2 2h6z" fill=""></path>
+</svg>;
+export function filePathToApiUrl(str) {
+    return str.replace('asset/', 'tree/');
 }
+export function FileRouteView({ apiRoute, filename, children, baseApiRoute = '', icon = folderIcon, target = '', className = 'col-span-8 flex items-center hover:underline md:col-span-5 lg:col-span-4', ...props }) {
+    return (
+        <a href={`/${baseApiRoute}${apiRoute}/${filename}`} target={target} className={className} {...props}>
+            {icon} {filename} {children}
+        </a>
+    );
+}
+export function ItemDataSize({ itemSize, unit = 'B' }) {
+    return <span className="truncate max-sm:text-xs text-gray-400">{itemSize} {unit}</span>;
+}
+
+export function DownloadIcon() {
+    return (
+        <div className="ms-2 flex h-5 w-5 items-center justify-center rounded border text-gray-500 group-hover:bg-gray-50 group-hover:text-gray-800 group-hover:shadow-sm dark:border-gray-800 dark:group-hover:bg-gray-800 dark:group-hover:text-gray-300 xl:ml-4">
+            {downloadIcon}
+        </div>
+    );
+}
+export function DataSizeAndDownloadIcon({ itemSize, ...props }) {
+    return (
+        <a className="group col-span-4 flex items-center justify-self-end truncate text-right font-mono text-[0.8rem] leading-6 text-gray-400 md:col-span-3 lg:col-span-2 xl:pr-10" title="Download file" download="" href="" {...props}
+        >
+            <ItemDataSize itemSize={itemSize} />
+            <DownloadIcon />
+        </a>
+    );
+}
+export function FolderTreeContainerHeader() {
+    return (
+        <div className="from-gray-100 to-white flex items-baseline rounded-t-lg border border-b-0 bg-gradient-to-t px-3 py-2 dark:border-gray-800">
+        </div>
+    );
+}
+export function FolderListContainer({ children }) {
+    return (
+        <div className="mb-8 rounded-b-lg border-x-1 border-b-1 border-x-gray-200 border-b-gray-200 border-t-0 divide-y-1 divide-gray-200 dark:border-gray-800 dark:bg-gray-900">
+            {children}
+        </div>
+    );
+}
+export function FileListItemContainer({
+    apiRoute, baseApiRoute, itemName, children, icon, ...props
+}) {
+    return (
+        <div className="grid h-10 grid-cols-12 place-content-center gap-x-3 border-t-gray-200 px-3 dark:border-t" {...props}>
+            <FileRouteView
+                baseApiRoute={baseApiRoute}
+                apiRoute={apiRoute}
+                filename={itemName}
+                icon={icon} />
+            {children}
+        </div>
+    );
+}
+
