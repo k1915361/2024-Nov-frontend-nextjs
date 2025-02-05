@@ -3,10 +3,6 @@
 import { API_HTTP } from '@/app/login/fetchData';
 import { useState } from 'react';
 
-export function log(...args) {
-    console.log(...args)
-}
-
 export default function DatasetForm() {
     const [formData, setFormData] = useState({
         name: '',
@@ -57,7 +53,7 @@ export default function DatasetForm() {
 
             console.log(response)
             if (response.ok) {
-                log('Form submitted successfully');
+                console.log('Form submitted successfully');
             } else {
                 const errorDetails = await response.json();
                 console.error(`Error details: ${errorDetails}`);
@@ -66,7 +62,7 @@ export default function DatasetForm() {
             
             const result = await response.json();
             setMessage(result?.message);
-            log(result);
+            console.log(result);
         } catch (error) {
             console.error('Error:', error);
         }

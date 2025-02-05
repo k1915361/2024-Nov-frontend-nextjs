@@ -104,6 +104,10 @@ export default function HeaderNavBar({ children }) {
                             <Icon bootstrapIcon='door-closed'/>
                             Log Out
                         </DropDownItem>
+                        <DropDownItem href="/signup/">
+                            <Icon bootstrapIcon='door-closed'/>
+                            Sign Up
+                        </DropDownItem>
                         <DropDownItem href="/user/final-task-analytics/">
                             Final Task Analytics
                         </DropDownItem>                       

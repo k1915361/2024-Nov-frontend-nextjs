@@ -469,7 +469,7 @@ export function FileRouteView({ apiRoute, filename, children, baseApiRoute = '',
     );
 }
 export function ItemDataSize({ itemSize, unit = 'B' }) {
-    return <span className="truncate max-sm:text-xs text-gray-400">{itemSize} {unit}</span>;
+    return <span className="bg-white truncate max-sm:text-xs text-gray-400">{itemSize} {unit}</span>;
 }
 
 export function DownloadIcon() {
