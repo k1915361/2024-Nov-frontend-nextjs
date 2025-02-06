@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from "../context/AuthContext";
-import { BorderLight, LinkDarkNoUnderline } from "./components";
+import { BorderLight, Icon, LinkDarkNoUnderline } from "./components";
 
 export default function Username() {
     const { user } = useAuth();
@@ -13,6 +13,8 @@ export default function Username() {
                     href='/profile'
                     title="Profile"
                 >
+                    <Icon bootstrapIcon="person-circle p-1">
+                    </Icon>
                     {user.username}
                 </LinkDarkNoUnderline>
                 :

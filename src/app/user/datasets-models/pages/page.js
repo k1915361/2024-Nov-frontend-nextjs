@@ -1,5 +1,5 @@
 import PageComponent from "@/app/pageComponent";
-import ListDatasetsPages from "../../datasets/pages/list_datasets_pages";
+import ListDatasetsPages from "../../datasets/list_datasets_pages";
 import ListModelsPages from "../../models/pages/list_models_pages";
 import UserOrGuestShowPublic from "../../UserOrGuestShowPublicItemsMessage";
 

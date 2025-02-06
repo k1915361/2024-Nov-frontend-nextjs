@@ -1,5 +1,6 @@
 import PageComponent from "@/app/pageComponent";
-import { ColButtonLight, RowGap1, RowGap1Margin0 } from "../models/page";
+import { RowGap1, RowGap1Margin0 } from "@/app/_components/components";
+import { ColButtonLight } from "@/app/_components/components";
 import { BtnPrimary, ColBorderLightSubtleMinHeight } from "../dataset/[id]/page";
 
 export function ColBorderLightSubtle({children, ...props}) {

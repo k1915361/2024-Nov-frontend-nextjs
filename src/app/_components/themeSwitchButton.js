@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonLight } from "../user/models/page";
+import { ButtonLight } from "./components";
 
 const THEME_KEY = 'theme';
 

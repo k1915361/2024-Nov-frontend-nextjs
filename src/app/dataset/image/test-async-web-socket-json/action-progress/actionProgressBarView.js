@@ -2,7 +2,8 @@
 
 import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
 import { API_ROOT_WEBSOCKET, HTTP_STATIC_SERVER } from '@/app/login/fetchData';
-import { ButtonLight, DivButtonLight } from '@/app/user/models/page';
+import { DivButtonLight } from "@/app/_components/components";
+import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
 import { borderLightClassName } from '../serverUtils';

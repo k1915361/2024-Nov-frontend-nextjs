@@ -1,11 +1,9 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import dayjs from "@/app/_components/dayjsRelativeTime";
 import { fetchData } from "@/app/login/fetchData";
-import { LinkText, ListItemBox, OverviewCardWrapper } from "@/app/_components/components";
-import { Text2ndarySmall } from "@/app/_components/components";
-import { ButtonLight, LinkButtonLight } from "../models/page";
+import { OverviewCardWrapper } from "@/app/_components/components";
+import { LinkButtonLight } from "@/app/_components/components";
 import { ListDatasetItem } from "@/app/home/listDatasetItem";
 
 export default function UserDatasets() {
@@ -16,7 +14,7 @@ export default function UserDatasets() {
         async function f() {
             const data = await fetchData(route, {})
             if (data != "Fetch Error" && data != "Fetch Failed. Response not ok"){
-                setList(data)
+                setList(data?.list || [])
             }
         }
         f();
@@ -24,7 +22,7 @@ export default function UserDatasets() {
     
     return (
         <>
-            {list?.length && list?.length != 0 &&
+            {(list?.length && list?.length != 0) &&
                 <>
                     <h5>My Datasets</h5>
 
@@ -33,7 +31,6 @@ export default function UserDatasets() {
                             <ListDatasetItem 
                                 dataset={dataset} 
                                 href={`/dataset/${dataset.id}`} 
-                                isPublicSignVisible={false}
                                 isUsernameVisible={false}
                             />
                         </OverviewCardWrapper>
@@ -45,7 +42,7 @@ export default function UserDatasets() {
                 </>
             }
 
-            {list?.length == 0 && 
+            {list.length == 0 && 
                 <p>No List of User Datasets available.</p>
             }
             

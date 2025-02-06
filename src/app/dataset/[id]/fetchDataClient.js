@@ -1,7 +1,8 @@
 'use client'
 
 import { fetchData } from "@/app/login/fetchData"
-import { ButtonLight, LinkButtonLight } from "@/app/user/models/page";
+import { ButtonLight } from "@/app/_components/components";
+import { LinkButtonLight } from "@/app/_components/components";
 import { useEffect, useState } from "react";
 import { LinkTextNormal } from "@/app/_components/components";
 import { datasetTreeBaseRoute } from "../blob/text-view/[id]/[...path]/page";

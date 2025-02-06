@@ -1,7 +1,7 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
 import { API_HTTP, API_VIEW } from "../login/fetchData";
 import { ispublic } from "./listDatasetItem";
-import { DotSeparator } from "../_components/components";
+import { DotSeparator, OverviewCardBottomDetailText, OverviewCardHeaderWrapper, OverviewCardWrapper } from "../_components/components";
 
 export function isModelForked(model, Prefix = DotSeparator) {
     if (model.original_model) {         
@@ -62,12 +62,12 @@ export function modelUsernameComponent(model, isUsernameVisible=true, Separator 
 
 export function ListModelItem({model, index='', href, isPublicSignVisible=true, isUsernameVisible=true}) {
     return <>
-        <header className="flex items-center mb-0.5">
+        <OverviewCardHeaderWrapper>
             <a href={href} className="text-md truncate text-black dark:group-hover/repo:text-yellow-500 group-hover/repo:text-red-600 text-smd">
                 {index} {model.name}
             </a>
-        </header>        
-        <div className="mr-1 flex items-center overflow-hidden whitespace-nowrap text-sm leading-tight text-gray-400">
+        </OverviewCardHeaderWrapper>
+        <OverviewCardBottomDetailText>
             {modelUsernameComponent(model, isUsernameVisible)}
             {(isUsernameVisible && isPublicSignVisible) &&
                 <DotSeparator/>
@@ -79,14 +79,14 @@ export function ListModelItem({model, index='', href, isPublicSignVisible=true, 
             <span> 
                 {isModelForked(model)}
             </span>
-        </div>
+        </OverviewCardBottomDetailText>
     </>
 }
 
 export function ListModelItemBody({model}) {
-    return <BodyBorderLightSubtle key={model.id}>
+    return <OverviewCardWrapper key={model.id}>
         <ListModelItem model={model}/>
-    </BodyBorderLightSubtle>
+    </OverviewCardWrapper>
 }
 
 export function LinkListModelItemBody({model}) {

@@ -1,7 +1,7 @@
 'use client'
 
 import { fetchResponse} from '@/app/login/fetchData';
-import { ButtonLight } from '@/app/user/models/page';
+import { ButtonLight } from "@/app/_components/components";
 import React from 'react';
 
 const DownloadButtonClientSide = ({id, route='/api/dataset/download/'}) => {

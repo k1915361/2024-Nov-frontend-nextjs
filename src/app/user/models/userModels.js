@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "@/app/login/fetchData";
 import { OverviewCardWrapper } from "@/app/_components/components";
-import { LinkButtonLight } from "./page";
+import { LinkButtonLight } from "@/app/_components/components";
 import { ListModelItem } from "@/app/home/list_models";
 
 export default function UserModels() {
@@ -14,7 +14,7 @@ export default function UserModels() {
         async function f() {
             const data = await fetchData(route, {})
             if (data != "Fetch Error" && data != "Fetch Failed. Response not ok"){
-                setList(data)
+                setList(data?.list || [])
             }
         }
         f();
@@ -22,7 +22,7 @@ export default function UserModels() {
     
     return (
         <>
-            {list?.length && list?.length != 0 &&
+            {(list?.length && list?.length != 0) &&
                 <>
                     <h5>My Models</h5>
                     {list?.map?.((model) => (
@@ -39,7 +39,7 @@ export default function UserModels() {
                     </LinkButtonLight>
                 </>
             }
-            {list?.length == 0 && 
+            {(list?.length == 0) && 
                 <p>No List of User Models available.</p>
             }            
         </>

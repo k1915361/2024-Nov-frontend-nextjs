@@ -515,4 +515,137 @@ export function FileListItemContainer({
         </div>
     );
 }
+export const marginEndBottom = " me-1 mb-1 ";
+export const btnLightClass = `btn btn-light border-light-subtle shadow-sm ${marginEndBottom}`;
+export const colBtnLightClass = `col ${btnLightClass}`;
+export const colBorderClass = "col p-1 rounded border border-light-subtle";
+export const btnDangerClass = `btn ${marginEndBottom} btn-danger`;
+export const colBtnDangerClass = `col ${btnDangerClass}`;
+export function LinkButtonLight({ children, addClassName = '', ...props }) {
+    return (
+        <a
+            className={`${btnLightClass} ${addClassName}`}
+            {...props}
+        >
+            {children}
+        </a>
+    );
+}
+export function ColLinkButtonLight({ children, ...props }) {
+    return (
+        <a
+            className={colBtnLightClass}
+            {...props}
+        >
+            {children}
+        </a>
+    );
+}
+export function ButtonLight({ children, ...props }) {
+    return (
+        <button
+            className={btnLightClass}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
+export function DivButtonLight({ children, ...props }) {
+    return (
+        <div>
+            <ButtonLight {...props}>
+                {children}
+            </ButtonLight>
+        </div>
+    );
+}
+export function ColButtonLight({ children, ...props }) {
+    return (
+        <button
+            className={colBtnLightClass}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
+export function ButtonDanger({ children, ...props }) {
+    return (
+        <button
+            className={btnDangerClass}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
+export function ColButtonDanger({ children, ...props }) {
+    return (
+        <button
+            className={colBtnDangerClass}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+}
 
+export function ColBorderLight({ children, ...props }) {
+    return (
+        <div
+            className={colBorderClass}
+            {...props}
+        >
+            {children}
+        </div>
+    );
+}
+
+export function RowGap1({ children, ...props }) {
+    return (
+        <div
+            className="row gap-1"
+            {...props}
+        >
+            {children}
+        </div>
+    );
+}
+
+export function RowGap1Margin0({ children, ...props }) {
+    return (
+        <div
+            className="row gap-1 m-0"
+            {...props}
+        >
+            {children}
+        </div>
+    );
+}
+export function OverviewCardBottomDetailText({ children, addClassname = '', ...props }) {
+    return (
+        <div className={`mr-1 flex items-center overflow-hidden whitespace-nowrap text-sm leading-tight text-gray-400 ${addClassname}`} {...props}>
+            {children}
+        </div>
+    );
+}
+
+export function OverviewCardHeaderWrapper({ children, addClassname = '', ...props }) {
+    return (
+        <header className={`flex items-center mb-0.5 ${addClassname}`} {...props} >
+            {children}
+        </header>
+    );
+}
+export function OverviewCardHeaderLink({ children, href, addClassname = '', ...props }) {
+    return (        
+        <a 
+            href={href} 
+            className={`text-md truncate text-black dark:group-hover/repo:text-yellow-500 group-hover/repo:text-red-600 text-smd ${addClassname}`} 
+            {...props} 
+        >
+            {children}
+        </a>
+    );
+}

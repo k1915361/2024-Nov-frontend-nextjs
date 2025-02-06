@@ -1,6 +1,6 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
-import { BodyBorderLightSubtle, FontWeightMedium, modelUsernameComponent, TextSecondary } from "./list_models";
-import { DotSeparator, OverviewCardWrapper } from "../_components/components";
+import { modelUsernameComponent } from "./list_models";
+import { DotSeparator, OverviewCardBottomDetailText, OverviewCardWrapper } from "../_components/components";
 
 export function isDatasetForked(dataset, Prefix=DotSeparator) {
     if (dataset.original_dataset) { 
@@ -33,8 +33,8 @@ export function ListDatasetItem({dataset, index='', href, isPublicSignVisible=tr
             <a href={href} className="text-md truncate text-black dark:group-hover/repo:text-yellow-500 group-hover/repo:text-red-600 text-smd">
                 {index} {dataset.name}
             </a>
-        </header>        
-        <div className="mr-1 flex items-center overflow-hidden whitespace-nowrap text-sm leading-tight text-gray-400">
+        </header>
+        <OverviewCardBottomDetailText>
             {modelUsernameComponent(dataset, isUsernameVisible)}
             {(isUsernameVisible && isPublicSignVisible) && 
                 <DotSeparator/>
@@ -46,13 +46,13 @@ export function ListDatasetItem({dataset, index='', href, isPublicSignVisible=tr
             <span> 
                 {isDatasetForked(dataset)}
             </span>
-        </div>
+        </OverviewCardBottomDetailText>
     </>
 }
 
-export function ListDatasetItemBody({dataset}) {
+export function ListDatasetItemBody({dataset, isUsernameVisible=true, isPublicSignVisible=true}) {
     return <OverviewCardWrapper key={dataset.id}>
-        <ListDatasetItem dataset={dataset}/>
+        <ListDatasetItem dataset={dataset} isUsernameVisible={isUsernameVisible} isPublicSignVisible={isPublicSignVisible} href={`/dataset/${dataset.id}`}/>
     </OverviewCardWrapper>
 }
 

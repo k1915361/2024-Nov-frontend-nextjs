@@ -3,7 +3,7 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
 import { newWebSocketAndSetState } from "../page";
 import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
-import { ButtonLight } from "@/app/user/models/page";
+import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
 import { BorderLightFullWidth } from "@/app/_components/components";

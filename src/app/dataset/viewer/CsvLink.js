@@ -1,4 +1,4 @@
-import { ButtonLight } from "@/app/user/models/page";
+import { ButtonLight } from "@/app/_components/components";
 
 function downloadCSV(csvData, filename) {
     const csvContent = "data:text/csv;charset=utf-8," + csvData.map(e => e.join(",")).join("\n");

@@ -1,6 +1,6 @@
 import PageComponent from "@/app/pageComponent";
 import { getFileExtension, isReadableText } from "../../../../tree/[id]/[...path]/page"
-import { LinkButtonLight } from "@/app/user/models/page";
+import { LinkButtonLight } from "@/app/_components/components";
 import ViewTextFile from "../../../[id]/[...path]/viewTextFile";
 import { TitleRouteView } from "@/app/dataset/titleRouteView";
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils";

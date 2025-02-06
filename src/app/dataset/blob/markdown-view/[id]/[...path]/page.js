@@ -1,7 +1,7 @@
 import PageComponent from "@/app/pageComponent";
 import { getFileExtension, isTextOrMarkdownOrReadme } from "../../../../tree/[id]/[...path]/page"
 import { API_HTTP } from "@/app/login/fetchData";
-import { LinkButtonLight } from "@/app/user/models/page";
+import { LinkButtonLight } from "@/app/_components/components";
 import { datasetTreeTextViewBaseRoute } from "../../../text-view/[id]/[...path]/page";
 import { TitleRouteView } from "@/app/dataset/titleRouteView";
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils";

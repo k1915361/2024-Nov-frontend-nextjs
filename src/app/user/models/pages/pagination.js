@@ -42,21 +42,25 @@ export function useListPaginationState(route, param, namespace, route_per_page =
     const [list, setList] = useState([]);
     const [hasNext, setHasNext] = useState(false);
     const [hasPrevious, setHasPrevious] = useState(false);
-    const [totalPages, setTotalPages] = useState(1); 
+    const [totalPages, setTotalPages] = useState(1);
+    const [message, setMessage] = useState(1); 
 
     const handleFetchListPage = async (route, page) => {
         const global_per_page = maxint(searchParams.get('per_page')) || 2
         const local_per_page = maxint(searchParams.get(local_per_page_param)) || global_per_page
         const response = await fetch(
             `${route}${page}${route_per_page}${global_per_page}&${local_per_page_param}=${local_per_page}`
-            ,{
+            , {
                 method: 'GET',
                 credentials: 'include',
             }
         );
+        if (!response.ok) {
+            console.log()
+        }
         const data = await response.json()
 
-        setList(data.list)
+        setList(data?.list || [])
         setHasNext(data.page_has_next)
         setHasPrevious(data.page_has_previous)
         setTotalPages(data.paginator_num_pages)

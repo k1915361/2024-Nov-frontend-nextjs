@@ -1,5 +1,5 @@
 import { fetchResponse} from '@/app/login/fetchData';
-import { ButtonLight } from '@/app/user/models/page';
+import { ButtonLight } from "@/app/_components/components";
 import React from 'react';
 
 /* Issue: document is only available on client side. 

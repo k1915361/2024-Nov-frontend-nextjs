@@ -3,7 +3,7 @@ import PageComponent from "../pageComponent";
 import { ColInvisibleBox } from "../_components/components";
 import TopModels from "./list_top_models";
 import TopDatasets from "./list_top_datasets";
-import { LinkButtonLight } from "../user/models/page";
+import { LinkButtonLight } from "../_components/components";
 import { Grid, Row, ColumnCard, ListItemBox, LinkDark } from "../_components/components";
 import UserDatasets from "../user/datasets/userDatasets";
 import UserModels from "../user/models/userModels";

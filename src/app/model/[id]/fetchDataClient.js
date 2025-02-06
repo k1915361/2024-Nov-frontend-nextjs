@@ -1,7 +1,7 @@
 'use client'
 
 import { fetchData } from "@/app/login/fetchData"
-import { LinkButtonLight } from "@/app/user/models/page";
+import { LinkButtonLight } from "@/app/_components/components";
 import { useEffect, useState } from "react";
 import { DeleteModal, ModalDeleteButton, ResponseMessage, strToDateToLocaleStr } from "@/app/dataset/[id]/fetchDataClient";
 import DownloadButtonClientSide from "@/app/dataset/[id]/downloadClientSide";

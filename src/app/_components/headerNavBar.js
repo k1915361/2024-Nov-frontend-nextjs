@@ -43,7 +43,7 @@ export default function HeaderNavBar({ children }) {
                     Home
                 </LinkDarkNoUnderlineIconText>
                 <LinkDarkNoUnderlineIconText 
-                    href="/profile"                         
+                    href="/profile"
                     bootstrapIcon='person-circle'
                 >
                     Profile
@@ -62,14 +62,14 @@ export default function HeaderNavBar({ children }) {
                     Previous Tasks
                 </LinkDarkNoUnderlineIconText>
                 <LinkDarkNoUnderlineIconText 
-                    href="/user/models/"
+                    href="/user/models/management"
                     bootstrapIcon='collection'
                     title="Personal Model Repo"
                 >
                     My Models
                 </LinkDarkNoUnderlineIconText>
                 <LinkDarkNoUnderlineIconText 
-                    href="/user/datasets/pages/page-range?page=1"
+                    href="/user/datasets/?page=1&per_page=4"
                     bootstrapIcon='collection'
                     title="Personal Dataset Repo"
                 >

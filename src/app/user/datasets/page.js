@@ -1,21 +1,11 @@
-'use client'
-
 import PageComponent from "@/app/pageComponent";
-import DatasetsPaginator from "./datasetsPaginator";
-import { RowGap0 } from "@/app/_components/components";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"
+import ListDatasetsPages from "./list_datasets_pages";
 
-export default function UserDatasetRepo() {
+export default function DatasetsPages() {
 
     return (
         <PageComponent>
-            <h1>Dataset Management</h1>
-            <div className="row align-items-start gap-1">
-                <RowGap0>
-                    <DatasetsPaginator/>                    
-                </RowGap0>
-            </div>
-
+            <ListDatasetsPages/>
         </PageComponent>
     )
 }
