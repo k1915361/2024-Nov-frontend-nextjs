@@ -1,12 +1,12 @@
 'use client'
 
-import { fetchResponse} from '@/app/login/fetchData';
+import { sendJsonFetchResponse} from '@/app/login/fetchData';
 import { ButtonLight } from "@/app/_components/components";
 import React from 'react';
 
 const DownloadButtonClientSide = ({id, route='/api/dataset/download/'}) => {
     const handleDownload = async () => {
-        const response = await fetchResponse(`${route}${id}/`, {});
+        const response = await sendJsonFetchResponse(`${route}${id}/`, {});
         if (!response.ok) {
             console.error('Download failed');
             return

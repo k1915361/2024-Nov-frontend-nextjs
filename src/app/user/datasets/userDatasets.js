@@ -5,10 +5,12 @@ import { fetchData } from "@/app/login/fetchData";
 import { OverviewCardWrapper } from "@/app/_components/components";
 import { LinkButtonLight } from "@/app/_components/components";
 import { ListDatasetItem } from "@/app/home/listDatasetItem";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function UserDatasets() {
     const route = '/api/user/datasets/'
     const [list, setList] = useState([]);
+    const { user } = useAuth()
 
     useEffect(() => {
         async function f() {
@@ -22,7 +24,7 @@ export default function UserDatasets() {
     
     return (
         <>
-            {(list?.length && list?.length != 0) &&
+            {(user?.username) &&
                 <>
                     <h5>My Datasets</h5>
 
@@ -42,7 +44,7 @@ export default function UserDatasets() {
                 </>
             }
 
-            {list.length == 0 && 
+            {(user?.username && list.length == 0) && 
                 <p>No List of User Datasets available.</p>
             }
             

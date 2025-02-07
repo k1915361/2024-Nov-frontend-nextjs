@@ -1,7 +1,6 @@
 'use client'
 
 import { fetchData } from "@/app/login/fetchData"
-import { ButtonLight } from "@/app/_components/components";
 import { LinkButtonLight } from "@/app/_components/components";
 import { useEffect, useState } from "react";
 import { LinkTextNormal } from "@/app/_components/components";
@@ -10,7 +9,6 @@ import { datasetActionBaseRoute } from "../action/[id]/page";
 import { Icon } from "@/app/_components/components";
 import DownloadButtonClientSide from "./downloadClientSide";
 import { useAuth } from "@/app/context/AuthContext";
-import { isEmptyObject } from "@/app/model/fork/[id]/pageClient";
 
 export const datasetViewerBaseRoute = 'dataset/viewer/'
 
@@ -125,19 +123,23 @@ export default function FetchDatasetClient({id}) {
         <LinkButtonLight href={`/${datasetTreeBaseRoute}${removeDatasetDirectoryBasePath(data?.dataset_directory || '')}`} >
             Files
         </LinkButtonLight>
-        {!user?.username &&
+        {user?.username &&
             <>
                 <LinkButtonLight href={`/${datasetActionBaseRoute}${id}`} >
                     Actions
                 </LinkButtonLight>
                 <div/>
-                <LinkButtonLight href={`/dataset/fork/${id}`}>
-                    Fork
-                </LinkButtonLight>
-                <ModalDeleteButton>
-                    Delete Dataset
-                </ModalDeleteButton>        
             </>
+        }
+        {(user?.username && user?.username !== data?.username) && 
+            <LinkButtonLight href={`/dataset/fork/${id}`}>
+                Fork
+            </LinkButtonLight>
+        }
+            {(user?.username && user?.username === data?.username) &&
+            <ModalDeleteButton>
+                Delete Dataset
+            </ModalDeleteButton>            
         }
         <DownloadButtonClientSide id={id}/>
         <DeleteModal onDelete={requestDeleteDataset}/>

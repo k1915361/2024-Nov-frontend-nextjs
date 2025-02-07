@@ -1,6 +1,6 @@
 'use client';
 
-import { ListModelItemBody } from '@/app/home/list_models';
+import { ListModelItemCard } from '@/app/home/list_models';
 import { API_HTTP } from '@/app/login/fetchData';
 import PageComponent from '@/app/pageComponent';
 import { useState, useEffect } from 'react';
@@ -77,7 +77,7 @@ export default function LiveSearch() {
             {loading && <p>Loading...</p>}
             <ul className="search-results">
                 {results.map((result, index) => (
-                    <ListModelItemBody key={result.id} model={result}/>
+                    <ListModelItemCard key={result.id} model={result}/>
                     // <li key={index}>{result.name}</li>
                 ))}
             </ul>

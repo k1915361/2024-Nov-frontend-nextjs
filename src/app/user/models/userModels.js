@@ -5,10 +5,12 @@ import { fetchData } from "@/app/login/fetchData";
 import { OverviewCardWrapper } from "@/app/_components/components";
 import { LinkButtonLight } from "@/app/_components/components";
 import { ListModelItem } from "@/app/home/list_models";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function UserModels() {
     const route = '/api/user/models/'
     const [list, setList] = useState([]);
+    const { user } = useAuth()
 
     useEffect(() => {
         async function f() {
@@ -22,7 +24,7 @@ export default function UserModels() {
     
     return (
         <>
-            {(list?.length && list?.length != 0) &&
+            {user?.username &&
                 <>
                     <h5>My Models</h5>
                     {list?.map?.((model) => (
@@ -39,7 +41,7 @@ export default function UserModels() {
                     </LinkButtonLight>
                 </>
             }
-            {(list?.length == 0) && 
+            {(user?.username && list?.length == 0) && 
                 <p>No List of User Models available.</p>
             }            
         </>

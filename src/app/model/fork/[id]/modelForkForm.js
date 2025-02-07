@@ -54,6 +54,13 @@ export default function ModelForkForm({model_id, model, loggedInUser}) {
             
             const result = await response.json();
             setMessage(result?.message);
+            if (result?.success === true) {
+                setMessage('The model is successfully forked.')
+                console.log(' 1 The model is successfully forked.');
+            }
+            if (result?.success == true) {
+                console.log(' 2 The model is successfully forked.');
+            }
         } catch (error) {
             console.error('Error:', error);
         }

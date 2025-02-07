@@ -1,6 +1,6 @@
 'use client'
 
-import { ListDatasetItemBody } from "@/app/home/listDatasetItem";
+import { ListDatasetItemCard } from "@/app/home/listDatasetItem";
 import { API_HTTP } from "../../login/fetchData";
 import { useListPaginationState } from "../models/pages/pagination";
 import { useAuth } from "@/app/context/AuthContext";
@@ -21,7 +21,7 @@ export default function ListDatasetsPages() {
                 <BoldHeading4>Please log in to see your datasets.</BoldHeading4>
             }
             { datasets?.map?.((dataset) =>
-                    <ListDatasetItemBody 
+                    <ListDatasetItemCard 
                         dataset={dataset} 
                         key={dataset.id}
                         isUsernameVisible={false}

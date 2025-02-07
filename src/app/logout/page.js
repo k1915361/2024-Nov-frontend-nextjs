@@ -2,7 +2,7 @@
 
 import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { fetchResponse } from "../login/fetchData";
+import { sendJsonFetchResponse } from "../login/fetchData";
 import PageComponent from "../pageComponent";
 import { useAuth } from "../context/AuthContext";
 
@@ -10,7 +10,7 @@ export async function check_log_in_state(route = '/api/token/check-login/cookie/
     const options = {
         method: 'POST',
     }
-    const response = await fetchResponse(route, options)
+    const response = await sendJsonFetchResponse(route, options)
     if (!response.ok) {
         return "Failed to log out"
     }

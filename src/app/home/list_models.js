@@ -83,9 +83,9 @@ export function ListModelItem({model, index='', href, isPublicSignVisible=true, 
     </>
 }
 
-export function ListModelItemBody({model}) {
+export function ListModelItemCard({model}) {
     return <OverviewCardWrapper key={model.id}>
-        <ListModelItem model={model}/>
+        <ListModelItem model={model} href={`/model/${model.id}`} />
     </OverviewCardWrapper>
 }
 
@@ -94,7 +94,7 @@ export function LinkListModelItemBody({model}) {
         href={`/model/${model.id}`} 
         className="btn btn-outline"
     >
-        <ListModelItemBody model={model}/>
+        <ListModelItemCard model={model}/>
     </a>
 }
 

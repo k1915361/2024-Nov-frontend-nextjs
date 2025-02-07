@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP, fetchResponse } from "@/app/login/fetchData";
+import { API_HTTP, sendJsonFetchResponse } from "@/app/login/fetchData";
 import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { useEffect, useState } from "react";
 

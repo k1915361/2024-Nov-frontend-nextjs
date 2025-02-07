@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useState, useEffect, useContext, useCallback } from 'react';
-import { fetchData, fetchResponse } from "../login/fetchData";
+import { fetchData, sendJsonFetchResponse } from "../login/fetchData";
 
 const AuthContext = createContext(null);
 
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
             method: 'POST',
         }
         try {
-            const response = await fetchResponse(route, options)
+            const response = await sendJsonFetchResponse(route, options)
             if (!response.ok) {
                 try {
                     const errorData = await response.json();

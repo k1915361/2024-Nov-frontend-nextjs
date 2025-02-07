@@ -28,14 +28,6 @@ export default function DatasetForkForm({dataset_id, dataset, loggedInUser}) {
         }));
     }
 
-    const handleFileChange = (e) => {
-        const { name, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: files[0]
-        }));
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -61,6 +53,9 @@ export default function DatasetForkForm({dataset_id, dataset, loggedInUser}) {
             
             const result = await response.json();
             setMessage(result?.message);
+            if (result?.success === true) {
+                setMessage('The dataset is successfully forked.')
+            }
         } catch (error) {
             console.error('Error:', error);
         }

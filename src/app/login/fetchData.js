@@ -37,7 +37,7 @@ export const fetchData = async (
 };
 
 /** Pass undefined to keep default parameter values like f(route, options, undefined, apiRoot) */
-export const fetchResponse = async (
+export const sendJsonFetchResponse = async (
     route
     , options
     , method = 'GET'
@@ -66,5 +66,5 @@ export const fetchResponseObjectParameter = async (
     config = { options: {}, method: 'GET', apiRoot: API_ROOT_HTTP }
 ) => {
     const { options, method, apiRoot } = config;
-    return fetchResponse(route, options, method, apiRoot)
+    return sendJsonFetchResponse(route, options, method, apiRoot)
 }

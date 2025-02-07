@@ -50,9 +50,14 @@ export function ListDatasetItem({dataset, index='', href, isPublicSignVisible=tr
     </>
 }
 
-export function ListDatasetItemBody({dataset, isUsernameVisible=true, isPublicSignVisible=true}) {
+export function ListDatasetItemCard({dataset, isUsernameVisible=true, isPublicSignVisible=true}) {
     return <OverviewCardWrapper key={dataset.id}>
-        <ListDatasetItem dataset={dataset} isUsernameVisible={isUsernameVisible} isPublicSignVisible={isPublicSignVisible} href={`/dataset/${dataset.id}`}/>
+        <ListDatasetItem 
+            dataset={dataset} 
+            isUsernameVisible={isUsernameVisible} 
+            isPublicSignVisible={isPublicSignVisible} 
+            href={`/dataset/${dataset.id}`}
+        />
     </OverviewCardWrapper>
 }
 
@@ -60,7 +65,7 @@ export function LinkListDatasetItemBody({dataset}) {
     return <div 
         className="text-start my-0 p-0"
     >
-        <ListDatasetItemBody dataset={dataset}>
-        </ListDatasetItemBody>
+        <ListDatasetItemCard dataset={dataset}>
+        </ListDatasetItemCard>
     </div>
 }

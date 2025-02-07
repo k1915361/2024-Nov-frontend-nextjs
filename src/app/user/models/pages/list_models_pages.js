@@ -1,6 +1,6 @@
 'use client'
 
-import { ListModelItemBody } from "../../../home/list_models";
+import { ListModelItemCard } from "../../../home/list_models";
 import { API_HTTP } from "../../../login/fetchData";
 import { useListPaginationState } from "./pagination";
 
@@ -14,7 +14,7 @@ export default function ListModelsPages() {
         <div>
             <h1>Models</h1>            
             { models?.map?.((model) => 
-                    <ListModelItemBody 
+                    <ListModelItemCard 
                         model={model} 
                         key={model.id}
                     />
