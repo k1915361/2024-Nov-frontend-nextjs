@@ -22,6 +22,15 @@ export function newWebSocketAndSetState(api, setState) {
     return socket
 }
 
+export const sendWebSocketMessage = (socket, data, type='start_task') => {
+    console.log(' sendWebSocketMessage ', socket, type, data)
+    if (socket) {
+        console.log(' 1. socket ', type, data)
+        const message = JSON.stringify({ type: type, payload: data, ...data }); 
+        socket.send(message);
+    }
+};
+
 export const ImageWithDefault = ({ src, defaultSrc, alt, title }) => {
     const [imageSrc, setImageSrc] = useState(src);
     const [altInfo, setAltInfo] = useState(alt);

@@ -85,8 +85,7 @@ export default function Home() {
             src="/file.svg"
             alt="File icon"
             width={16}
-            height={16}
-            style={{ width: 16, height: "auto" }}
+            height={20}
           />
           About
         </a>
@@ -100,8 +99,7 @@ export default function Home() {
             src="/window.svg"
             alt="Window icon"
             width={16}
-            height={16}
-            style={{ width: 16, height: "auto" }}
+            height={20}
           />
           T&C
         </a>
@@ -115,8 +113,7 @@ export default function Home() {
             src="/globe.svg"
             alt="Globe icon"
             width={16}
-            height={16}
-            style={{ width: 16, height: "auto" }}
+            height={20}
           />
           Home
         </a>

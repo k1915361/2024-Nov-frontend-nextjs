@@ -7,9 +7,8 @@ import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
 import { borderLightClassName } from '../serverUtils';
-import { Text2ndarySmall } from "@/app/_components/components";
-import { TextSecondary } from '@/app/home/list_models';
 import { TextLighter } from '@/app/dataset/viewer/tabulateArray';
+import { sendWebSocketMessage } from '../page';
 
 export function removeStaticServerBaseURL(url, source=HTTP_STATIC_SERVER+'/', target='') {
     return url.replace(source, target)
@@ -22,13 +21,24 @@ export function ViewFileLink({href, name, children, changeDisplayNameFunction=re
     </a>
 }
 
-export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/action-progress', buttonName='Start Task'}) {
+export function ProgressBarViewDataset({ total_steps = 3, apiRoute = '/dataset/image/action-progress', buttonName = 'Start Task', type = '', parameters = {}, objectType='dataset' }) {
+    return <ProgressBarView 
+        total_steps={total_steps}
+        apiRoute={apiRoute}
+        buttonName={buttonName}
+        type={type}
+        parameters={parameters} 
+        objectType={objectType}
+    />
+}
+
+export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/action-progress', buttonName='Start Task', type='', parameters={}}) {
     const [progress, setProgress] = useState({ current: 0, total: 100 });
-    const [ws, setWs] = useState(null);
+    const [wsocket, setWsocket] = useState(null);
 
     useEffect(() => {
         const newWs = new WebSocket(`${API_ROOT_WEBSOCKET}${apiRoute}`);
-        setWs(newWs);
+        setWsocket(newWs);
 
         newWs.onopen = () => {
             console.log('WebSocket connected');
@@ -38,7 +48,7 @@ export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/actio
             const data = JSON.parse(event.data);
             setProgress(data);
             if(data.finished) {
-                setWs(null);
+                setWsocket(null);
             }
         };
 
@@ -47,16 +57,17 @@ export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/actio
         };
 
         return () => {
-            if (ws) ws.close();
+            if (wsocket) wsocket.close();
         };
     }, []);
 
     const startTask = () => {
-        if (ws && ws.readyState === WebSocket.OPEN) { 
-            ws.send(JSON.stringify({ type: 'start_task', total_steps: total_steps })); 
+        if (wsocket && wsocket.readyState === WebSocket.OPEN) { 
+            wsocket.send(JSON.stringify({ type: 'start_task', total_steps: total_steps })); 
+            sendWebSocketMessage(wsocket, { parameters: parameters }, type || undefined)
         } else {
             console.log("Websocket not connected.")
-        }
+        }        
     };
 
     const progressPercentage = Math.round((progress.current / progress.total) * 100, 2);

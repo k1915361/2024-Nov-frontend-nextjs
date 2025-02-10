@@ -244,22 +244,41 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 2025  
 
+
 [ ] save the new model or the dataset after an action.  
-[ ] actions database. new dataset/model saved in file system.  
+[ ] actions database: new dataset/model saved in file system.  
 
 [ ] DD.MM. Todo description.   
-[x] 30.01. hide buttons for guest user:  Delete, Actions, Fork  
+
 [x] 05.02. register page (NextJS).  
 [x] 10.02. after login redirect to previous page (or to homepage). (I thought user may want to go back to previous page which may not be the homepage. redirect to previous page?)  
 logged in user homepage:  
-- [x] 03.02. list 10 user-owned datasets/models on homepage.  
 - [x] 07.02. list 10 user privately owned datasets/models on its list page.   
+- [x] 03.02. list 10 user-owned datasets/models on homepage.  
 
-[x] 29.01. always show navigation buttons on the top (Home page, Profile View, Start a new optimization task, Previous Tasks, Personal Model Repo, Personal Dataset Repo).  
 [x] 03.02. or, always show side navigation buttons on the left.  
+[x] 30.01. hide buttons for guest user:  Delete, Actions, Fork  
+[x] 29.01. always show navigation buttons on the top (Home page, Profile View, Start a new optimization task, Previous Tasks, Personal Model Repo, Personal Dataset Repo).  
 logged in user - list page of datasets/models: 
 - [x] give another option to only view user-datasets and user-models.  
 
 [x] 12.2024-01.2025. Actions page on model like seen on the dataset-actions-page.  
 [x] 7.02. relate a model-dataset.   
 [x] 7.02. show a success message after relating a model-dataset.   
+
+#### 28.Jan
+  guest:
+  - [x] go to homepage as guest - show public models and datasets.
+  - [x] as a guest, be able to download and view the public models and datasets.
+
+  user:
+  - [x] go to home page as user - show public models and datasets and their private ones.
+  - [x] download, view the public models and datasets.
+  - [x] see action buttons in dataset/model page.
+  - [x] fork a dataset. 
+  
+  [x] upload a model.  
+  [x] upload a dataset.  
+  [x] delete dataset.  
+  [x] Associate Model-Dataset.  
+  [x] 29.01. fork a model.   

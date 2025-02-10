@@ -18,9 +18,8 @@ export default function Footer({ }){
                         src="/file.svg"
                         alt="File icon"
                         width={16}
-                        height={16}
+                        height={20}
                         className="hover:underline"
-                        style={{ 'width': 16, 'height': "auto" }}
                     /> <HoverUnderline>
                             About
                         </HoverUnderline>
@@ -36,8 +35,7 @@ export default function Footer({ }){
                         src="/window.svg"
                         alt="Window icon"
                         width={16}
-                        height={16}
-                        style={{ 'width': '16', 'height': "auto" }}
+                        height={20}
                     /> <HoverUnderline>
                         T&C
                     </HoverUnderline>
@@ -53,8 +51,7 @@ export default function Footer({ }){
                         src="/globe.svg"
                         alt="Globe icon"
                         width={16}
-                        height={16}
-                        style={{ 'width': 16, 'height': "auto" }}
+                        height={20}
                     /> <HoverUnderline>
                         Home
                     </HoverUnderline>

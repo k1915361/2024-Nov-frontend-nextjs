@@ -1,7 +1,7 @@
 'use client'
 
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
-import { newWebSocketAndSetState } from "../page";
+import { newWebSocketAndSetState, sendWebSocketMessage } from "../page";
 import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
@@ -11,7 +11,8 @@ import { BorderLightFullWidth } from "@/app/_components/components";
 export function handleWebsocketEvents(setEvents, apiRoot=API_ROOT_WEBSOCKET, apiRoute='/dataset/image/test-async-file-stream-json/') {
     console.log(`${apiRoot}${apiRoute}`)
     const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`, setEvents);
-    
+    sendWebSocketMessage(socket, {parameters: {paramA: 'valX'}})
+
     return () => {
         socket.close();
     };

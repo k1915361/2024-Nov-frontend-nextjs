@@ -57,8 +57,7 @@ export default function Home() {
             src="/file.svg"
             alt="File icon"
             width={16}
-            height={16}
-            styles={{ width: "auto" }}
+            height={20}
           />
           Learn
         </a>
@@ -72,8 +71,7 @@ export default function Home() {
             src="/window.svg"
             alt="Window icon"
             width={16}
-            height={16}
-            styles={{ width: "auto" }}
+            height={20}
           />
           Examples
         </a>
@@ -87,8 +85,7 @@ export default function Home() {
             src="/globe.svg"
             alt="Globe icon"
             width={16}
-            height={16}
-            styles={{ width: "auto" }}
+            height={20}
           />
           Go to nextjs.org →
         </a>
