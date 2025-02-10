@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PageComponent from "../pageComponent";
 import { fetchData } from "./fetchData";
 import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export async function checked_logged_in(route = '/api/login/check/') {
     const options = {
@@ -14,6 +15,7 @@ export async function checked_logged_in(route = '/api/login/check/') {
 }
 
 export default function Login() {
+    const router = useRouter()
     const [message, setMessage] = useState("")
     const [username, setUsername] = useState("")    
     const route = '/api/token/login/cookie/'
@@ -33,13 +35,11 @@ export default function Login() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(credentials),
+            credentials: 'include',
         }
-
         try {
-            const data = await fetchData(route, options)
-            
+            const data = await fetchData(route, options)            
             setUsername(data.username)
-            
         } catch (err) {
             setMessage(err.message || "An error occurred")
         }
@@ -59,10 +59,11 @@ export default function Login() {
                 && data?.user_is_authenticated == true
             ) {
                 setUsername(data.username)
+                router.back()
             }
         }
         f()
-    }, [])
+    }, [username])
 
     return (
         <PageComponent>

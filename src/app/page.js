@@ -86,6 +86,7 @@ export default function Home() {
             alt="File icon"
             width={16}
             height={16}
+            style={{ width: 16, height: "auto" }}
           />
           About
         </a>
@@ -100,6 +101,7 @@ export default function Home() {
             alt="Window icon"
             width={16}
             height={16}
+            style={{ width: 16, height: "auto" }}
           />
           T&C
         </a>
@@ -114,6 +116,7 @@ export default function Home() {
             alt="Globe icon"
             width={16}
             height={16}
+            style={{ width: 16, height: "auto" }}
           />
           Home
         </a>

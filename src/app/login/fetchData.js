@@ -1,4 +1,7 @@
-export const API_ROOT = "127.0.0.1:8000"
+export const API_HOST_OLD = "127.0.0.1"
+export const API_HOST = "localhost"
+export const API_PORT = "8000"
+export const API_ROOT = API_HOST + ":" + API_PORT
 export const API_ROOT_HTTP = "http://" + API_ROOT
 export const HTTP_STATIC_SERVER = API_ROOT_HTTP + "/static"
 export const API_VIEW = API_ROOT_HTTP + "/polls"

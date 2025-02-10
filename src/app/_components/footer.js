@@ -20,6 +20,7 @@ export default function Footer({ }){
                         width={16}
                         height={16}
                         className="hover:underline"
+                        style={{ 'width': 16, 'height': "auto" }}
                     /> <HoverUnderline>
                             About
                         </HoverUnderline>
@@ -36,6 +37,7 @@ export default function Footer({ }){
                         alt="Window icon"
                         width={16}
                         height={16}
+                        style={{ 'width': '16', 'height': "auto" }}
                     /> <HoverUnderline>
                         T&C
                     </HoverUnderline>
@@ -52,6 +54,7 @@ export default function Footer({ }){
                         alt="Globe icon"
                         width={16}
                         height={16}
+                        style={{ 'width': 16, 'height': "auto" }}
                     /> <HoverUnderline>
                         Home
                     </HoverUnderline>

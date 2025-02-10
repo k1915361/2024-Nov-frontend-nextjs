@@ -239,3 +239,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## TODO check list
+
+### 2025  
+
+[ ] save the new model or the dataset after an action.  
+[ ] actions database. new dataset/model saved in file system.  
+
+[ ] DD.MM. Todo description.   
+[x] 30.01. hide buttons for guest user:  Delete, Actions, Fork  
+[x] 05.02. register page (NextJS).  
+[x] 10.02. after login redirect to previous page (or to homepage). (I thought user may want to go back to previous page which may not be the homepage. redirect to previous page?)  
+logged in user homepage:  
+- [x] 03.02. list 10 user-owned datasets/models on homepage.  
+- [x] 07.02. list 10 user privately owned datasets/models on its list page.   
+
+[x] 29.01. always show navigation buttons on the top (Home page, Profile View, Start a new optimization task, Previous Tasks, Personal Model Repo, Personal Dataset Repo).  
+[x] 03.02. or, always show side navigation buttons on the left.  
+logged in user - list page of datasets/models: 
+- [x] give another option to only view user-datasets and user-models.  
+
+[x] 12.2024-01.2025. Actions page on model like seen on the dataset-actions-page.  
+[x] 7.02. relate a model-dataset.   
+[x] 7.02. show a success message after relating a model-dataset.   

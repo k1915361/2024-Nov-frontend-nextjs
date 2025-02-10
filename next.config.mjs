@@ -23,13 +23,16 @@ const nextConfig = {
             }
         ]
     },
-    
 	
     async rewrites() {
         return [
             {
                 source: '/polls/:path*',
-                destination: 'http://127.0.0.1:8000/:path*', // Server Origin
+                destination: 'http://localhost:8000/:path*', // Server Origin
+            },
+            {
+                source: '/api/:path*',
+                destination: 'http://localhost:8000/:path*', // Server API Origin
             },
             {
                 source: "/blog/:path*",

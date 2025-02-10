@@ -58,6 +58,7 @@ export default function Home() {
             alt="File icon"
             width={16}
             height={16}
+            styles={{ width: "auto" }}
           />
           Learn
         </a>
@@ -72,6 +73,7 @@ export default function Home() {
             alt="Window icon"
             width={16}
             height={16}
+            styles={{ width: "auto" }}
           />
           Examples
         </a>
@@ -86,6 +88,7 @@ export default function Home() {
             alt="Globe icon"
             width={16}
             height={16}
+            styles={{ width: "auto" }}
           />
           Go to nextjs.org →
         </a>
