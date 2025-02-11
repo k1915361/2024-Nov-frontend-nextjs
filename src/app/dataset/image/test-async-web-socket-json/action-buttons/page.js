@@ -8,21 +8,33 @@ import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
 import { BorderLightFullWidth } from "@/app/_components/components";
 
-export function handleWebsocketEvents(setEvents, apiRoot=API_ROOT_WEBSOCKET, apiRoute='/dataset/image/test-async-file-stream-json/') {
+export function handleWebsocketEvents(
+    setEvents, 
+    apiRoot=API_ROOT_WEBSOCKET, 
+    apiRoute='/dataset/image/test-async-file-stream-json/', 
+    type=undefined, 
+    parameters={}
+) {
     console.log(`${apiRoot}${apiRoute}`)
     const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`, setEvents);
-    sendWebSocketMessage(socket, {parameters: {paramA: 'valX'}})
+    sendWebSocketMessage(socket, parameters, type)
 
+    return socket
     return () => {
         socket.close();
     };
 }
 
-export function ActionResponseView({buttonName, apiRoute}) {
+export function ActionResponseView({buttonName, apiRoute, setData, ...props}) {
     const [events, setEvents] = useState([]);
     
     function handleOnClickWebsocketEvents() {
-        handleWebsocketEvents(setEvents, API_ROOT_WEBSOCKET, apiRoute)
+        const socket = handleWebsocketEvents(setEvents, API_ROOT_WEBSOCKET, apiRoute)
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);            
+            setData(data)
+        };
+        socket.close()
     } 
     
     return (
@@ -45,11 +57,12 @@ export function ActionResponseView({buttonName, apiRoute}) {
     )
 }
 
-export function DivActionResponseView({buttonName, apiRoute, ...props}) {
+export function DivActionResponseView({buttonName, apiRoute, setData, ...props}) {
     return <div>
         <ActionResponseView
             buttonName={buttonName}
             apiRoute={apiRoute}
+            setData={setData}
             {...props}
         />
     </div>

@@ -25,8 +25,7 @@ export function newWebSocketAndSetState(api, setState) {
 export const sendWebSocketMessage = (socket, data, type='start_task') => {
     console.log(' sendWebSocketMessage ', socket, type, data)
     if (socket) {
-        console.log(' 1. socket ', type, data)
-        const message = JSON.stringify({ type: type, payload: data, ...data }); 
+        const message = JSON.stringify({ type: type, payload: data }); 
         socket.send(message);
     }
 };

@@ -32,7 +32,14 @@ export function ProgressBarViewDataset({ total_steps = 3, apiRoute = '/dataset/i
     />
 }
 
-export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/action-progress', buttonName='Start Task', type='', parameters={}}) {
+export function ProgressBarView({ 
+    total_steps = 3, 
+    apiRoute = '/dataset/image/action-progress', 
+    buttonName = 'Start Task', 
+    type = '', 
+    parameters = {}, 
+    message_props 
+}) {
     const [progress, setProgress] = useState({ current: 0, total: 100 });
     const [wsocket, setWsocket] = useState(null);
 
@@ -64,7 +71,7 @@ export function ProgressBarView({total_steps = 3, apiRoute='/dataset/image/actio
     const startTask = () => {
         if (wsocket && wsocket.readyState === WebSocket.OPEN) { 
             wsocket.send(JSON.stringify({ type: 'start_task', total_steps: total_steps })); 
-            sendWebSocketMessage(wsocket, { parameters: parameters }, type || undefined)
+            sendWebSocketMessage(wsocket, { parameters: parameters, ...message_props }, type || undefined)
         } else {
             console.log("Websocket not connected.")
         }        
