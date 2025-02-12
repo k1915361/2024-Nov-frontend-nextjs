@@ -15,26 +15,27 @@ export function handleWebsocketEvents(
     type=undefined, 
     parameters={}
 ) {
-    console.log(`${apiRoot}${apiRoute}`)
     const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`, setEvents);
     sendWebSocketMessage(socket, parameters, type)
 
     return socket
-    return () => {
-        socket.close();
-    };
 }
 
-export function ActionResponseView({buttonName, apiRoute, setData, ...props}) {
+export function ActionResponseView({buttonName, apiRoute, ...props}) {
     const [events, setEvents] = useState([]);
     
     function handleOnClickWebsocketEvents() {
         const socket = handleWebsocketEvents(setEvents, API_ROOT_WEBSOCKET, apiRoute)
         socket.onmessage = (event) => {
-            const data = JSON.parse(event.data);            
-            setData(data)
+            const data = JSON.parse(event.data);
+            if (data?.finished === true) {
+                socket.close()
+            }
         };
-        socket.close()
+        socket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+            socket.close(); 
+        }
     } 
     
     return (
@@ -57,12 +58,11 @@ export function ActionResponseView({buttonName, apiRoute, setData, ...props}) {
     )
 }
 
-export function DivActionResponseView({buttonName, apiRoute, setData, ...props}) {
+export function DivActionResponseView({buttonName, apiRoute, ...props}) {
     return <div>
         <ActionResponseView
             buttonName={buttonName}
             apiRoute={apiRoute}
-            setData={setData}
             {...props}
         />
     </div>
@@ -105,8 +105,7 @@ export default function EventSourceClient() {
             <ProgressBarView buttonName="Start Task D" 
                 apiRoute="/dataset/image/action-progress-action-d"/>
             <ProgressBarView buttonName="Start Task E" 
-                apiRoute="/dataset/image/action-progress-action-e"/>
-            
+                apiRoute="/dataset/image/action-progress-action-e"/>            
         </div>
     );
 }
