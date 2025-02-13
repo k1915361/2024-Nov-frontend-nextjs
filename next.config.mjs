@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    env: {
+        customKey: 'my-value',
+        PUBLIC_BACKEND_URL: 'http://localhost:8000/',
+    },
     async headers() {
         return [
             {

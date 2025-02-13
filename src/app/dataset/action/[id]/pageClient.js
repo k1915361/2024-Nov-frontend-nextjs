@@ -3,7 +3,7 @@
 import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
-import { API_HTTP, fetchData } from "@/app/login/fetchData"
+import { API_HTTP, isDataValid, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
 import { Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
@@ -14,9 +14,10 @@ export default function PageClient({ id, taskId='', task_name='' }){
     const [taskId_, setTaskId] = useState(taskId)
     const route = `/api/task/${task_name}`
     const [shouldRedirect, setShouldRedirect] = useState(false);
+    const [accessToken, setAccessToken] = useState('')
 
-    useEffect(() => {
-        if (!taskId) {
+    if (!taskId) {
+        useEffect(() => {
             async function f() {
                 const data_ = await fetchData(route, {})
                 if (data_ && data_ != "Fetch Error" && data_ != "Fetch Failed. Response not ok") {
@@ -26,14 +27,30 @@ export default function PageClient({ id, taskId='', task_name='' }){
                 }
             }
             f();
-        }
-    }, []);
+        }, []);
+    }
     
+    useEffect(() => {
+        async function f() {
+            const { data: data_, success, error, message, response } = await fetchData_(`/api/token/access/`)
+            if (success === true) {
+                setAccessToken(data_.access_token)
+            }
+        }
+        f();
+    }, []);
+
     useEffect(() => {
         if (shouldRedirect) {
             redirect(`/dataset/action/${id}/task/${data.task_id}`)
         }
     }, [shouldRedirect, data, taskId_]);
+
+    const message_props = { 
+        'id': id, 
+        'task_id': taskId_, 
+        'accessToken': accessToken 
+    }
 
     return (
       <>
@@ -43,35 +60,35 @@ export default function PageClient({ id, taskId='', task_name='' }){
                 apiRoute='/dataset/image/test-async-file-stream-json/action-a'
                 type='analysis'
                 parameters={{ 'paramA': 'cleaning_valueA' }}
-                message_props={{ 'id': id, 'task_id': taskId_ }}
+                message_props={message_props}
             />
             <ProgressBarView 
                 buttonName="Cleaning"
                 apiRoute="/dataset/image/action-progress"
                 type='cleaning'
                 parameters={{ 'paramA': 'cleaning_valueA' }}
-                message_props={{ 'id': id, 'task_id': taskId_ }}
+                message_props={message_props}
             />
             <ProgressBarView 
                 buttonName="Enrichment" 
                 apiRoute="/dataset/image/action-progress-action-b"
                 type='enrichment'
                 parameters={{ 'paramA': 'enrichment_valueB' }}
-                message_props={{ 'id': id, 'task_id': taskId_ }}
+                message_props={message_props}
             />
             <ProgressBarView 
                 buttonName="Data Curation" 
                 apiRoute="/dataset/image/action-progress-action-c"
                 type='curation'
                 parameters={{ 'paramA': 'data_curation_valueC' }}
-                message_props={{ 'id': id, 'task_id': taskId_ }}
+                message_props={message_props}
             />
             <ProgressBarView 
                 buttonName="Data Balancing" 
                 apiRoute="/dataset/image/action-progress-action-d"
                 type='balancing'
                 parameters={{ 'paramA': 'balancing_valueD' }}
-                message_props={{ 'id': id, 'task_id': taskId_ }}
+                message_props={message_props}
             />
             <Text2ndarySmall>
                 Explainable AI (XAI)
@@ -82,7 +99,8 @@ export default function PageClient({ id, taskId='', task_name='' }){
                 buttonName="XAI" 
                 apiRoute="/dataset/image/action-progress-action-e"
                 type='explainable_ai'
-                parameters={{ 'id': id, 'task_id': taskId_, 'paramA': 'explainable_ai_valueD' }}
+                parameters={{ 'paramA': 'explainable_ai_valueD' }}
+                message_props={message_props}
                 dataset_id={id}
             />
             <div>

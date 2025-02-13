@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PageComponent from "../pageComponent";
-import { fetchData } from "./fetchData";
+import { API_ROOT_HTTP, fetchData } from "./fetchData";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,40 @@ export async function checked_logged_in(route = '/api/login/check/') {
     }
     const data = await fetchData(route, options)
     return data
+}
+
+export function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue; 1
+}
+
+export async function getCSRFToken() {
+    try {
+        const response = await fetch(
+            `${API_ROOT_HTTP}/api/token/csrf/`, 
+        );
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const csrftoken = getCookie('csrftoken');
+        if (!csrftoken) {
+            throw new Error("CSRF token not found in cookie after initial request.");
+        }
+        return csrftoken;
+    } catch (error) {
+        console.error("Error getting CSRF token:", error);
+        return null;
+    }
 }
 
 export default function Login() {
@@ -28,17 +62,29 @@ export default function Login() {
             username: e.target.username.value,
             password: e.target.password.value,
         };
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(credentials),
-            credentials: 'include',
-        }
+        
+        const csrftoken_ = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
+        const csrftoken = getCookie('csrftoken')
+        console.log(' csrftoken: ', csrftoken_, csrftoken);
+        
         try {
-            const data = await fetchData(route, options)            
+            const csrftoken = await getCSRFToken();
+            if (!csrftoken) {
+                console.error("Could not obtain CSRF token.");
+            }            
+            console.log(' 2 csrftoken: ', csrftoken, process.env.PUBLIC_BACKEND_URL);
+            
+            
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify(credentials),
+                credentials: 'include',
+            }                
+            const data = await fetch(`${API_ROOT_HTTP}${route}`, options)
             setUsername(data.username)
         } catch (err) {
             setMessage(err.message || "An error occurred")

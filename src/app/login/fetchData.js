@@ -39,7 +39,52 @@ export const fetchData = async (
     }
 };
 
-/** Pass undefined to keep default parameter values like f(route, options, undefined, apiRoot) */
+/** Experimental fetchData function */
+export const fetchData_ = async (
+    route
+    , options = {}
+    , apiRoot = API_ROOT_HTTP
+) => {
+    try {
+        const response = await fetch(`${apiRoot}${route}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers,
+            },
+            credentials: 'include',
+            ...options,
+        });
+        if (!response.ok) {
+            return {
+                data: undefined,
+                success: false,
+                error: undefined,
+                message: "Response not ok.",
+                response: response,
+            }
+        }
+        const data = await response.json()
+        return {
+            data: data,
+            success: true,
+            error: undefined,
+            message: "",
+            response: undefined,
+        }
+
+    } catch (error) {
+        return { 
+            data: undefined, 
+            success: false,
+            error: error, 
+            message: "Error raised during fetch data.",
+            response: undefined,
+        }
+    }
+};
+
+/** Pass undefined to keep default parameter values like f(r, undefined) */
 export const sendJsonFetchResponse = async (
     route
     , options
@@ -70,4 +115,11 @@ export const fetchResponseObjectParameter = async (
 ) => {
     const { options, method, apiRoot } = config;
     return sendJsonFetchResponse(route, options, method, apiRoot)
+}
+
+export function isDataValid(data) {
+    if (data && data != "Fetch Error" && data != "Fetch Failed. Response not ok") {
+        return data
+    }
+    return false
 }
