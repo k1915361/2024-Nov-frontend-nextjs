@@ -206,7 +206,7 @@ Unfortunately this is not able to resolve the issue.
 CSRF is used to encrypt user credentials and login.
 Then JWToken is set in the cookie where CSRF is no longer required unless sensitive data needs to be sent which is not yet the case for this project. 
 
-The CSRF token is seen in the browser application storage cookies but it is not accessible by JS which is correct due to `CSRF_COOKIE_HTTPONLY = True` settings, however Django is keep refusing the request even though the CSRF token cookie is included in both requeset.
+The CSRF token is seen in the browser application storage cookies but it is not accessible by JS which is correct due to `CSRF_COOKIE_HTTPONLY = True` settings, however both requests' header cookie does have the `csrftoken` but Django is still refusing the request with `forbidden` `incorrect length.` message.
 
 Browser Network tab > csrf/ (/api/token/csrf/) > headers > Set-Cookie
 `set-cookie:csrftoken=u1P...fw7;`
