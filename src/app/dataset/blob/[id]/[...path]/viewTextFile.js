@@ -1,7 +1,7 @@
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { responseIssueMessage } from "../../markdown-view/[id]/[...path]/page";
 
-export default async function ViewTextFile({apiRoute, apiRoot=API_HTTP, apiBaseRoute='dataset/blob', apiSeparator = '/', ...props }) {
+export default async function ViewTextFile({apiRoute, apiRoot=API_ROOT, apiBaseRoute='dataset/blob', apiSeparator = '/', ...props }) {
     const response = await fetch(`${apiRoot}${apiSeparator}${apiBaseRoute}${apiRoute}`);
     
     if (!response.ok) {

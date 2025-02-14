@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
 
 export function fetchAndSetState(api, setState, fetchInit={}) {
@@ -15,7 +15,7 @@ export function fetchAndSetState(api, setState, fetchInit={}) {
     f();
 }
 
-export default function ViewTextFileClientSide({apiRoute, apiRoot=API_HTTP, apiSeparator = '/', ...props }) {
+export default function ViewTextFileClientSide({apiRoute, apiRoot=API_ROOT, apiSeparator = '/', ...props }) {
     const [text, setText] = useState('')
     
     useEffect(() => {

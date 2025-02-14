@@ -1,5 +1,5 @@
 import { BoldHeading4 } from "@/app/_components/components";
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 
@@ -37,7 +37,7 @@ export default function DatasetForkForm({dataset_id, dataset, loggedInUser}) {
         });
 
         try {
-            const response = await fetch(API_HTTP + '/dataset/fork/', {
+            const response = await fetch(API_ROOT + '/dataset/fork/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

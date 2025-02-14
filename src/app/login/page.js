@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PageComponent from "../pageComponent";
-import { API_ROOT_HTTP, fetchData } from "./fetchData";
+import { API_BASE_URL_WITH_PROTOCOL, fetchData } from "./fetchData";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -29,10 +29,19 @@ export function getCookie(name) {
     return cookieValue; 1
 }
 
+export function getCookieMatch() {
+    return document.cookie.match(/csrftoken=([^;]+)/)?.[1];
+}
+
 export async function getCSRFToken() {
     try {
         const response = await fetch(
-            `${API_ROOT_HTTP}/api/token/csrf/`, 
+            `${API_BASE_URL_WITH_PROTOCOL}/api/token/csrf/`, 
+            { 
+                credentials: 'include', 
+                
+            },
+            
         );
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -63,28 +72,28 @@ export default function Login() {
             password: e.target.password.value,
         };
         
-        const csrftoken_ = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
-        const csrftoken = getCookie('csrftoken')
-        console.log(' csrftoken: ', csrftoken_, csrftoken);
+        const csrftoken1 = document?.querySelector('[name=csrfmiddlewaretoken]')?.value;
+        const csrftoken2 = getCookieMatch();
+        const csrftoken3 = getCookie('csrftoken')
         
         try {
             const csrftoken = await getCSRFToken();
             if (!csrftoken) {
                 console.error("Could not obtain CSRF token.");
             }            
-            console.log(' 2 csrftoken: ', csrftoken, process.env.PUBLIC_BACKEND_URL);
-            
+            console.log(' csrftoken: ', csrftoken, csrftoken1, csrftoken2, csrftoken3);
             
             const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken,
+                    // 'X-CSRFToken': csrftoken || csrftoken1 || csrftoken2 || csrftoken3,
+                    
                 },
                 body: JSON.stringify(credentials),
                 credentials: 'include',
-            }                
-            const data = await fetch(`${API_ROOT_HTTP}${route}`, options)
+            }
+            const data = await fetch(`${API_BASE_URL_WITH_PROTOCOL}${route}`, options)
             setUsername(data.username)
         } catch (err) {
             setMessage(err.message || "An error occurred")
@@ -105,7 +114,7 @@ export default function Login() {
                 && data?.user_is_authenticated == true
             ) {
                 setUsername(data.username)
-                router.back()
+                // router.back()
             }
         }
         f()

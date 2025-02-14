@@ -1,5 +1,5 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView"
-import { API_DATASET_ROOT, API_HTTP } from "@/app/login/fetchData"
+import { DATASET_API_URL, API_ROOT } from "@/app/login/fetchData"
 import PageComponent from "@/app/pageComponent"
 import "@/app/dataset/table/styles.css"
 import { datasetTreeTextViewBaseRoute } from "../../../blob/text-view/[id]/[...path]/page"
@@ -113,7 +113,7 @@ export function arrayLast(array, index=1){
     return array[array.length - index];
 };
 
-export function FileView({apiRoute, extension, className, apiBaseRoute='dataset/blob/', apiRoot=API_HTTP, ...props }) {
+export function FileView({apiRoute, extension, className, apiBaseRoute='dataset/blob/', apiRoot=API_ROOT, ...props }) {
     if (extension === '') {
         return 
     }

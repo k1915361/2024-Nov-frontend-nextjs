@@ -1,6 +1,6 @@
 import PageComponent from "@/app/pageComponent";
 import { getFileExtension, isTextOrMarkdownOrReadme } from "../../../../tree/[id]/[...path]/page"
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { LinkButtonLight } from "@/app/_components/components";
 import { datasetTreeTextViewBaseRoute } from "../../../text-view/[id]/[...path]/page";
 import { TitleRouteView } from "@/app/dataset/titleRouteView";
@@ -8,7 +8,7 @@ import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-
 
 export const responseIssueMessage = "Something wrong with data requesting: Data does not exist or deleted / Server is not available."
 
-export async function ViewMarkdownFile({apiRoute, apiRoot=`${API_HTTP}/`, apiBaseRoute='dataset/blob', ...props}) {
+export async function ViewMarkdownFile({apiRoute, apiRoot=`${API_ROOT}/`, apiBaseRoute='dataset/blob', ...props}) {
     const response = await fetch(`${apiRoot}${apiBaseRoute}${apiRoute}`);
 
     if (!response.ok) {

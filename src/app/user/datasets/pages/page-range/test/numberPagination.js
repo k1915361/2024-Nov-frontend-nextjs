@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP } from "@/app/login/fetchData"
+import { API_ROOT } from "@/app/login/fetchData"
 import { maxint, minint } from "@/app/user/models/pages/pagination"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -52,7 +52,7 @@ function ButtonLightShadowOutline({disabled, href, children, ...props}) {
 
 /** Example of search parameter using Next's navigation */
 export default function DatasetPageRange({namespace='datasets', LinkListItemBody=LinkListDatasetItemBody}) {
-    const route = `${API_HTTP}/${namespace}/page/?page=`
+    const route = `${API_ROOT}/${namespace}/page/?page=`
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()

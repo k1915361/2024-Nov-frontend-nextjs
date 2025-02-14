@@ -1,5 +1,5 @@
 import dayjs from "@/app/_components/dayjsRelativeTime";
-import { API_HTTP, API_VIEW } from "../login/fetchData";
+import { API_ROOT, POLLS_API_URL } from "../login/fetchData";
 import { ispublic } from "./listDatasetItem";
 import { DotSeparator, OverviewCardBottomDetailText, OverviewCardHeaderWrapper, OverviewCardWrapper } from "../_components/components";
 
@@ -103,7 +103,7 @@ export function LinkListModelItemBodyDatasetToModel({dataset}) {
 }
 
 export default async function ListModels({  }) {
-    const data = await fetch(`${API_VIEW}/models/`)
+    const data = await fetch(`${POLLS_API_URL}/models/`)
     const datajson = await data.json()
     const models = datajson.models
  

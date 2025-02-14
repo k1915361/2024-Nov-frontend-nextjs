@@ -1,7 +1,7 @@
 'use client'
 
 import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
-import { API_ROOT_WEBSOCKET, HTTP_STATIC_SERVER } from '@/app/login/fetchData';
+import { WEBSOCKET_URL, STATIC_URL } from '@/app/login/fetchData';
 import { DivButtonLight } from "@/app/_components/components";
 import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
@@ -10,7 +10,7 @@ import { borderLightClassName } from '../serverUtils';
 import { TextLighter } from '@/app/dataset/viewer/tabulateArray';
 import { sendWebSocketMessage } from '../page';
 
-export function removeStaticServerBaseURL(url, source=HTTP_STATIC_SERVER+'/', target='') {
+export function removeStaticServerBaseURL(url, source=STATIC_URL+'/', target='') {
     return url.replace(source, target)
 }
 
@@ -44,7 +44,7 @@ export function ProgressBarView({
     const [wsocket, setWsocket] = useState(null);
 
     useEffect(() => {
-        const newWs = new WebSocket(`${API_ROOT_WEBSOCKET}${apiRoute}`);
+        const newWs = new WebSocket(`${WEBSOCKET_URL}${apiRoute}`);
         setWsocket(newWs);
 
         newWs.onopen = () => {

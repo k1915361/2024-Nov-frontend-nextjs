@@ -1,5 +1,5 @@
 import PageComponent from "@/app/pageComponent"
-import { API_HTTP } from "@/app/login/fetchData"
+import { API_ROOT } from "@/app/login/fetchData"
 import { ProgressBarView } from "@/app/dataset/image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "@/app/dataset/image/test-async-web-socket-json/action-buttons/page"
 
@@ -36,7 +36,7 @@ export default async function Page(context) {
                     apiRoute="/dataset/image/action-progress-action-e"
                 />
                 <div>
-                    <a href={`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
+                    <a href={`${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
                         Download CSV File
                     </a>
                 </div>

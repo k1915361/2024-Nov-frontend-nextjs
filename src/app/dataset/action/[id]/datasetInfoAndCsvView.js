@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { CsvTableAndDownloadButtonComponent } from "./datasetCsvView";
 import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { DatasetInfoComponent } from "./datasetInfo";
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 
 export default function DatasetInfoAndCsvView({id}) { 
     const [data, setData] = useState();
@@ -12,7 +12,7 @@ export default function DatasetInfoAndCsvView({id}) {
 
     useEffect(() => {
         fetchAndSetState(
-            `${API_HTTP}/${route}`, 
+            `${API_ROOT}/${route}`, 
             async (response) => setData(await response.json()),
             {credentials: 'include'}
         )

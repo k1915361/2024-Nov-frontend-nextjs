@@ -1,4 +1,4 @@
-import { API_HTTP } from '@/app/login/fetchData';
+import { API_ROOT } from '@/app/login/fetchData';
 import { useState, useEffect } from 'react';
 import '@/app/dataset/table/styles.css'
 import { arrayLast } from '../tree/[id]/[...path]/page';
@@ -9,7 +9,7 @@ export function TextLighter({children, ...props}) {
     </div>
 }
 
-export function TabulateArray({csv_data, apiAddress=`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
+export function TabulateArray({csv_data, apiAddress=`${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
 	const [sortColumn, setSortColumn] = useState(null);
 	const [sortOrder, setSortOrder] = useState('asc');
 	const [columns, setColumns] = useState(csv_data[0])

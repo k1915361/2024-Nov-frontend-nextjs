@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP, sendJsonFetchResponse } from "@/app/login/fetchData";
+import { API_ROOT, sendJsonFetchResponse } from "@/app/login/fetchData";
 import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { useEffect, useState } from "react";
 
@@ -26,7 +26,7 @@ export default function DatasetInfo({id}) {
 
     useEffect(() => {
         fetchAndSetState(
-            `${API_HTTP}/${route}`, 
+            `${API_ROOT}/${route}`, 
             async (response) => setData(await response.json()),
             {credentials: 'include'}
         )

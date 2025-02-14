@@ -1,11 +1,11 @@
 'use client';
 
 import { ListModelItemCard } from '@/app/home/list_models';
-import { API_HTTP } from '@/app/login/fetchData';
+import { API_ROOT } from '@/app/login/fetchData';
 import PageComponent from '@/app/pageComponent';
 import { useState, useEffect } from 'react';
 
-export const API_MODEL_SEARCH = `${API_HTTP}/model/search/?query=`
+export const API_MODEL_SEARCH = `${API_ROOT}/model/search/?query=`
 
 export function LiveSearchInput({value, handleChange, ...props}){
     return <input

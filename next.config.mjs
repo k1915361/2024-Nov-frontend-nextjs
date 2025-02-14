@@ -3,6 +3,7 @@ const nextConfig = {
     env: {
         customKey: 'my-value',
         PUBLIC_BACKEND_URL: 'http://localhost:8000/',
+        TEST_VAL: 'from next.config.mjs'
     },
     async headers() {
         return [

@@ -1,33 +1,54 @@
 export const API_HOST_OLD = "127.0.0.1"
 export const API_HOST = "localhost"
 export const API_PORT = "8000"
-export const API_ROOT = API_HOST + ":" + API_PORT
-export const API_ROOT_HTTP = "http://" + API_ROOT
-export const HTTP_STATIC_SERVER = API_ROOT_HTTP + "/static"
-export const API_VIEW = API_ROOT_HTTP + "/polls"
-export const API_HTTP = API_ROOT_HTTP + "/api"
-export const API = API_ROOT + "/api"
-export const API_ROOT_WEBSOCKET = "ws://" + API
+export const API_BASE_URL = `${API_HOST}:${API_PORT}`
+export const API_PROTOCOL_HTTP = "http://"; 
+export const API_PROTOCOL = "https://";
+export const API_BASE_URL_WITH_PROTOCOL = API_PROTOCOL + API_BASE_URL
+export const STATIC_URL = API_BASE_URL_WITH_PROTOCOL + "/static"
+export const POLLS_API_URL = API_BASE_URL_WITH_PROTOCOL + "/polls"
+export const API_ROOT = API_BASE_URL_WITH_PROTOCOL + "/api"
+export const WEBSOCKET_URL = "ws://" + API_BASE_URL + "/api"
+export const API_WITH_ENDPOINT_EXAMPLE = `${API_ROOT}/top-datasets/`
 
-export const API_DATASET_ROOT = `${API_HTTP}/asset/dataset`;
-export const API_MODEL_ROOT = `${API_HTTP}/asset/model`;
+export const DATASET_API_URL = `${API_ROOT}/asset/dataset`;
+export const MODEL_API_URL = `${API_ROOT}/asset/model`;
+
+export const GET = 'GET'
+export const POST = 'POST'
+export const PUT = 'PUT'
+export const PATCH = 'PATCH'
+export const DELETE = 'DELETE'
+export const OPTIONS = 'OPTIONS'
+
+export const DEFAULT_3RD_PARTY_API_OPTIONS = {
+    method: GET,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+}
+
+export const DEFAULT_TRUSTED_API_OPTIONS = {
+    method: GET,
+    headers: {
+        'Content-Type': 'application/json',        
+    },
+    credentials: 'include',
+}
 
 export const fetchData = async (
     route
     , options
-    , method = 'GET'
-    , apiRoot = API_ROOT_HTTP
+    , method = GET
+    , apiRoot = API_BASE_URL_WITH_PROTOCOL
 ) => { 
     try {
-        const response = await fetch(`${apiRoot}${route}`, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },            
-            credentials: 'include',
-            ...options,
-        });
+        const response = await fetch(`${apiRoot}${route}`, 
+            {
+                ...DEFAULT_TRUSTED_API_OPTIONS,
+                ...options,
+            }
+        );
         if (!response.ok) {
             return response
         }
@@ -43,16 +64,11 @@ export const fetchData = async (
 export const fetchData_ = async (
     route
     , options = {}
-    , apiRoot = API_ROOT_HTTP
+    , apiRoot = API_BASE_URL_WITH_PROTOCOL
 ) => {
     try {
         const response = await fetch(`${apiRoot}${route}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },
-            credentials: 'include',
+            ...DEFAULT_TRUSTED_API_OPTIONS,
             ...options,
         });
         if (!response.ok) {
@@ -88,22 +104,16 @@ export const fetchData_ = async (
 export const sendJsonFetchResponse = async (
     route
     , options
-    , method = 'GET'
-    , apiRoot = API_ROOT_HTTP
+    , method = GET
+    , apiRoot = API_BASE_URL_WITH_PROTOCOL
 ) => {
     console.log(`${apiRoot}${route}`)
     try {
         const response = await fetch(`${apiRoot}${route}`, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },            
-            credentials: 'include',
+            ...DEFAULT_TRUSTED_API_OPTIONS,
             ...options,
         });
         return response
-
     } catch (error) {
         return error
     }
@@ -111,7 +121,7 @@ export const sendJsonFetchResponse = async (
 
 export const fetchResponseObjectParameter = async (
     route,
-    config = { options: {}, method: 'GET', apiRoot: API_ROOT_HTTP }
+    config = { options: {}, method: GET, apiRoot: API_BASE_URL_WITH_PROTOCOL }
 ) => {
     const { options, method, apiRoot } = config;
     return sendJsonFetchResponse(route, options, method, apiRoot)

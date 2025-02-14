@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
 import { closeEventSourceOnError, streamEventSource } from "../test-async-file-stream/page";
 
@@ -8,7 +8,7 @@ export default function EventSourceClient() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        const eventSource = streamEventSource(`${API_HTTP}/dataset/image/test-async-stream/`, setEvents);
+        const eventSource = streamEventSource(`${API_ROOT}/dataset/image/test-async-stream/`, setEvents);
 
         closeEventSourceOnError(eventSource)
     }, []);

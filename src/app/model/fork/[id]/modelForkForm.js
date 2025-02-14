@@ -1,5 +1,5 @@
 import { BoldHeading4 } from "@/app/_components/components";
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 
@@ -38,7 +38,7 @@ export default function ModelForkForm({model_id, model, loggedInUser}) {
         });
 
         try {
-            const response = await fetch(API_HTTP + '/model/fork/', {
+            const response = await fetch(API_ROOT + '/model/fork/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

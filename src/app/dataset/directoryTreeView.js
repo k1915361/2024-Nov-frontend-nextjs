@@ -1,6 +1,6 @@
 'use client'
 
-import { API_HTTP } from "../login/fetchData";
+import { API_ROOT } from "../login/fetchData";
 import { TitleRouteView } from "./titleRouteView";
 import { ifLoadingOrErrorDisplay, useFetch } from "../_components/useFetch";
 import { DataSizeAndDownloadIcon, fileIcon, FileListItemContainer, filePathToApiUrl, folderIcon, FolderListContainer, FolderTreeContainerHeader } from "../_components/components";
@@ -15,7 +15,7 @@ export const folderOrFileIcon = {
     false: fileIcon,
 }
 
-export default function ViewDirectoryTree({apiRoute, apiRoot=API_HTTP, apiType='dataset', routeTitle}) {
+export default function ViewDirectoryTree({apiRoute, apiRoot=API_ROOT, apiType='dataset', routeTitle}) {
     apiRoute = decodeURIComponent(apiRoute)
     apiRoute = filePathToApiUrl(apiRoute)
     

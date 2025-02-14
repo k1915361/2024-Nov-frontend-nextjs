@@ -3,7 +3,7 @@
 import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
-import { API_HTTP, isDataValid, fetchData, fetchData_ } from "@/app/login/fetchData"
+import { API_ROOT, isDataValid, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
 import { Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
@@ -104,7 +104,7 @@ export default function PageClient({ id, taskId='', task_name='' }){
                 dataset_id={id}
             />
             <div>
-                <a href={`${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
+                <a href={`${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
                     Download CSV File
                 </a>
             </div>

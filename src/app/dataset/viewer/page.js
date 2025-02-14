@@ -1,11 +1,11 @@
 'use client'
 
-import { API_HTTP } from '@/app/login/fetchData';
+import { API_ROOT } from '@/app/login/fetchData';
 import { useState, useEffect } from 'react';
 import CSVLink from './CsvLink';
 import { TabulateArray } from './tabulateArray';
 
-function CsvTableAndDownloadButton({apiAddress = `${API_HTTP}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
+function CsvTableAndDownloadButton({apiAddress = `${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`}) {
     const [csvData, setCsvData] = useState(null);
     const [message, setMessage] = useState('');
 

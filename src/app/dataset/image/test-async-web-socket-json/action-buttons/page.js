@@ -2,7 +2,7 @@
 
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
 import { newWebSocketAndSetState, sendWebSocketMessage } from "../page";
-import { API_ROOT_WEBSOCKET } from "@/app/login/fetchData";
+import { WEBSOCKET_URL } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
@@ -10,7 +10,7 @@ import { BorderLightFullWidth } from "@/app/_components/components";
 
 export function handleWebsocketEvents(
     setEvents, 
-    apiRoot=API_ROOT_WEBSOCKET, 
+    apiRoot=WEBSOCKET_URL, 
     apiRoute='/dataset/image/test-async-file-stream-json/', 
     type=undefined, 
     parameters={}
@@ -25,7 +25,7 @@ export function ActionResponseView({buttonName, apiRoute, ...props}) {
     const [events, setEvents] = useState([]);
     
     function handleOnClickWebsocketEvents() {
-        const socket = handleWebsocketEvents(setEvents, API_ROOT_WEBSOCKET, apiRoute)
+        const socket = handleWebsocketEvents(setEvents, WEBSOCKET_URL, apiRoute)
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data?.finished === true) {

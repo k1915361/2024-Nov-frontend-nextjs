@@ -1,7 +1,7 @@
 'use client'
 
 import { BoldHeading4, Input } from "@/app/_components/components";
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
@@ -23,7 +23,7 @@ export default function ModelDatasetRelateForm({ model_id, dataset_id, model, lo
         });
 
         try {
-            const response = await fetch(API_HTTP + '/model-dataset/relate/', {
+            const response = await fetch(API_ROOT + '/model-dataset/relate/', {
                 method: 'POST',
                 credentials: 'include',
                 body: formDataToSend,

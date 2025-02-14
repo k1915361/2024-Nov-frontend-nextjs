@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react";
-import { API_HTTP } from "../login/fetchData";
+import { API_ROOT } from "../login/fetchData";
 
 /** Pass undefined to keep default parameter values and then override values like f(route, undefined, root) */
 export function useFetch(
     apiRoute, 
     customSetStateFunction = (v) => v,
-    apiRoot = API_HTTP, 
+    apiRoot = API_ROOT, 
     apiSeparator = '/', 
     customFetch = fetch,
     fetchInit = { credentials: 'include' },

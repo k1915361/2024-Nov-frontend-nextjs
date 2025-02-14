@@ -1,11 +1,11 @@
 'use client'
 
-import { API_HTTP } from "@/app/login/fetchData";
+import { API_ROOT } from "@/app/login/fetchData";
 import { fetchAndSetState } from "../../blob/[id]/[...path]/viewTextFileClientSide";
 import { useEffect, useState } from "react";
 import CsvTableAndDownloadButton from "../../viewer/page";
 
-export function directoryBaseToApiBaseUrl(path, apiBaseUrl=API_HTTP) {
+export function directoryBaseToApiBaseUrl(path, apiBaseUrl=API_ROOT) {
     return path
         ?.replace('asset/user/', apiBaseUrl+'/')
         .replace('asset/', '')
@@ -15,7 +15,7 @@ export function CsvTableAndDownloadButtonComponent({directory}) {
     return (
         directory && 
             <CsvTableAndDownloadButton 
-                apiAddress={`${API_HTTP}/${directoryBaseToApiBaseUrl(directory)}/.csv`}
+                apiAddress={`${API_ROOT}/${directoryBaseToApiBaseUrl(directory)}/.csv`}
             />
     )     
 }
@@ -26,7 +26,7 @@ export default function DatasetCsvView({id}) {
 
     useEffect(() => {
         fetchAndSetState(
-            `${API_HTTP}/${route}`, 
+            `${API_ROOT}/${route}`, 
             async (response) => setData(await response.json()),
             {credentials: 'include'}
         )

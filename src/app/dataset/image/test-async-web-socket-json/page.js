@@ -1,6 +1,6 @@
 'use client'
 
-import { API_DATASET_ROOT, API_HTTP, API_ROOT_WEBSOCKET, fetchData, sendJsonFetchResponse } from "@/app/login/fetchData";
+import { DATASET_API_URL, API_ROOT, WEBSOCKET_URL, fetchData, sendJsonFetchResponse } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
 import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
@@ -54,7 +54,7 @@ export default function EventSourceClient() {
     const [img, setImage] = useState(null);
     
     useEffect(() => {
-        const socket = newWebSocketAndSetState(`${API_ROOT_WEBSOCKET}/dataset/image/test-async-file-stream-json/`, setEvents);
+        const socket = newWebSocketAndSetState(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`, setEvents);
         
         return () => {
             socket.close();
@@ -77,7 +77,7 @@ export default function EventSourceClient() {
                 ))}
             </div>
             <div>
-                <img src={`${API_DATASET_ROOT}/1-20241120_154348-CS_dataset/test/images/ppe_0104_jpg.rf.36f0fdcaa15cdc7277b6d67e334e43b5.jpg`}/>                
+                <img src={`${DATASET_API_URL}/1-20241120_154348-CS_dataset/test/images/ppe_0104_jpg.rf.36f0fdcaa15cdc7277b6d67e334e43b5.jpg`}/>                
             </div>
         </div>
     );
