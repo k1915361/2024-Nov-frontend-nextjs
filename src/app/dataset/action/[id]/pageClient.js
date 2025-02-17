@@ -8,6 +8,7 @@ import DatasetCsvView from "./datasetCsvView"
 import { Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
 import { redirect } from "next/navigation"
+import { useFetch } from "@/app/_components/useFetch"
 
 export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }){
     const [data, setData] = useState({})
@@ -17,17 +18,12 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const [accessToken, setAccessToken] = useState('')
 
     if (!taskId) {
-        useEffect(() => {
-            async function f() {
-                const data_ = await fetchData(route, {})
-                if (data_ && data_ != "Fetch Error" && data_ != "Fetch Failed. Response not ok") {
-                    setData(data_)
-                    setTaskId(data_.task_id)
-                    setShouldRedirect(true)
-                }
-            }
-            f();
-        }, []);
+        const { data: data_, loading, error } = useFetch(route)
+        if (data_) {
+            setData(data_)
+            setTaskId(data_.task_id)
+            setShouldRedirect(true)
+        }
     }
     
     useEffect(() => {
@@ -53,8 +49,8 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     }
 
     return (
-      <>
-        <DatasetInfo id={id}/>
+        <>
+            <DatasetInfo id={id}/>
             <DivActionResponseView
                 buttonName='Dataset Analysis'
                 apiRoute='/dataset/image/test-async-file-stream-json/action-a'

@@ -11,47 +11,33 @@ export function useFetch(
     apiSeparator = '/', 
     customFetch = fetch,
     fetchInit = { credentials: 'include' },
-    maxRetries = 3, 
-    retryDelay = 1000
 ) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
-    const retryCount = useRef(0); 
+    const url = `${apiRoot}${apiSeparator}${apiRoute}`
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await customFetch(`${apiRoot}${apiSeparator}${apiRoute}`, fetchInit);
-
-                if (!response.ok) {
-                    if (retryCount.current < maxRetries) {
-                        console.log(`Retrying (${retryCount.current + 1}/${maxRetries}) for ${apiRoute}...`);
-                        retryCount.current++;
-                        await new Promise(resolve => setTimeout(resolve, retryDelay)); 
-                        return fetchData(); 
-                    } else {
-                        console.error(`Max retries (${maxRetries}) reached for ${apiRoute}. Giving up.`);
-                        const errorData = await response.json(); 
-                        throw new Error(errorData.detail || `HTTP error ${response.status}`); 
-                    }
-                }
-
+                const response = await customFetch(url, fetchInit);
                 const contentType = response.headers.get('Content-Type'); 
-                if (contentType && contentType.includes('application/json')) { 
+                
+                if (contentType && contentType.includes('application/json')) {                    
                     const jsonData = await response.json();
                     setData(customSetStateFunction(jsonData));
                 } else {
                     const textData = await response.text();
                     setData(customSetStateFunction(textData));
                 }
-
+                if (!response.ok) {
+                    console.log(JSON.stringify(data) || `HTTP error ${response.status}. url: ${url}.`);
+                }
             } catch (err) {
-                console.error("Fetch error:", err);
+                console.log(`Fetch error: ${err}. url: ${url}.`);
                 setError(err);
             } finally {
                 setLoading(false);
-                retryCount.current = 0; 
             }
         };
 

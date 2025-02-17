@@ -7,6 +7,8 @@ import { redirect } from "next/navigation"
 import { TitleRouteView } from "@/app/dataset/titleRouteView"
 import ViewTextFileClientSide from "../../../blob/[id]/[...path]/viewTextFileClientSide"
 import { borderLightClassName } from "@/app/dataset/image/test-async-web-socket-json/serverUtils"
+import CsvTableAndDownloadButton from "@/app/dataset/viewer/page"
+// import DatasetCsvView from "@/app/dataset/action/[id]/datasetCsvView"
 
 export const imageThumbnailClass = "imageView img-thumbnail"
 
@@ -34,6 +36,7 @@ export const isFile = {
     'jpg': true,
     'jpeg': true,
     'json': true,
+    'csv': true,
 }
 
 export const isReadableText = {
@@ -45,6 +48,10 @@ export const isReadableText = {
     'readme': true,
     'yaml': true,
     'json': true,
+}
+
+export const isCSV = {
+    'csv': true
 }
 
 export const isKeyValueTreeMap = {
@@ -115,7 +122,7 @@ export function arrayLast(array, index=1){
 
 export function FileView({apiRoute, extension, className, apiBaseRoute='dataset/blob/', apiRoot=API_ROOT, ...props }) {
     if (extension === '') {
-        return 
+        return
     }
 
     if (isReadableText[extension]) {
@@ -136,6 +143,14 @@ export function FileView({apiRoute, extension, className, apiBaseRoute='dataset/
                 {...props}
             />
         )
+    }
+    console.log(' - FileView apiRoute ', `${apiRoot}/${apiBaseRoute}${apiRoute}`)
+    if (isCSV) {
+        return <>
+            <CsvTableAndDownloadButton
+                apiAddress={`${apiRoot}/${apiBaseRoute}${apiRoute}`}
+            />
+        </>
     }
 
     return <div>Unsupported file type: {extension}</div>;    
@@ -167,7 +182,11 @@ export default async function Page({
                 <TitleRouteView apiRoute={apiRoute} /> :
                 <ViewDirectoryTree apiRoute={apiRoute} apiType="dataset" />
             }
-            <FileView extension={extension} apiRoute={apiRoute} apiBaseRoute={datasetBlobBaseRoute} />
+            <FileView 
+                extension={extension} 
+                apiRoute={apiRoute} 
+                apiBaseRoute={datasetBlobBaseRoute} 
+            />
         </PageComponent>
     )
 }

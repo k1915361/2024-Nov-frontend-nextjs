@@ -272,9 +272,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 [ ] save the new model or the dataset after an action.  
 [ ] actions database: new dataset/model saved in file system.  
+[ ] model forking. 
+[ ] Integrate models and dataset action scripts.
+[ ] Make video demo and send to Team of the update at 26th Feb.
 
 [ ] DD.MM. Todo description.   
 
+[x] 17.02. Test all action buttons.
 [x] 14.02. Enable HTTPs on both Django and Next app - set up local certificate authority (CA). Document this setup.
 [x] 05.02. register page (NextJS).  
 [x] 10.02. after login redirect to previous page (or to homepage). (I thought user may want to go back to previous page which may not be the homepage. redirect to previous page?)  

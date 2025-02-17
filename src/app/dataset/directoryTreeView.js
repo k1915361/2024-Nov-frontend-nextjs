@@ -20,9 +20,11 @@ export default function ViewDirectoryTree({apiRoute, apiRoot=API_ROOT, apiType='
     apiRoute = filePathToApiUrl(apiRoute)
     
     const { data: tree, loading, error } = useFetch(`${apiType}/tree/${apiRoute}`)
-
+    
     const display = ifLoadingOrErrorDisplay(loading, error)
-    if (display) return display;
+    if (display) {
+        return display
+    };
 
     return (
         <div>
