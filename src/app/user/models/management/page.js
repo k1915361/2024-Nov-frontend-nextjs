@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import UserModels from "../userModels";
 import { ButtonLight, ColBorderLight, ColButtonDanger, ColButtonLight, ColLinkButtonLight, RowGap1, RowGap1Margin0 } from "@/app/_components/components";
 
+/** @deprecated. Will be deleted after a commit. */
 export default function UserModelRepo() {
     return (
         <PageComponent>

@@ -9,7 +9,7 @@ import { Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
 import { redirect } from "next/navigation"
 
-export default function PageClient({ id, taskId='', task_name='' }){
+export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }){
     const [data, setData] = useState({})
     const [taskId_, setTaskId] = useState(taskId)
     const route = `/api/task/${task_name}`
@@ -103,12 +103,16 @@ export default function PageClient({ id, taskId='', task_name='' }){
                 message_props={message_props}
                 dataset_id={id}
             />
-            <div>
-                <a href={`${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
-                    Download CSV File
-                </a>
-            </div>
-            <DatasetCsvView id={id}/>
+            {isDataset &&
+                <>
+                    <div>
+                        <a href={`${API_ROOT}/dataset/1-20241107_192036-CS_dataset/.csv`} download="data.csv">
+                            Download CSV File
+                        </a>
+                    </div>
+                    <DatasetCsvView id={id}/>
+                </>
+            }
         </>
     )
 }

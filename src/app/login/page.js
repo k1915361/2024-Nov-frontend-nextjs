@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PageComponent from "../pageComponent";
-import { API_BASE_URL_WITH_PROTOCOL, fetchData } from "./fetchData";
+import { API_BASE_URL_WITH_PROTOCOL, API_ROOT, fetchData } from "./fetchData";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -38,10 +38,8 @@ export async function getCSRFToken() {
         const response = await fetch(
             `${API_BASE_URL_WITH_PROTOCOL}/api/token/csrf/`, 
             { 
-                credentials: 'include', 
-                
-            },
-            
+                credentials: 'include',                 
+            },            
         );
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,7 +50,7 @@ export async function getCSRFToken() {
         }
         return csrftoken;
     } catch (error) {
-        console.error("Error getting CSRF token:", error);
+        console.log("Error getting CSRF token:", error);
         return null;
     }
 }
@@ -78,8 +76,14 @@ export default function Login() {
         
         try {
             const csrftoken = await getCSRFToken();
+            const response = await fetch(
+                `${API_ROOT}/token/csrf/test/`,
+                {
+                    credentials: 'include',
+                },
+            );
             if (!csrftoken) {
-                console.error("Could not obtain CSRF token.");
+                console.log("Could not obtain CSRF token.");
             }            
             console.log(' csrftoken: ', csrftoken, csrftoken1, csrftoken2, csrftoken3);
             
@@ -88,7 +92,6 @@ export default function Login() {
                 headers: {
                     'Content-Type': 'application/json',
                     // 'X-CSRFToken': csrftoken || csrftoken1 || csrftoken2 || csrftoken3,
-                    
                 },
                 body: JSON.stringify(credentials),
                 credentials: 'include',

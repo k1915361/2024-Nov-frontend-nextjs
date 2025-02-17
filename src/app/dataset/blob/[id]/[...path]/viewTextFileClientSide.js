@@ -28,6 +28,7 @@ export default function ViewTextFileClientSide({apiRoute, apiRoot=API_ROOT, apiS
     
     return (
         <pre {...props} style={{ textWrap: "wrap"}} >
+            {apiRoot} . {apiRoute}
             {text}
         </pre>
     )

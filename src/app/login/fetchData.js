@@ -8,7 +8,9 @@ export const API_BASE_URL_WITH_PROTOCOL = API_PROTOCOL + API_BASE_URL
 export const STATIC_URL = API_BASE_URL_WITH_PROTOCOL + "/static"
 export const POLLS_API_URL = API_BASE_URL_WITH_PROTOCOL + "/polls"
 export const API_ROOT = API_BASE_URL_WITH_PROTOCOL + "/api"
-export const WEBSOCKET_URL = "ws://" + API_BASE_URL + "/api"
+export const WEBSOCKET_PROTOCOL = "ws://"
+export const WEBSOCKET_SECURE_PROTOCOL = "wss://"
+export const WEBSOCKET_URL = WEBSOCKET_SECURE_PROTOCOL + API_BASE_URL + "/api"
 export const API_WITH_ENDPOINT_EXAMPLE = `${API_ROOT}/top-datasets/`
 
 export const DATASET_API_URL = `${API_ROOT}/asset/dataset`;
