@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { ButtonBorderLight, Icon } from "../components"
-import { MobileNavButtonsPanelGrid } from "./components"
+import { MobileNavButtonsPanelGrid, MobileNavHeaderProfilePanel, MobileNavProfileIcon, MobileNavProfileUsername, SectionHeader } from "./components"
 import { MobileBlockLargeScreenHidden, MobileNavLinkButton, MobileNavMain } from "./components"
+import { useAuth } from "@/app/context/AuthContext"
 
 export const openedMap = {
     false: 'hidden',
@@ -23,6 +24,7 @@ export function MobileNavMenuContainerClientSide({ children, addClassname, opene
 
 export default function MobileNavHeaderPopupMenu({ children }) {
     const [opened, setOpened] = useState(true)
+    const { user } = useAuth()
 
     function toggleHidden() {
         setOpened(!opened)
@@ -39,6 +41,15 @@ export default function MobileNavHeaderPopupMenu({ children }) {
             <MobileNavMain>
                 <ul className="my-0 space-y-0 px-2 pb-0">
                     <MobileNavMenuContainerClientSide opened={opened}>
+                        <SectionHeader name='Account'/>
+                        <MobileNavHeaderProfilePanel>
+                            <MobileNavProfileIcon/>
+                            <MobileNavProfileUsername
+                                href='/profile'
+                                name={user?.username || 'guest'}
+                            >
+                            </MobileNavProfileUsername>
+                        </MobileNavHeaderProfilePanel>
                         <MobileNavButtonsPanelGrid>
                             <MobileNavLinkButton
                                 href='/home'
@@ -79,38 +90,41 @@ export default function MobileNavHeaderPopupMenu({ children }) {
                                 bootstrapIcon='cloud-arrow-up'
                             />
                             <MobileNavLinkButton 
+                                name="Upload Datasets"
                                 href="/dataset/upload/"
                                 bootstrapIcon='cloud-arrow-up'
-                                name="Upload Datasets"
                             />
                             <MobileNavLinkButton 
+                                name="Log In"
                                 href="/login/"
                                 bootstrapIcon='door-open'
-                                name="Log In"
                             />
                             <MobileNavLinkButton 
+                                name="Log Out"
                                 href="/logout/"
                                 bootstrapIcon='door-closed'
-                                name="Log Out"
                             />
                             <MobileNavLinkButton 
+                                name="Sign Up"
                                 href="/signup/"
                                 bootstrapIcon='door-closed'
-                                name="Sign Up"
                             />
                             <MobileNavLinkButton 
-                                href="/user/final-task-analytics/"
-                                name="FinalTaskA"
+                                name="Final Task A"
                                 title="Final Task Analytics"
+                                href="/user/final-task-analytics/"
+                                bootstrapIcon=''
                             />
                             <MobileNavLinkButton 
-                                href="/user/hitl-reinforced-feedback/"
                                 name="HITLRF"
+                                href="/user/hitl-reinforced-feedback/"
                                 title="HITL Reinforced Feedback"
+                                bootstrapIcon=''
                             />
                             <MobileNavLinkButton 
-                                href="/"
                                 name="Root"
+                                href="/"
+                                bootstrapIcon=''
                             />
                         </MobileNavButtonsPanelGrid>
                     </MobileNavMenuContainerClientSide>
