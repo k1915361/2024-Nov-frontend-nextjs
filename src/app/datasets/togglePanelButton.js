@@ -1,11 +1,14 @@
-export function ToggleButton({ children, togglePanel }) {
+import { GradientGrayToWhiteButton } from "../_components/components"
+
+export function ToggleButton({ children, togglePanel, addClassname='', ...props }) {
     return (
-        <button 
-            className="mr-2 text-sm block border-1 border-gray-100 bg-linear-to-t from-gray-100 to-white md:block lg:hidden m-1 left-4 z-50 font-bold py-2 px-4 rounded hover:shadow-inner"
+        <GradientGrayToWhiteButton 
+            addClassname={addClassname}
             onClick={togglePanel}
+            {...props}
         >
             {children}
-        </button>
+        </GradientGrayToWhiteButton>
     )
 }
 

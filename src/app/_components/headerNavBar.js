@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Username from "./username";
-import { ButtonBorderLight, DisplayFlexContentCenterBorder, DropDownItem, Icon, Input, LinkDarkNoUnderlineIconText, LogoIconText, LogoText, WidthFullContainerFlex } from "./components";
+import { ButtonBorderLight, DisplayFlexContentCenterBorder, DropDownItem, GradientGrayToWhiteButton, Icon, Input, LinkDarkNoUnderlineIconText, LogoIconText, LogoText, WidthFullContainerFlex } from "./components";
+import MobileNavHeaderPopupMenu from "./headerNavBarComponents.js/mobileNavHeaderPopupMenu";
 
 export default function HeaderNavBar({ children }) {
     return (
@@ -9,14 +10,16 @@ export default function HeaderNavBar({ children }) {
             <WidthFullContainerFlex>
                 <div className="d-flex mx-1 me-3">
                     <a href="/home/" 
-                        className="link-dark text-dark link-underline-dark link-underline-opacity-0"
+                        className="link-dark text-dark flex link-underline-dark link-underline-opacity-0"
                         title="Home"
                     >
                         <LogoIconText className="fw-bold" style={{fontSize:'1.3rem'}}>
                             😊 
                         </LogoIconText>
-                        <LogoText className="ms-1 ps-0 " style={{fontSize:'1.1rem', fontWeight: '800'}}>
-                            Logo
+                            <LogoText className="ms-1 ps-0 hidden  whitespace-nowrap text-lg font-bold md:block" style={{fontSize:'1.1rem', fontWeight: '800'}}>
+                                Logo
+                            <span className="">
+                            </span>
                         </LogoText>
                     </a>
                 </div>
@@ -36,58 +39,68 @@ export default function HeaderNavBar({ children }) {
                         </div>
                     </div>
                 </form>
-                <LinkDarkNoUnderlineIconText 
-                    href="/home" 
-                    bootstrapIcon='house'
-                >
-                    Home
-                </LinkDarkNoUnderlineIconText>
-                <LinkDarkNoUnderlineIconText 
-                    href="/profile"
-                    bootstrapIcon='person-circle'
-                >
-                    Profile
-                </LinkDarkNoUnderlineIconText>
-                <LinkDarkNoUnderlineIconText 
-                    href="/user/final-task-analytics/"                         
-                    bootstrapIcon='sliders2'
-                    title='Start a New Optimisation Task'
-                >
-                    New Task
-                </LinkDarkNoUnderlineIconText>
-                <LinkDarkNoUnderlineIconText 
-                    href="/user/previous-tasks/"
-                    bootstrapIcon='clipboard2-check'
-                >
-                    Previous Tasks
-                </LinkDarkNoUnderlineIconText>
-                <LinkDarkNoUnderlineIconText 
-                    href="/user/models/management"
-                    bootstrapIcon='collection'
-                    title="Personal Model Repo"
-                >
-                    My Models
-                </LinkDarkNoUnderlineIconText>
-                <LinkDarkNoUnderlineIconText 
-                    href="/user/datasets/?page=1&per_page=4"
-                    bootstrapIcon='collection'
-                    title="Personal Dataset Repo"
-                >
-                    My Datasets
-                </LinkDarkNoUnderlineIconText>
                 <Suspense>
-                    <Username/>
+                    <MobileNavHeaderPopupMenu/>
                 </Suspense>
-                <div className="dropdown-center mx-1">
+                <nav aria-label="Main" className="ml-auto hidden lg:block">
+                    <ul className="flex items-center pb-0 mb-0 space-x-1.5 2xl:space-x-2">
+                        <LinkDarkNoUnderlineIconText 
+                            href="/home" 
+                            bootstrapIcon='house'
+                        >
+                            Home
+                        </LinkDarkNoUnderlineIconText>
+                        <LinkDarkNoUnderlineIconText 
+                            href="/profile"
+                            bootstrapIcon='person-circle'
+                        >
+                            Profile
+                        </LinkDarkNoUnderlineIconText>
+                        <LinkDarkNoUnderlineIconText 
+                            href="/user/final-task-analytics/"                         
+                            bootstrapIcon='sliders2'
+                            title='Start a New Optimisation Task'
+                        >
+                            New Task
+                        </LinkDarkNoUnderlineIconText>
+                        <LinkDarkNoUnderlineIconText 
+                            href="/user/previous-tasks/"
+                            bootstrapIcon='clipboard2-check'
+                        >
+                            Previous Tasks
+                        </LinkDarkNoUnderlineIconText>
+                        <LinkDarkNoUnderlineIconText 
+                            href="/user/models/management"
+                            bootstrapIcon='collection'
+                            title="Personal Model Repo"
+                        >
+                            Models
+                        </LinkDarkNoUnderlineIconText>
+                        <LinkDarkNoUnderlineIconText 
+                            href="/user/datasets/?page=1&per_page=4"
+                            bootstrapIcon='collection'
+                            title="Personal Dataset Repo"
+                        >
+                            Datasets
+                        </LinkDarkNoUnderlineIconText> 
+                        <Suspense> 
+                            <Username/> 
+                        </Suspense> 
+                    </ul> 
+                </nav> 
+                <div className="dropdown-center mx-1"> 
                     <ButtonBorderLight 
                         addClassname="dropdown-toggle " 
                         type="button" 
                         data-bs-toggle="dropdown" 
-                        aria-expanded="false"
+                        aria-expanded="false" 
                     >
                         <Icon bootstrapIcon='list'/>
                     </ButtonBorderLight>
-                    <ul className="dropdown-menu dropdown-menu-end border-1 border-gray-100">                            
+                    <ul className="dropdown-menu dropdown-menu-end border-1 border-gray-100">
+                        <GradientGrayToWhiteButton>
+                            Show on small screen
+                        </GradientGrayToWhiteButton>
                         <DropDownItem href="/model/upload/">
                             <Icon bootstrapIcon='cloud-arrow-up'/>
                             Upload Models

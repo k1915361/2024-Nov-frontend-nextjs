@@ -205,10 +205,10 @@ export function ColumnCard({ children, ...props }) {
     );
 }
 
-export function Icon({ children, bootstrapIcon = "list", width = 16, height = 16, fill = "currentColor", viewBox = "0 0 16 16", ...props }) {
+export function Icon({ children, bootstrapIcon = "list", width = 16, height = 16, fill = "currentColor", viewBox = "0 0 16 16", addClassname='', ...props }) {
     return (
         <i
-            className={`bi bi-${bootstrapIcon}`}
+            className={`bi bi-${bootstrapIcon} ${addClassname}`}
             width={`${width}`}
             height={`${height}`}
             fill={`${fill}`}
@@ -244,7 +244,7 @@ export function DisplayFlexContentCenterBorder({ children, ...props }) {
 
 export function WidthFullContainerFlex({ children, ...props }) {
     return (
-        <div className="w-full px-4 container flex flex-wrap items-center py-1 gap-y-1" {...props}>
+        <div className="w-full px-1 container flex h-16 items-center py-1 gap-y-1" {...props}>
             {children}
         </div>
     );
@@ -648,4 +648,28 @@ export function OverviewCardHeaderLink({ children, href, addClassname = '', ...p
             {children}
         </a>
     );
+}
+export const GradientGrayToWhiteButtonClassname = "mr-2 text-sm block border-1 border-gray-100 bg-linear-to-t from-gray-100 to-white md:block lg:hidden m-1 left-4 z-50 font-bold py-2 px-4 rounded hover:shadow-inner"
+
+export function GradientGrayToWhiteButton({ children, addClassname = '', Tag = 'button', ...props }) {
+    return (
+        <Tag
+            className={`${GradientGrayToWhiteButtonClassname} ${addClassname}`}
+            {...props}
+        >
+            {children}
+        </Tag>
+    )
+}
+
+export function GradientGrayToWhiteLinkButton({ children, addClassname = '', Tag = 'a', ...props }) {
+    return (
+        <GradientGrayToWhiteButton
+            addClassname={addClassname}
+            {...props}
+            Tag={Tag}
+        >
+            {children}
+        </GradientGrayToWhiteButton>
+    )
 }
