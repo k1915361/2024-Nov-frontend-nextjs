@@ -3,12 +3,11 @@
 import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
 import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
 import DatasetInfo from "./datasetInfo"
-import { API_ROOT, isDataValid, fetchData, fetchData_ } from "@/app/login/fetchData"
+import { API_ROOT, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
 import { Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
 import { redirect } from "next/navigation"
-import { useFetch } from "@/app/_components/useFetch"
 
 export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }){
     const [data, setData] = useState({})
@@ -17,15 +16,20 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const [accessToken, setAccessToken] = useState('')
 
-    if (!taskId) {
-        const { data: data_, loading, error } = useFetch(route)
-        if (data_) {
-            setData(data_)
-            setTaskId(data_.task_id)
-            setShouldRedirect(true)
-        }
+    if (!taskId) {        
+        useEffect(() => {
+            async function f() {
+                const data_ = await fetchData(route, {})
+                if (data_ && data_ != "Fetch Error" && data_ != "Fetch Failed. Response not ok") {
+                    setData(data_)
+                    setTaskId(data_.task_id)
+                    setShouldRedirect(true)
+                }
+            }
+            f();
+        }, []);
     }
-    
+
     useEffect(() => {
         async function f() {
             const { data: data_, success, error, message, response } = await fetchData_(`/api/token/access/`)
@@ -45,7 +49,7 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const message_props = { 
         'id': id, 
         'task_id': taskId_, 
-        'accessToken': accessToken 
+        'access_token': accessToken 
     }
 
     return (

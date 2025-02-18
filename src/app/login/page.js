@@ -117,7 +117,7 @@ export default function Login() {
                 && data?.user_is_authenticated == true
             ) {
                 setUsername(data.username)
-                // router.back()
+                router.push('/home/');
             }
         }
         f()

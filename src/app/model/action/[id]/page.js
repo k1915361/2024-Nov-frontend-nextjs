@@ -1,6 +1,4 @@
 import PageComponent from "@/app/pageComponent"
-import { ProgressBarView } from "@/app/dataset/image/test-async-web-socket-json/action-progress/actionProgressBarView"
-import { DivActionResponseView } from "@/app/dataset/image/test-async-web-socket-json/action-buttons/page"
 import PageClient from "./pageClient"
 
 export const modelActionBaseRoute = 'model/action/'

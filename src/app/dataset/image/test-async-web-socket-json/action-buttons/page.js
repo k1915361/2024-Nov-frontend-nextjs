@@ -21,11 +21,11 @@ export function handleWebsocketEvents(
     return socket
 }
 
-export function ActionResponseView({buttonName, apiRoute, ...props}) {
+export function ActionResponseView({ buttonName, apiRoute, type=undefined, parameters={}, ...props}) {
     const [events, setEvents] = useState([]);
     
     function handleOnClickWebsocketEvents() {
-        const socket = handleWebsocketEvents(setEvents, WEBSOCKET_URL, apiRoute)
+        const socket = handleWebsocketEvents(setEvents, WEBSOCKET_URL, apiRoute, type, parameters)
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data?.finished === true) {

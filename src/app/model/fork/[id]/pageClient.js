@@ -59,6 +59,7 @@ export default function ModelForkPageClientSide({id}) {
             <UsernameAndModelNameLinks 
                 data={data} 
                 id={id}
+                userId={user?.id}
             />
             <PageComponent>
                 <ModelForkForm 

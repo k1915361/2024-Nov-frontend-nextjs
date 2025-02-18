@@ -5,6 +5,7 @@ import { ButtonBorderLight, Icon } from "../components"
 import { MobileNavButtonsPanelGrid, MobileNavHeaderProfilePanel, MobileNavProfileIcon, MobileNavProfileUsername, SectionHeader } from "./components"
 import { MobileBlockLargeScreenHidden, MobileNavLinkButton, MobileNavMain } from "./components"
 import { useAuth } from "@/app/context/AuthContext"
+import { IconClientSide } from "../componentsClientSide"
 
 export const openedMap = {
     false: 'hidden',
@@ -23,7 +24,7 @@ export function MobileNavMenuContainerClientSide({ children, addClassname, opene
 }
 
 export default function MobileNavHeaderPopupMenu({ children }) {
-    const [opened, setOpened] = useState(true)
+    const [opened, setOpened] = useState(false)
     const { user } = useAuth()
 
     function toggleHidden() {
@@ -36,7 +37,7 @@ export default function MobileNavHeaderPopupMenu({ children }) {
                 addClassname="ms-1 dropdown-toggle"
                 onClick={toggleHidden}
             >
-                <Icon bootstrapIcon={opened ? 'x' : 'list' } />
+                <IconClientSide bootstrapIcon={opened ? 'x' : 'list'} />
             </ButtonBorderLight>
             <MobileNavMain>
                 <ul className="my-0 space-y-0 px-2 pb-0">

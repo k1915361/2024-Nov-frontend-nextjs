@@ -2,7 +2,7 @@
 
 import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
 import { WEBSOCKET_URL, STATIC_URL } from '@/app/login/fetchData';
-import { DivButtonLight } from "@/app/_components/components";
+import { BorderLight, DivButtonLight } from "@/app/_components/components";
 import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
@@ -32,8 +32,8 @@ export function ProgressBarViewDataset({ total_steps = 3, apiRoute = '/dataset/i
     />
 }
 
-export function ProgressBarView({ 
-    total_steps = 3, 
+export function ProgressBarView({     
+    total_steps = 2, 
     apiRoute = '/dataset/image/action-progress', 
     buttonName = 'Start Task', 
     type = '', 
@@ -44,6 +44,7 @@ export function ProgressBarView({
     const [wsocket, setWsocket] = useState(null);
 
     useEffect(() => {
+        console.log(' ProgressBarView useEffect ')
         const newWs = new WebSocket(`${WEBSOCKET_URL}${apiRoute}`);
         setWsocket(newWs);
 
@@ -54,13 +55,14 @@ export function ProgressBarView({
         newWs.onmessage = (event) => {
             const data = JSON.parse(event.data);
             setProgress(data);
-            if(data.finished) {
-                setWsocket(null);
+            if(data?.finished && data?.success) {
+                wsocket?.close()
             }
         };
-
+        
         newWs.onclose = () => {
             console.log('WebSocket disconnected');
+            setWsocket(null);
         };
 
         return () => {
@@ -69,6 +71,7 @@ export function ProgressBarView({
     }, []);
 
     const startTask = () => {
+        console.log(' - startTask ')
         if (wsocket && wsocket.readyState === WebSocket.OPEN) { 
             wsocket.send(JSON.stringify({ type: 'start_task', total_steps: total_steps })); 
             sendWebSocketMessage(wsocket, { parameters: parameters, ...message_props }, type || undefined)
@@ -78,11 +81,17 @@ export function ProgressBarView({
     };
 
     const progressPercentage = Math.round((progress.current / progress.total) * 100, 2);
+    const disabled = wsocket === null
 
     return (
-        <>
+        <BorderLight>       
+            {wsocket === null && 
+                <div>
+                    Disconnected, please refresh the page to use again.
+                </div>
+            }
             <div>
-                <ButtonLight onClick={startTask}>
+                <ButtonLight onClick={startTask} disabled={disabled}>
                     {buttonName}
                 </ButtonLight>
             </div>
@@ -118,7 +127,7 @@ export function ProgressBarView({
                 </>
                 
             }                
-        </>
+        </BorderLight>
     );
 
 }
