@@ -26,23 +26,15 @@ export default function HomePage() {
                     <Row>
                         <ColumnCard>
                             <h5>List of Top of Verified Energy Efficient Tools</h5>
-                            <ol>
-                                <ListItemBox>
-                                    <LinkDark>
-                                        Plant Disease Detection Tool
-                                    </LinkDark>
-                                </ListItemBox>
-                                <ListItemBox>
-                                    <LinkDark>
-                                        Tool B
-                                    </LinkDark>
-                                </ListItemBox>
-                                <ListItemBox>
-                                    <LinkDark>
-                                        Tool C
-                                    </LinkDark>
-                                </ListItemBox>
-                            </ol>                            
+                            <div>
+                                Plant Disease Detection Tool
+                            </div>
+                            <div>
+                                Tool B
+                            </div>
+                            <div>
+                                Tool C
+                            </div>
                         </ColumnCard>
                         <ColumnCard>
                             <h5>News</h5>

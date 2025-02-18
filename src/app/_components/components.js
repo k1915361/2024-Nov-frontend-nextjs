@@ -236,7 +236,7 @@ export function DropDownItem({ children, href, ...props }) {
 
 export function DisplayFlexContentCenterBorder({ children, ...props }) {
     return (
-        <header className="border-b border-gray-100" {...props}>
+        <header className="border-b border-gray-100 max-w-fit" {...props}>
             {children}
         </header>
     );

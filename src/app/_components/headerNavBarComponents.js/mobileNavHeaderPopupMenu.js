@@ -121,11 +121,6 @@ export default function MobileNavHeaderPopupMenu({ children }) {
                                 title="HITL Reinforced Feedback"
                                 bootstrapIcon=''
                             />
-                            <MobileNavLinkButton 
-                                name="Root"
-                                href="/"
-                                bootstrapIcon=''
-                            />
                         </MobileNavButtonsPanelGrid>
                     </MobileNavMenuContainerClientSide>
                 </ul>

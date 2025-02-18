@@ -89,17 +89,8 @@ export function ListModelItemCard({model}) {
     </OverviewCardWrapper>
 }
 
-export function LinkListModelItemBody({model}) {
-    return <a 
-        href={`/model/${model.id}`} 
-        className="btn btn-outline"
-    >
-        <ListModelItemCard model={model}/>
-    </a>
-}
-
 export function LinkListModelItemBodyDatasetToModel({dataset}) {
-    return <LinkListModelItemBody model={dataset}/>
+    return <ListModelItemCard model={dataset}/>
 }
 
 export default async function ListModels({  }) {
@@ -111,7 +102,7 @@ export default async function ListModels({  }) {
         <div>
             <h1>Public Models</h1>
             { models.map((model) => 
-                <LinkListModelItemBody model={model}/>                
+                <ListModelItemCard model={model}/>                
                 )
             }
         </div>

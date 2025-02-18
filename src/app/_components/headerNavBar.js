@@ -43,7 +43,7 @@ export default function HeaderNavBar({ children }) {
                     <MobileNavHeaderPopupMenu/>
                 </Suspense>
                 <nav aria-label="Main" className="ml-auto hidden lg:block">
-                    <ul className="flex items-center pb-0 mb-0 space-x-1.5 2xl:space-x-2">
+                    <ul className="flex items-center pb-0 mb-0 ps-0 space-x-1.5 2xl:space-x-2">
                         <LinkDarkNoUnderlineIconText 
                             href="/home" 
                             bootstrapIcon='house'
@@ -88,7 +88,7 @@ export default function HeaderNavBar({ children }) {
                         </Suspense> 
                     </ul> 
                 </nav> 
-                <div className="dropdown-center mx-1"> 
+                <div className="dropdown-center mx-1 hidden lg:block"> 
                     <ButtonBorderLight 
                         addClassname="dropdown-toggle " 
                         type="button" 
@@ -126,9 +126,6 @@ export default function HeaderNavBar({ children }) {
                         </DropDownItem>                       
                         <DropDownItem href="/user/hitl-reinforced-feedback/">
                             HITL Reinforced Feedback
-                        </DropDownItem>
-                        <DropDownItem href="/">
-                            Root
                         </DropDownItem>
                     </ul>
                 </div>

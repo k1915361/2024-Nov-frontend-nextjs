@@ -1,8 +1,8 @@
 import { POLLS_API_URL } from "../login/fetchData";
 import { ListDatasetItemCard } from "./listDatasetItem";
 
-/** NextJS server side ReferenceError: document is not defined.*/
-import "bootstrap/dist/js/bootstrap.bundle.min.js" 
+/** NextJS server side ReferenceError: document is not defined. */
+// import "bootstrap/dist/js/bootstrap.bundle.min.js" 
 
 export default async function ListDatasets({  }) {
     const data = await fetch(`${POLLS_API_URL}/datasets/`)
