@@ -6,26 +6,29 @@ import { appendListState } from "../test-async-file-stream/page";
 import ViewDirectoryTree from "../../directoryTreeView";
 import { BorderLightFullWidth } from "@/app/_components/components";
 
-export function newWebSocketAndSetState(api, setState) {
+export function newWebSocketAndSetState(api) {
     const socket = new WebSocket(api);
-
-    socket.onmessage = (event) => {
-        const data = JSON.parse(event.data); 
-
-        appendListState(setState, data)
-    };
-
-    socket.onerror = (error) => {
-        console.log("WebSocket error:", error);
-    };
-
     return socket
 }
 
 export const sendWebSocketMessage = (socket, data, type='start_task') => {
-    if (socket) {
-        const message = JSON.stringify({ type: type, payload: data }); 
-        socket.send(message);
+    const message = JSON.stringify({ type: type, payload: data });
+    socket.send(message);
+}
+
+export const handleSendWebSocketMessage = (socket, data, type='start_task') => {
+    if (!socket) {
+        return
+    }
+    if (socket.readyState === WebSocket.OPEN) {
+        sendWebSocketMessage(socket, data, type)        
+    } else if (socket.readyState === WebSocket.CONNECTING) {
+        socket.onopen = () => {
+            sendWebSocketMessage(socket, data, type)
+            socket.onopen = null; 
+        }
+    } else if (socket.readyState === WebSocket.CLOSED || socket.readyState === WebSocket.CLOSING) {
+        console.log('Could not send web socket message. WebSocket is closed or closing.')
     }
 };
 
@@ -49,12 +52,31 @@ export const ImageWithDefault = ({ src, defaultSrc, alt, title }) => {
     )
 }
 
+export function socketOnMessageAppendListState(event, setEvents) {
+    const data = JSON.parse(event.data);
+    appendListState(setEvents, data)
+    if (data?.finished === true && data?.success === true) {
+        socket.close()
+    }
+}
+
+export function socketOnErrorClose(socket) {    
+    socket.onerror = (error) => {
+        console.error("WebSocket error:", error);
+        socket.close();
+    }
+}
+
 export default function EventSourceClient() {
     const [events, setEvents] = useState([]);
     const [img, setImage] = useState(null);
     
     useEffect(() => {
-        const socket = newWebSocketAndSetState(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`, setEvents);
+        const socket = newWebSocketAndSetState(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`);
+
+        socket.onmessage = (event) => {
+            socketOnMessageAppendListState(event, setEvents)
+        };
         
         return () => {
             socket.close();

@@ -8,13 +8,13 @@ import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
 import { borderLightClassName } from '../serverUtils';
 import { TextLighter } from '@/app/dataset/viewer/tabulateArray';
-import { sendWebSocketMessage } from '../page';
+import { handleSendWebSocketMessage, sendWebSocketMessage } from '../page';
 
 export function removeStaticServerBaseURL(url, source=STATIC_URL+'/', target='') {
     return url.replace(source, target)
 }
 
-export function ViewFileLink({href, name, children, changeDisplayNameFunction=removeStaticServerBaseURL, ...props}) {
+export function FileLink({href, name, children, changeDisplayNameFunction=removeStaticServerBaseURL, ...props}) {
     return <a title={href} href={href} {...props}>
         {changeDisplayNameFunction(href)}
         {children}
@@ -32,8 +32,51 @@ export function ProgressBarViewDataset({ total_steps = 3, apiRoute = '/dataset/i
     />
 }
 
+export const ProgressBar = ({ percentage, valuemax="100", ...props }) => (
+    <div className="progress" role="progressbar" aria-label="Progress" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax={valuemax} {...props}>
+        <div className="progress-bar" style={{ width: `${percentage}%` }}>{percentage}%</div>
+    </div>
+);
+
+export const ResultPreview = ({ resultUrl, children }) => {
+    const fileExtension = getFileExtension(resultUrl || '');
+
+    if (isReadableText[fileExtension]) {
+        return (
+            <>
+                <FileLink href={resultUrl} />
+                <ViewTextFileClientSide
+                    apiRoute={resultUrl}
+                    apiRoot=""
+                    apiSeparator=""
+                    className={borderLightClassName}
+                />
+                {children}
+            </>
+        );
+    }
+
+    if (isImage[fileExtension]) {
+        return (
+            <>
+                <img className="imageView img-thumbnail" src={resultUrl} alt="Result preview" />
+                {children}
+            </> 
+        )
+    }
+
+    return null;
+};
+
+export const DownloadSection = () => (
+    <>
+        <TextLighter>Result Dataset expires and is deleted from server in 24 hours:</TextLighter>
+        <DivButtonLight>Download Result</DivButtonLight>
+    </>
+);
+
 export function ProgressBarView({     
-    total_steps = 2, 
+    total_steps = 1, 
     apiRoute = '/dataset/image/action-progress', 
     buttonName = 'Start Task', 
     type = '', 
@@ -41,93 +84,67 @@ export function ProgressBarView({
     message_props 
 }) {
     const [progress, setProgress] = useState({ current: 0, total: 100 });
-    const [wsocket, setWsocket] = useState(null);
+    const [socket, setSocket] = useState(null);
+
+    const handleMessage = (event) => {
+        const data = JSON.parse(event.data);
+        setProgress(data);
+        if (data?.finished && data?.success) {
+            socket?.close()
+        }
+    };
 
     useEffect(() => {
-        console.log(' ProgressBarView useEffect ')
-        const newWs = new WebSocket(`${WEBSOCKET_URL}${apiRoute}`);
-        setWsocket(newWs);
+        const ws = new WebSocket(`${WEBSOCKET_URL}${apiRoute}`);
 
-        newWs.onopen = () => {
-            console.log('WebSocket connected');
-        };
-
-        newWs.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            setProgress(data);
-            if(data?.finished && data?.success) {
-                wsocket?.close()
-            }
-        };
-        
-        newWs.onclose = () => {
+        ws.onopen = () => console.log('WebSocket connected');
+        ws.onmessage = handleMessage
+        ws.onclose = () => {
             console.log('WebSocket disconnected');
-            setWsocket(null);
+            setSocket(null);
         };
+
+        setSocket(ws);
 
         return () => {
-            if (wsocket) wsocket.close();
+            if (ws) ws.close();
         };
     }, []);
 
     const startTask = () => {
-        console.log(' - startTask ')
-        if (wsocket && wsocket.readyState === WebSocket.OPEN) { 
-            wsocket.send(JSON.stringify({ type: 'start_task', total_steps: total_steps })); 
-            sendWebSocketMessage(wsocket, { parameters: parameters, ...message_props }, type || undefined)
-        } else {
-            console.log("Websocket not connected.")
-        }        
+        handleSendWebSocketMessage(
+            socket, 
+            { parameters: parameters, 
+                total_steps: total_steps, 
+                ...message_props 
+            }, 
+            type || undefined
+        )
     };
 
     const progressPercentage = Math.round((progress.current / progress.total) * 100, 2);
-    const disabled = wsocket === null
-    const tooltip_title = wsocket === null ? "Refresh this page to use again." : ''
+    const isDisabled = !socket
+    const tooltipTitle = isDisabled ? "Refresh this page to use again." : ''
 
     return (
         <BorderLight addClassname='truncate'>
-            {wsocket === null && 
+            {isDisabled && 
                 <Text2ndarySmall>
                     Refresh the page to use again.
                 </Text2ndarySmall>
             }
             <div>
-                <ButtonLight onClick={startTask} disabled={disabled} title={tooltip_title}>
+                <ButtonLight onClick={startTask} disabled={isDisabled} title={tooltipTitle}>
                     {buttonName}
                 </ButtonLight>
             </div>
-
-            <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow={progressPercentage} aria-valuemin="0" aria-valuemax={progress.total}>
-                <div className="progress-bar" style={{width: `${progressPercentage}%`}}>{progressPercentage}%</div>
-            </div>
-            {(progress?.finished === true 
-                && isReadableText[getFileExtension(progress?.result_url || '')])
-                && <>
-                    <ViewFileLink href={progress?.result_url}/>
-                    <ViewTextFileClientSide 
-                        apiRoute={`${progress?.result_url}`} 
-                        apiRoot='' 
-                        apiSeparator='' 
-                        className={borderLightClassName}
-                    />
-                    <TextLighter>Result Dataset expires and is deleted from server in 24 hours:</TextLighter>
-                    <DivButtonLight>
-                        Download Result 
-                    </DivButtonLight> 
+            <ProgressBar percentage={progressPercentage} />
+            {progress?.finished && <>
+                    <ResultPreview resultUrl={progress.result_url}>
+                        <DownloadSection/>
+                    </ResultPreview>
                 </>
             }
-            {(progress?.finished === true 
-                && isImage[getFileExtension(progress?.result_url || '')])
-                && 
-                <>
-                    <img className="imageView img-thumbnail" src={progress?.result_url}/>
-                    <TextLighter>Result Dataset expires and is deleted from server in 24 hours:</TextLighter>
-                    <DivButtonLight>
-                        Download Result 
-                    </DivButtonLight>
-                </>
-                
-            }                
         </BorderLight>
     );
 

@@ -1,7 +1,7 @@
 'use client'
 
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
-import { newWebSocketAndSetState, sendWebSocketMessage } from "../page";
+import { handleSendWebSocketMessage, newWebSocketAndSetState, sendWebSocketMessage, socketOnErrorClose, socketOnMessageAppendListState } from "../page";
 import { WEBSOCKET_URL } from "@/app/login/fetchData";
 import { BorderLight, ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
@@ -9,14 +9,14 @@ import { ProgressBarView } from "../action-progress/actionProgressBarView";
 import { BorderLightFullWidth } from "@/app/_components/components";
 
 export function handleWebsocketEvents(
-    setEvents, 
     apiRoot=WEBSOCKET_URL, 
     apiRoute='/dataset/image/test-async-file-stream-json/', 
     type=undefined, 
     parameters={}
 ) {
-    const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`, setEvents);
-    sendWebSocketMessage(socket, parameters, type)
+    const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`);
+
+    handleSendWebSocketMessage(socket, parameters, type)
 
     return socket
 }
@@ -25,17 +25,11 @@ export function ActionResponseView({ buttonName, apiRoute, type=undefined, param
     const [events, setEvents] = useState([]);
     
     function handleOnClickWebsocketEvents() {
-        const socket = handleWebsocketEvents(setEvents, WEBSOCKET_URL, apiRoute, type, parameters)
+        const socket = handleWebsocketEvents(WEBSOCKET_URL, apiRoute, type, parameters)
         socket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data?.finished === true) {
-                socket.close()
-            }
+            socketOnMessageAppendListState(event, setEvents)
         };
-        socket.onerror = (error) => {
-            console.error("WebSocket error:", error);
-            socket.close(); 
-        }
+        socketOnErrorClose(socket)
     } 
     
     return (
