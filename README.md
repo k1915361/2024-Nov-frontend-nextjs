@@ -274,8 +274,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 2025  
 
-[ ] save the new model or the dataset after an action.  
-[ ] actions database: new dataset/model saved in file system.  
+[ ] actions database: save the new dataset after an action.  
+[ ] new dataset/model saved in file system after an action.  
 [ ] Integrate models and dataset action scripts.
 [ ] Make video demo and send to Team of the update at 26th Feb.
 

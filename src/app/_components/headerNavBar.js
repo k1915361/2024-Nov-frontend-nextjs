@@ -51,23 +51,18 @@ export default function HeaderNavBar({ children }) {
                             Home
                         </LinkDarkNoUnderlineIconText>
                         <LinkDarkNoUnderlineIconText 
-                            href="/profile"
-                            bootstrapIcon='person-circle'
-                        >
-                            Profile
-                        </LinkDarkNoUnderlineIconText>
-                        <LinkDarkNoUnderlineIconText 
                             href="/user/final-task-analytics/"                         
                             bootstrapIcon='sliders2'
                             title='Start a New Optimisation Task'
                         >
-                            New Task
+                            Start
                         </LinkDarkNoUnderlineIconText>
                         <LinkDarkNoUnderlineIconText 
                             href="/user/previous-tasks/"
                             bootstrapIcon='clipboard2-check'
+                            title="Previous Tasks"
                         >
-                            Previous Tasks
+                            Tasks
                         </LinkDarkNoUnderlineIconText>
                         <LinkDarkNoUnderlineIconText 
                             href="/user/models/management"

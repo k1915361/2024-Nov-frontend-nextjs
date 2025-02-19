@@ -3,7 +3,7 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
 import { newWebSocketAndSetState, sendWebSocketMessage } from "../page";
 import { WEBSOCKET_URL } from "@/app/login/fetchData";
-import { ButtonLight } from "@/app/_components/components";
+import { BorderLight, ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
 import { ProgressBarView } from "../action-progress/actionProgressBarView";
 import { BorderLightFullWidth } from "@/app/_components/components";
@@ -39,7 +39,7 @@ export function ActionResponseView({ buttonName, apiRoute, type=undefined, param
     } 
     
     return (
-        <>
+        <BorderLight>
             <ButtonLight onClick={handleOnClickWebsocketEvents}>
                 {buttonName}
             </ButtonLight>
@@ -54,7 +54,7 @@ export function ActionResponseView({ buttonName, apiRoute, type=undefined, param
                     </BorderLightFullWidth>
                 ))}
             </div>            
-        </>
+        </BorderLight>
     )
 }
 

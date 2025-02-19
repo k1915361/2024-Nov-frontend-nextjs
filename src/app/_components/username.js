@@ -22,7 +22,7 @@ export default function Username() {
                     href='/login'
                     title="Login"
                 >
-                    Guest
+                    Login
                 </LinkDarkNoUnderline>
             }            
         </BorderLight>

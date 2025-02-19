@@ -63,10 +63,10 @@ export function LinkTextBlackNoUnderline({ children, type = 'model', id = 0, ...
     );
 }
 
-export function BoldHeading4({ children, overrideClassname, ...props }) {
+export function BoldHeading4({ children, addClassname, ...props }) {
     return (
         <div
-            className={`fw-semibold fs-4 ${overrideClassname}`}
+            className={`fw-semibold fs-4 ${addClassname}`}
             {...props}
         >
             {children}
@@ -86,10 +86,10 @@ export function LinkDarkBoldNoUnderline({ children, type = 'model', id = 0, ...p
     );
 }
 
-export function LinkDarkNoUnderline({ children, type = 'model', id = 0, overrideClassname, ...props }) {
+export function LinkDarkNoUnderline({ children, type = 'model', id = 0, addClassname='', ...props }) {
     return (
         <a
-            className={`link-body-emphasis link-underline link-underline-opacity-0 ${overrideClassname}`}
+            className={`link-body-emphasis link-underline link-underline-opacity-0 flex ${addClassname}`}
             href={`/${type}/${id}`}
             {...props}
         >
@@ -236,7 +236,7 @@ export function DropDownItem({ children, href, ...props }) {
 
 export function DisplayFlexContentCenterBorder({ children, ...props }) {
     return (
-        <header className="border-b border-gray-100 max-w-fit" {...props}>
+        <header className="border-b border-gray-100 w-full" {...props}>
             {children}
         </header>
     );
@@ -250,10 +250,10 @@ export function WidthFullContainerFlex({ children, ...props }) {
     );
 }
 
-export function IconText({ children, overrideClassname, ...props }) {
+export function IconText({ children, addClassname, ...props }) {
     return (
         <span
-            className={`ms-1 ${overrideClassname}`}             
+            className={`ms-1 ${addClassname}`}             
             {...props}
         >
             {children}
@@ -261,11 +261,11 @@ export function IconText({ children, overrideClassname, ...props }) {
     );
 }
 
-export function LinkDarkNoUnderlineIcon({ children, overrideClassname, href, bootstrapIcon, ...props }) {
+export function LinkDarkNoUnderlineIcon({ children, addClassname, href, bootstrapIcon, ...props }) {
     return (
         <LinkDarkNoUnderline
             href={href}
-            overrideClassname={`mx-2 ${overrideClassname}`}
+            addClassname={`mx-2 ${addClassname}`}
             {...props}
         >
             <Icon bootstrapIcon={bootstrapIcon} />
@@ -299,11 +299,11 @@ export function BorderLight({ children, addClassname='', ...props }) {
     )
 }
 
-export function LinkDarkNoUnderlineIconText({ children, overrideClassname, href, bootstrapIcon, textProps, ...props }) {
+export function LinkDarkNoUnderlineIconText({ children, addClassname, href, bootstrapIcon, textProps, ...props }) {
     return (
         <LinkDarkNoUnderlineIcon
             href={href}
-            overrideClassname={`flex rounded p-1 text-nowrap ${overrideClassname}`}
+            addClassname={`flex rounded p-1 text-nowrap ${addClassname}`}
             bootstrapIcon={bootstrapIcon}
             {...props}
         >
@@ -316,10 +316,10 @@ export function LinkDarkNoUnderlineIconText({ children, overrideClassname, href,
     );
 }
 
-export function LogoText({ children, overrideClassname, ...props }) {
+export function LogoText({ children, addClassname, ...props }) {
     return (
         <span 
-            className={`ms-1 ps-0 ${overrideClassname}`} 
+            className={`ms-1 ps-0 ${addClassname}`} 
             style={{
                 fontSize:'1.1rem', 
                 fontWeight: '800'
@@ -331,10 +331,10 @@ export function LogoText({ children, overrideClassname, ...props }) {
     )
 }
 
-export function LogoIconText({ children, overrideClassname, Tag='span', ...props }) {
+export function LogoIconText({ children, addClassname, Tag='span', ...props }) {
     return (
         <DynamicTagComponent 
-            className={`${overrideClassname}`} 
+            className={`${addClassname}`} 
             style={{
                 fontSize:'1.3rem'
             }}
@@ -346,10 +346,10 @@ export function LogoIconText({ children, overrideClassname, Tag='span', ...props
     )
 }
 
-export function DynamicTagComponent({ children, overrideClassname, Tag='span', ...props }) {
+export function DynamicTagComponent({ children, addClassname, Tag='span', ...props }) {
     return (
         <Tag 
-            className={`${overrideClassname}`}             
+            className={`${addClassname}`}             
             {...props}
         >
             {children}
@@ -672,4 +672,11 @@ export function GradientGrayToWhiteLinkButton({ children, addClassname = '', Tag
             {children}
         </GradientGrayToWhiteButton>
     )
+}export function PleaseLoginMessage() {
+    return (
+        <BoldHeading4>
+            Please log in to use this page.
+        </BoldHeading4>
+    );
 }
+

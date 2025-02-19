@@ -6,6 +6,7 @@ import ModelInfo from "./modelInfo";
 import { useEffect, useState } from "react";
 import { fetchData_ } from "@/app/login/fetchData";
 import { useAuth } from "@/app/context/AuthContext";
+import { PleaseLoginMessage } from "@/app/_components/components";
 
 export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }) {
     const [accessToken, setAccessToken] = useState('')
@@ -28,15 +29,16 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
         'accessToken': accessToken
     }
 
+    if (!user?.username) {
+        return <>
+            <ModelInfo id={id}/>
+            <PleaseLoginMessage/>  
+        </>
+    }
+
     return (
         <>
-            {!user?.username &&
-                <div>
-                    You must log in to apply actions.
-                </div>
-            }     
             <ModelInfo id={id}/>
-            {/* TODO make model API and change these dataset API below */}
             <DivActionResponseView
                 buttonName='Model Analysis'
                 apiRoute='/model/image/test-async-file-stream-json/action-a'

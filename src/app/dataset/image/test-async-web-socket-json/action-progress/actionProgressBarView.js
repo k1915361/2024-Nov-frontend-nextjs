@@ -2,7 +2,7 @@
 
 import { getFileExtension, isImage, isReadableText } from '@/app/dataset/tree/[id]/[...path]/page';
 import { WEBSOCKET_URL, STATIC_URL } from '@/app/login/fetchData';
-import { BorderLight, DivButtonLight } from "@/app/_components/components";
+import { BorderLight, DivButtonLight, Text2ndarySmall } from "@/app/_components/components";
 import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
@@ -15,7 +15,7 @@ export function removeStaticServerBaseURL(url, source=STATIC_URL+'/', target='')
 }
 
 export function ViewFileLink({href, name, children, changeDisplayNameFunction=removeStaticServerBaseURL, ...props}) {
-    return <a href={href} {...props}>
+    return <a title={href} href={href} {...props}>
         {changeDisplayNameFunction(href)}
         {children}
     </a>
@@ -82,16 +82,17 @@ export function ProgressBarView({
 
     const progressPercentage = Math.round((progress.current / progress.total) * 100, 2);
     const disabled = wsocket === null
+    const tooltip_title = wsocket === null ? "Refresh this page to use again." : ''
 
     return (
-        <BorderLight>       
+        <BorderLight addClassname='truncate'>
             {wsocket === null && 
-                <div>
-                    Disconnected, please refresh the page to use again.
-                </div>
+                <Text2ndarySmall>
+                    Refresh the page to use again.
+                </Text2ndarySmall>
             }
             <div>
-                <ButtonLight onClick={startTask} disabled={disabled}>
+                <ButtonLight onClick={startTask} disabled={disabled} title={tooltip_title}>
                     {buttonName}
                 </ButtonLight>
             </div>

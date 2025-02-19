@@ -5,9 +5,10 @@ import { DivActionResponseView } from "../../image/test-async-web-socket-json/ac
 import DatasetInfo from "./datasetInfo"
 import { API_ROOT, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
-import { Text2ndarySmall } from "@/app/_components/components"
+import { PleaseLoginMessage, Text2ndarySmall } from "@/app/_components/components"
 import { useEffect, useState } from "react"
 import { redirect } from "next/navigation"
+import { useAuth } from "@/app/context/AuthContext"
 
 export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }){
     const [data, setData] = useState({})
@@ -15,8 +16,9 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const route = `/api/task/${task_name}`
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const [accessToken, setAccessToken] = useState('')
+    const { user } = useAuth()
 
-    if (!taskId) {        
+    if (!taskId) {
         useEffect(() => {
             async function f() {
                 const data_ = await fetchData(route, {})
@@ -50,6 +52,13 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
         'id': id, 
         'task_id': taskId_, 
         'access_token': accessToken 
+    }
+
+    if (!user?.username) {
+        return <>
+            <DatasetInfo id={id}/>
+            <PleaseLoginMessage/>
+        </>
     }
 
     return (
