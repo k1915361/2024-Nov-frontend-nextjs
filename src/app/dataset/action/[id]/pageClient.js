@@ -1,7 +1,7 @@
 'use client'
 
-import { ProgressBarView } from "../../image/test-async-web-socket-json/action-progress/actionProgressBarView"
-import { DivActionResponseView } from "../../image/test-async-web-socket-json/action-buttons/page"
+import { ProgressBarView } from "../task/websocket/actionProgressBarView"
+import { DivActionResponseView } from "../test/websocket/page"
 import DatasetInfo from "./datasetInfo"
 import { API_ROOT, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
@@ -18,9 +18,9 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const [accessToken, setAccessToken] = useState('')
     const { user } = useAuth()
 
-    if (!taskId) {
-        useEffect(() => {
-            async function f() {
+    useEffect(() => {
+        if (!taskId) {
+            async function fetchTaskData() {
                 const data_ = await fetchData(route, {})
                 if (data_ && data_ != "Fetch Error" && data_ != "Fetch Failed. Response not ok") {
                     setData(data_)
@@ -28,19 +28,21 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
                     setShouldRedirect(true)
                 }
             }
-            f();
-        }, []);
-    }
+            fetchTaskData();
+        }        
+    }, []);
 
     useEffect(() => {
-        async function f() {
-            const { data: data_, success, error, message, response } = await fetchData_(`/api/token/access/`)
+        
+
+        async function fetchAccessToken() {
+            const { data: data_, success } = await fetchData_(`/api/token/access/`)
             if (success === true) {
                 setAccessToken(data_.access_token)
             }
         }
-        f();
-    }, []);
+        fetchAccessToken();
+    }, [taskId_]);
 
     useEffect(() => {
         if (shouldRedirect) {
@@ -48,17 +50,17 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
         }
     }, [shouldRedirect, data, taskId_]);
 
+    if (!user?.username) {
+        return <>
+            <DatasetInfo id={id} />
+            <PleaseLoginMessage />
+        </>
+    }
+
     const message_props = { 
         'id': id, 
         'task_id': taskId_, 
         'access_token': accessToken 
-    }
-
-    if (!user?.username) {
-        return <>
-            <DatasetInfo id={id}/>
-            <PleaseLoginMessage/>
-        </>
     }
 
     return (

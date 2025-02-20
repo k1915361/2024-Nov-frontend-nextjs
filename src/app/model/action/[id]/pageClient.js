@@ -1,7 +1,7 @@
 'use client'
 
-import { DivActionResponseView } from "@/app/dataset/image/test-async-web-socket-json/action-buttons/page";
-import { ProgressBarView } from "@/app/dataset/image/test-async-web-socket-json/action-progress/actionProgressBarView";
+import { DivActionResponseView } from "@/app/dataset/action/test/websocket/page";
+import { ProgressBarView } from "@/app/dataset/action/task/websocket/actionProgressBarView";
 import ModelInfo from "./modelInfo";
 import { useEffect, useState } from "react";
 import { fetchData_ } from "@/app/login/fetchData";
@@ -12,6 +12,13 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const [accessToken, setAccessToken] = useState('')
     const [taskId_, setTaskId] = useState(taskId)
     const { user } = useAuth()
+
+    if (!user?.username) {
+        return <>
+            <ModelInfo id={id} />
+            <PleaseLoginMessage />
+        </>
+    }
 
     useEffect(() => {
         async function f() {
@@ -27,13 +34,6 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
         'id': id,
         'task_id': taskId_,
         'accessToken': accessToken
-    }
-
-    if (!user?.username) {
-        return <>
-            <ModelInfo id={id}/>
-            <PleaseLoginMessage/>  
-        </>
     }
 
     return (

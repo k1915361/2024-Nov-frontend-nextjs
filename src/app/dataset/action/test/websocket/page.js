@@ -1,11 +1,11 @@
 'use client'
 
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
-import { handleSendWebSocketMessage, newWebSocketAndSetState, sendWebSocketMessage, socketOnErrorClose, socketOnMessageAppendListState } from "../page";
+import { handleSendWebSocketMessage, socketOnErrorClose, socketOnMessageAppendListState } from "./image/page";
 import { WEBSOCKET_URL } from "@/app/login/fetchData";
 import { BorderLight, ButtonLight } from "@/app/_components/components";
 import { useState } from "react";
-import { ProgressBarView } from "../action-progress/actionProgressBarView";
+import { ProgressBarView } from "../../task/websocket/actionProgressBarView";
 import { BorderLightFullWidth } from "@/app/_components/components";
 
 export function handleWebsocketEvents(
@@ -14,7 +14,7 @@ export function handleWebsocketEvents(
     type=undefined, 
     parameters={}
 ) {
-    const socket = newWebSocketAndSetState(`${apiRoot}${apiRoute}`);
+    const socket = new WebSocket(`${apiRoot}${apiRoute}`);
 
     handleSendWebSocketMessage(socket, parameters, type)
 
@@ -27,7 +27,7 @@ export function ActionResponseView({ buttonName, apiRoute, type=undefined, param
     function handleOnClickWebsocketEvents() {
         const socket = handleWebsocketEvents(WEBSOCKET_URL, apiRoute, type, parameters)
         socket.onmessage = (event) => {
-            socketOnMessageAppendListState(event, setEvents)
+            socketOnMessageAppendListState(event, setEvents, socket)
         };
         socketOnErrorClose(socket)
     } 
@@ -40,8 +40,8 @@ export function ActionResponseView({ buttonName, apiRoute, type=undefined, param
             <div>
                 {events.map((data, index) => (
                     <BorderLightFullWidth key={index}>
-                        {data.image_url !== undefined &&
-                            <img src={`${data.image_url}`}/>
+                        {data.file_url !== undefined &&
+                            <img src={`${data.file_url}`}/>
                         }
                         <div>Step {data.step}</div> 
                         <div>Status: {data.status}</div> 

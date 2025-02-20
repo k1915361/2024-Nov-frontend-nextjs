@@ -6,9 +6,9 @@ import { BorderLight, DivButtonLight, Text2ndarySmall } from "@/app/_components/
 import { ButtonLight } from "@/app/_components/components";
 import { useState, useEffect } from 'react';
 import ViewTextFileClientSide from '@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide';
-import { borderLightClassName } from '../serverUtils';
+import { borderLightClassName } from '../../../image/test-async-web-socket-json/serverUtils';
 import { TextLighter } from '@/app/dataset/viewer/tabulateArray';
-import { handleSendWebSocketMessage, sendWebSocketMessage } from '../page';
+import { handleSendWebSocketMessage } from '../../test/websocket/image/page';
 
 export function removeStaticServerBaseURL(url, source=STATIC_URL+'/', target='') {
     return url.replace(source, target)
@@ -81,15 +81,16 @@ export function ProgressBarView({
     buttonName = 'Start Task', 
     type = '', 
     parameters = {}, 
-    message_props 
+    message_props,
+    onMessage = ()=>''
 }) {
     const [progress, setProgress] = useState({ current: 0, total: 100 });
     const [socket, setSocket] = useState(null);
-
+    
     const handleMessage = (event) => {
         const data = JSON.parse(event.data);
         setProgress(data);
-        if (data?.finished && data?.success) {
+        if (!data?.loading && data?.success) {
             socket?.close()
         }
     };
@@ -105,11 +106,7 @@ export function ProgressBarView({
         };
 
         setSocket(ws);
-
-        return () => {
-            if (ws) ws.close();
-        };
-    }, []);
+    }, [apiRoute]);
 
     const startTask = () => {
         handleSendWebSocketMessage(
@@ -134,13 +131,13 @@ export function ProgressBarView({
                 </Text2ndarySmall>
             }
             <div>
-                <ButtonLight onClick={startTask} disabled={isDisabled} title={tooltipTitle}>
+                <ButtonLight onClick={startTask} disabled={isDisabled}>
                     {buttonName}
                 </ButtonLight>
             </div>
             <ProgressBar percentage={progressPercentage} />
-            {progress?.finished && <>
-                    <ResultPreview resultUrl={progress.result_url}>
+            {progress?.success && <>
+                    <ResultPreview resultUrl={progress.file_url}>
                         <DownloadSection/>
                     </ResultPreview>
                 </>

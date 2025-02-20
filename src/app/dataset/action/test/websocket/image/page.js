@@ -2,18 +2,12 @@
 
 import { DATASET_API_URL, API_ROOT, WEBSOCKET_URL, fetchData, sendJsonFetchResponse } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
-import { appendListState } from "../test-async-file-stream/page";
-import ViewDirectoryTree from "../../directoryTreeView";
+import { appendListState } from "../../../../image/test-async-file-stream/page";
+import ViewDirectoryTree from "../../../../directoryTreeView";
 import { BorderLightFullWidth } from "@/app/_components/components";
 
-export function newWebSocketAndSetState(api) {
-    const socket = new WebSocket(api);
-    return socket
-}
-
 export const sendWebSocketMessage = (socket, data, type='start_task') => {
-    const message = JSON.stringify({ type: type, payload: data });
-    socket.send(message);
+    socket.send(JSON.stringify({ type: type, payload: data }));
 }
 
 export const handleSendWebSocketMessage = (socket, data, type='start_task') => {
@@ -52,17 +46,17 @@ export const ImageWithDefault = ({ src, defaultSrc, alt, title }) => {
     )
 }
 
-export function socketOnMessageAppendListState(event, setEvents) {
+export function socketOnMessageAppendListState(event, setEvents, socket = undefined) {
     const data = JSON.parse(event.data);
     appendListState(setEvents, data)
-    if (data?.finished === true && data?.success === true) {
-        socket.close()
+    if (socket && (data?.success === true || data?.success === false)) {
+        socket?.close()
     }
 }
 
 export function socketOnErrorClose(socket) {    
     socket.onerror = (error) => {
-        console.error("WebSocket error:", error);
+        console.log("WebSocket error:", error);
         socket.close();
     }
 }
@@ -72,10 +66,10 @@ export default function EventSourceClient() {
     const [img, setImage] = useState(null);
     
     useEffect(() => {
-        const socket = newWebSocketAndSetState(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`);
-
+        const socket = new WebSocket(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`);
+        
         socket.onmessage = (event) => {
-            socketOnMessageAppendListState(event, setEvents)
+            socketOnMessageAppendListState(event, setEvents, socket)
         };
         
         return () => {
