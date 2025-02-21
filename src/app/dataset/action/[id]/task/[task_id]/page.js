@@ -12,7 +12,7 @@ export default async function Page(
             <PageClient 
                 id={id}
                 taskId={taskId}
-            />            
+            />
         </PageComponent>
     )
 }

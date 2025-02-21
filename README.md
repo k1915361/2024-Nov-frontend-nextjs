@@ -274,13 +274,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 2025  
 
-[ ] actions database: save the new dataset after an action.  
-[ ] new dataset/model saved in file system after an action.  
-[ ] Integrate models and dataset action scripts.
+[ ] new model saved in file system after an action.  
+[ ] Integrate models and dataset action AI/dataset scripts.
 [ ] Make video demo and send to Team of the update at 26th Feb.
+[ ] Setup Ngrok to make servers available online.
+[ ] Update API's data source to MinIO.
 
-[ ] DD.MM. Todo description.   
+[ ] DD.MM. Todo description.
 
+[x] 21.02. dataset action/task database: save the new dataset after an action.  
+[x] 21.02. new dataset saved in file system after an action/task.  
 [x] 18.02. model forking. 
 [x] 17.02. Test all action buttons.
 [x] 14.02. Enable HTTPs on both Django and Next app - set up local certificate authority (CA). Document this setup.
