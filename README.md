@@ -281,7 +281,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 [ ] DD.MM. Todo description.
 
-[x] 22.02. video demo and send to Team of the update at 22nd Feb.
 [x] 22.02. Make general/standardized/normalized naming of functions and variables for better code reusability (to `directory`, `original`, `create_directory` from `dataset_directory`, `original_dataset`, `model_directory`, `original_model`, `get_unique_model_directory`, etc.).
 [x] 22.02. Make reusable Action and Task saving (to database and file system) function for both Dataset and Model.   
 [x] 22.02. Make video demo and send to Team of the update at 22nd Feb.
