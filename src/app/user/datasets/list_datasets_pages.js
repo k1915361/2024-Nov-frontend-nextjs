@@ -6,6 +6,7 @@ import { useListPaginationState } from "../models/pages/pagination";
 import { useAuth } from "@/app/context/AuthContext";
 import { BoldHeading4 } from "@/app/_components/components";
 import { isEmptyObject } from "@/app/model/fork/[id]/pageClient";
+import { useEffect } from "react";
 
 export default function ListDatasetsPages() {
     const route = `${API_ROOT}/user/datasets/?dataset_page=`    
@@ -13,6 +14,10 @@ export default function ListDatasetsPages() {
     const namespace = 'dataset_'
     const {list: datasets, Pagination_} = useListPaginationState(route, param, namespace);
     const { user } = useAuth()
+    
+    useEffect(() => {
+        require("bootstrap/dist/js/bootstrap.bundle.min.js");
+    }, []);
 
     return (
         <div>

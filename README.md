@@ -276,12 +276,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 [ ] new model saved in file system after an action.  
 [ ] Integrate models and dataset action AI/dataset scripts.
-[ ] Make video demo and send to Team of the update at 26th Feb.
 [ ] Setup Ngrok to make servers available online.
 [ ] Update API's data source to MinIO.
 
 [ ] DD.MM. Todo description.
 
+[x] 22.02. video demo and send to Team of the update at 22nd Feb.
+[x] 22.02. Make general/standardized/normalized naming of functions and variables for better code reusability (to `directory`, `original`, `create_directory` from `dataset_directory`, `original_dataset`, `model_directory`, `original_model`, `get_unique_model_directory`, etc.).
+[x] 22.02. Make reusable Action and Task saving (to database and file system) function for both Dataset and Model.   
+[x] 22.02. Make video demo and send to Team of the update at 22nd Feb.
 [x] 21.02. dataset action/task database: save the new dataset after an action.  
 [x] 21.02. new dataset saved in file system after an action/task.  
 [x] 18.02. model forking. 
