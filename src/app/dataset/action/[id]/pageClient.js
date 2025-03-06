@@ -13,43 +13,55 @@ import { apiRouteBaseActionProgressStatus } from "@/app/model/action/[id]/pageCl
 
 export async function fetchAccessToken() {
     const { data: data_, success } = await fetchData_(`/api/token/access/`)
-    return { data: data_, success }    
+    console.log({ data_, success })
+    return { data_, success }
 }
 
-export default function PageClient({ id, taskId = '', task_name = '', isDataset = true, resourceType = 'dataset' }){
-    const [data, setData] = useState({})
-    const [taskId_, setTaskId] = useState(taskId)
-    const route = `/api/task/${task_name}`
+export function useResourceTaskData(id, taskId, route, resourceType) {
+    const [data, setData] = useState({});
+    const [taskId_, setTaskId] = useState(taskId);
     const [shouldRedirect, setShouldRedirect] = useState(false);
-    const [accessToken, setAccessToken] = useState('')
-    const { user } = useAuth()
+    const [accessToken, setAccessToken] = useState('');
+    const { user } = useAuth();
 
     useEffect(() => {
         if (!taskId) {
             async function fetchTaskData() {
-                const data_ = await fetchData(route, {})
+                const data_ = await fetchData(route, {});
                 if (data_ && data_ != "Fetch Error" && data_ != "Fetch Failed. Response not ok") {
-                    setData(data_)
-                    setTaskId(data_.task_id)
-                    setShouldRedirect(true)
+                    setData(data_);
+                    setTaskId(data_.task_id);
+                    setShouldRedirect(true);
                 }
             }
-            fetchTaskData();
-        }        
+            fetchTaskData()
+        }
     }, []);
 
     useEffect(() => {
-        const { data: data_, success } = fetchAccessToken();
-        if (success === true) {
-            setAccessToken(data_.access_token)
-        }
-    }, [taskId_]);
+        async function fetchTokenAndRedirect() {
+            const { data_: tokenData, success: tokenSuccess } = await fetchAccessToken();
+            if (tokenSuccess) {
+                setAccessToken(tokenData.access_token);
+            }
 
-    useEffect(() => {
-        if (shouldRedirect) {
-            redirect(`/${resourceType}/action/${id}/task/${data.task_id}`)
         }
-    }, [shouldRedirect, data, taskId_]);
+        
+        fetchTokenAndRedirect();
+    }, [taskId_]);
+    
+    useEffect(() => {        
+        if (shouldRedirect) {
+            redirect(`/${resourceType}/action/${id}/task/${data.task_id}`);
+        }        
+    }, [shouldRedirect]);
+
+    return { data, taskId: taskId_, accessToken, user };
+}
+
+export default function PageClient({ id, taskId = '', task_name = '', isDataset = true, resourceType = 'dataset' }){
+    const route = `/api/task/${task_name}`
+    const { data, taskId: taskId_, accessToken, user } = useResourceTaskData(id, taskId, route, resourceType);
 
     if (!user?.username) {
         return <>
@@ -61,7 +73,7 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const message_props = { 
         'id': id, 
         'task_id': taskId_, 
-        'access_token': accessToken 
+        'access_token': accessToken,
     }
 
     const apiRouteActionProgressBase = `/${resourceType}/image/action-progress`

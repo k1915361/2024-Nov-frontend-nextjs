@@ -2,28 +2,14 @@
 
 import { ProgressBarView } from "@/app/dataset/action/task/websocket/actionProgressBarView";
 import ModelInfo from "./modelInfo";
-import { useEffect, useState } from "react";
-import { fetchData_ } from "@/app/login/fetchData";
-import { useAuth } from "@/app/context/AuthContext";
 import { PleaseLoginMessage } from "@/app/_components/components";
 import { DivActionResponseView } from "@/app/dataset/action/DivActionResponseView";
+import { useResourceTaskData } from "@/app/dataset/action/[id]/pageClient";
 
 export default function PageClient({ id, taskId = '', task_name = '', isDataset = true, resourceType = 'model' }) {
-    const [accessToken, setAccessToken] = useState('')
-    const [taskId_, setTaskId] = useState(taskId)
-    const { user } = useAuth()
-    
-    useEffect(() => {
-        
-        async function f() {
-            const { data: data_, success, error, message, response } = await fetchData_(`/api/token/access/`)
-            if (success === true) {
-                setAccessToken(data_.access_token)
-            }
-        }
-        f();
-    }, []);
-    
+    const route = `/api/task/${task_name}`
+    const { data, taskId: taskId_, accessToken, user } = useResourceTaskData(id, taskId, route, resourceType);
+
     if (!user?.username) {
         return <>
             <ModelInfo id={id} />
@@ -34,7 +20,8 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     const message_props = {
         'id': id,
         'task_id': taskId_,
-        'accessToken': accessToken
+        'access_token': accessToken,
+        'object_type': 'model',
     }
 
     const apiBaseRouteActionProgress = `/${resourceType}/image/action-progress`
@@ -80,12 +67,11 @@ export const MODEL_ACTIONS = {
     MODEL_ANALYSIS_NAME: 'Model Analysis',
     MODEL_ANALYSIS: 'analysis',
     DISTILLATION_NAME: "Distillation",
-    DISTILLATION: "cleaning",
+    DISTILLATION: "distillation",
     FINE_TUNING_NAME: 'Fine Tuning',
-    FINE_TUNING: 'enrichment',
+    FINE_TUNING: 'fine_tuning',
     EXPLAINABLE_AI_NAME: 'XAI',
-    EXPLAINABLE_AI: 'curation',
-
+    EXPLAINABLE_AI: 'explainable_ai',
 }
 
 export const MODEL_ACTION_PARAMS = {

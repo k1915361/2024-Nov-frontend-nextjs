@@ -6,7 +6,6 @@ import { WEBSOCKET_URL } from "@/app/login/fetchData";
 import { ProgressBarView } from "../../task/websocket/actionProgressBarView";
 import { ActionResponseView } from "../../DivActionResponseView";
 
-/** @deprecated. to be removed. */
 export function handleWebsocketEvents(
     apiRoot=WEBSOCKET_URL, 
     apiRoute='/dataset/image/async-file-stream/', 

@@ -1,7 +1,9 @@
 'use client';
-import { BorderLight, ButtonLight } from "@/app/_components/components";
+import { BorderLight, BorderLightFullWidth, ButtonLight } from "@/app/_components/components";
 import { useState } from "react"
-
+import { handleWebsocketEvents } from "./test/websocket/page";
+import { WEBSOCKET_URL } from "@/app/login/fetchData";
+import { socketOnErrorClose, socketOnMessageAppendListState } from "./test/websocket/image/page";
 
 export function DivActionResponseView({ buttonName, apiRoute, ...props }) {
     return <div>
