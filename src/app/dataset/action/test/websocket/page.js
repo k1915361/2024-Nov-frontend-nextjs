@@ -3,14 +3,13 @@
 import ViewDirectoryTree from "@/app/dataset/directoryTreeView";
 import { handleSendWebSocketMessage, socketOnErrorClose, socketOnMessageAppendListState } from "./image/page";
 import { WEBSOCKET_URL } from "@/app/login/fetchData";
-import { BorderLight, ButtonLight } from "@/app/_components/components";
-import { useState } from "react";
 import { ProgressBarView } from "../../task/websocket/actionProgressBarView";
-import { BorderLightFullWidth } from "@/app/_components/components";
+import { ActionResponseView } from "../../DivActionResponseView";
 
+/** @deprecated. to be removed. */
 export function handleWebsocketEvents(
     apiRoot=WEBSOCKET_URL, 
-    apiRoute='/dataset/image/test-async-file-stream-json/', 
+    apiRoute='/dataset/image/async-file-stream/', 
     type=undefined, 
     parameters={}
 ) {
@@ -21,47 +20,7 @@ export function handleWebsocketEvents(
     return socket
 }
 
-export function ActionResponseView({ buttonName, apiRoute, type=undefined, parameters={}, ...props}) {
-    const [events, setEvents] = useState([]);
-    
-    function handleOnClickWebsocketEvents() {
-        const socket = handleWebsocketEvents(WEBSOCKET_URL, apiRoute, type, parameters)
-        socket.onmessage = (event) => {
-            socketOnMessageAppendListState(event, setEvents, socket)
-        };
-        socketOnErrorClose(socket)
-    } 
-    
-    return (
-        <BorderLight>
-            <ButtonLight onClick={handleOnClickWebsocketEvents}>
-                {buttonName}
-            </ButtonLight>
-            <div>
-                {events.map((data, index) => (
-                    <BorderLightFullWidth key={index}>
-                        {data.file_url !== undefined &&
-                            <img src={`${data.file_url}`}/>
-                        }
-                        <div>Step {data.step}</div> 
-                        <div>Status: {data.status}</div> 
-                    </BorderLightFullWidth>
-                ))}
-            </div>            
-        </BorderLight>
-    )
-}
-
-export function DivActionResponseView({buttonName, apiRoute, ...props}) {
-    return <div>
-        <ActionResponseView
-            buttonName={buttonName}
-            apiRoute={apiRoute}
-            {...props}
-        />
-    </div>
-}
-
+/** @deprecated. to be removed. */
 export default function EventSourceClient() {
 
     return (
@@ -71,35 +30,35 @@ export default function EventSourceClient() {
             <ActionResponseView buttonName='Action'/>
             <ActionResponseView
                 buttonName='ActionA'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-a'
+                apiRoute='/dataset/image/async-file-stream/action-a'
             />
             <ActionResponseView
                 buttonName='ActionB'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-b'
+                apiRoute='/dataset/image/async-file-stream/action-b'
             />
             <ActionResponseView
                 buttonName='ActionC'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-c'
+                apiRoute='/dataset/image/async-file-stream/action-c'
             />
             <ActionResponseView
                 buttonName='ActionD'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-d'
+                apiRoute='/dataset/image/async-file-stream/action-d'
             />
             <ActionResponseView
                 buttonName='ActionE'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-e'
+                apiRoute='/dataset/image/async-file-stream/action-e'
             />
             <ProgressBarView/>
             <ProgressBarView 
-                apiRoute="/dataset/image/action-progress-action-a" buttonName="Start Task A"/>
+                apiRoute="/dataset/image/action-progress-a" buttonName="Start Task A"/>
             <ProgressBarView buttonName="Start Task B" 
-                apiRoute="/dataset/image/action-progress-action-b"/>
+                apiRoute="/dataset/image/action-progress-b"/>
             <ProgressBarView buttonName="Start Task C" 
-                apiRoute="/dataset/image/action-progress-action-c"/>
+                apiRoute="/dataset/image/action-progress-c"/>
             <ProgressBarView buttonName="Start Task D" 
-                apiRoute="/dataset/image/action-progress-action-d"/>
+                apiRoute="/dataset/image/action-progress-d"/>
             <ProgressBarView buttonName="Start Task E" 
-                apiRoute="/dataset/image/action-progress-action-e"/>            
+                apiRoute="/dataset/image/action-progress-e"/>            
         </div>
     );
 }

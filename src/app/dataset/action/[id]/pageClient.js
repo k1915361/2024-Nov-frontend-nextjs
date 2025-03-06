@@ -1,7 +1,6 @@
 'use client'
 
 import { ProgressBarView } from "../task/websocket/actionProgressBarView"
-import { DivActionResponseView } from "../test/websocket/page"
 import DatasetInfo from "./datasetInfo"
 import { API_ROOT, fetchData, fetchData_ } from "@/app/login/fetchData"
 import DatasetCsvView from "./datasetCsvView"
@@ -9,8 +8,15 @@ import { PleaseLoginMessage, Text2ndarySmall } from "@/app/_components/component
 import { useEffect, useState } from "react"
 import { redirect } from "next/navigation"
 import { useAuth } from "@/app/context/AuthContext"
+import { DivActionResponseView } from "../DivActionResponseView"
+import { apiRouteBaseActionProgressStatus } from "@/app/model/action/[id]/pageClient"
 
-export default function PageClient({ id, taskId = '', task_name = '', isDataset = true }){
+export async function fetchAccessToken() {
+    const { data: data_, success } = await fetchData_(`/api/token/access/`)
+    return { data: data_, success }    
+}
+
+export default function PageClient({ id, taskId = '', task_name = '', isDataset = true, resourceType = 'dataset' }){
     const [data, setData] = useState({})
     const [taskId_, setTaskId] = useState(taskId)
     const route = `/api/task/${task_name}`
@@ -33,20 +39,15 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
     }, []);
 
     useEffect(() => {
-        
-
-        async function fetchAccessToken() {
-            const { data: data_, success } = await fetchData_(`/api/token/access/`)
-            if (success === true) {
-                setAccessToken(data_.access_token)
-            }
+        const { data: data_, success } = fetchAccessToken();
+        if (success === true) {
+            setAccessToken(data_.access_token)
         }
-        fetchAccessToken();
     }, [taskId_]);
 
     useEffect(() => {
         if (shouldRedirect) {
-            redirect(`/dataset/action/${id}/task/${data.task_id}`)
+            redirect(`/${resourceType}/action/${id}/task/${data.task_id}`)
         }
     }, [shouldRedirect, data, taskId_]);
 
@@ -63,42 +64,44 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
         'access_token': accessToken 
     }
 
+    const apiRouteActionProgressBase = `/${resourceType}/image/action-progress`
+
     return (
         <>
             <DatasetInfo id={id}/>
             <DivActionResponseView
-                buttonName='Dataset Analysis'
-                apiRoute='/dataset/image/test-async-file-stream-json/action-a'
-                type='analysis'
-                parameters={{ 'paramA': 'cleaning_valueA' }}
+                buttonName={DATASET_ACTIONS.DATASET_ANALYSIS_NAME}
+                apiRoute={`/dataset/${apiRouteBaseActionProgressStatus}-a`}
+                type={DATASET_ACTIONS.DATASET_ANALYSIS}
+                parameters={DATASET_ACTION_PARAMS.A}
                 message_props={message_props}
             />
             <ProgressBarView 
-                buttonName="Cleaning"
-                apiRoute="/dataset/image/action-progress"
-                type='cleaning'
-                parameters={{ 'paramA': 'cleaning_valueA' }}
+                buttonName={DATASET_ACTIONS.CLEANING_NAME}
+                apiRoute={apiRouteActionProgressBase}
+                type={DATASET_ACTIONS.CLEANING}
+                parameters={DATASET_ACTION_PARAMS.A}
                 message_props={message_props}
             />
             <ProgressBarView 
-                buttonName="Enrichment" 
-                apiRoute="/dataset/image/action-progress-action-b"
-                type='enrichment'
-                parameters={{ 'paramA': 'enrichment_valueB' }}
+                buttonName={DATASET_ACTIONS.ENRICHMENT_NAME}
+                apiRoute={`${apiRouteActionProgressBase}-b`}
+                type={DATASET_ACTIONS.ENRICHMENT}
+                parameters={DATASET_ACTION_PARAMS.B}
                 message_props={message_props}
             />
             <ProgressBarView 
-                buttonName="Data Curation" 
-                apiRoute="/dataset/image/action-progress-action-c"
-                type='curation'
-                parameters={{ 'paramA': 'data_curation_valueC' }}
+                buttonName={DATASET_ACTIONS.DATA_CURATION_NAME}
+                apiRoute={`${apiRouteActionProgressBase}-c`}
+                type={DATASET_ACTIONS.DATA_CURATION}
+                parameters={DATASET_ACTION_PARAMS.C}
                 message_props={message_props}
             />
             <ProgressBarView 
-                buttonName="Data Balancing" 
-                apiRoute="/dataset/image/action-progress-action-d"
-                type='balancing'
-                parameters={{ 'paramA': 'balancing_valueD' }}
+                buttonName={DATASET_ACTIONS.DATA_BALANCING_NAME}
+                apiRoute={`${apiRouteActionProgressBase}-d`}
+                type={DATASET_ACTIONS.DATA_BALANCING}
+                parameters={DATASET_ACTION_PARAMS.D}
                 message_props={message_props}
             />
             <Text2ndarySmall>
@@ -107,10 +110,10 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
             <div>
             </div>
             <ProgressBarView 
-                buttonName="XAI" 
-                apiRoute="/dataset/image/action-progress-action-e"
-                type='explainable_ai'
-                parameters={{ 'paramA': 'explainable_ai_valueD' }}
+                buttonName={EXPLAINABLE_AI_NAME}
+                apiRoute={`${apiRouteActionProgressBase}-e`}
+                type={EXPLAINABLE_AI}
+                parameters={DATASET_ACTION_PARAMS.E}
                 message_props={message_props}
                 dataset_id={id}
             />
@@ -126,4 +129,27 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
             }
         </>
     )
+}
+
+export const DATASET_ACTIONS = {
+    DATASET_ANALYSIS_NAME: 'Dataset Analysis',
+    DATASET_ANALYSIS: 'analysis',
+    CLEANING_NAME: 'Cleaning',
+    CLEANING: 'cleaning',
+    ENRICHMENT_NAME: 'Enrichment',
+    ENRICHMENT: 'enrichment',
+    DATA_CURATION_NAME: 'Data Curation',
+    DATA_CURATION: 'curation',
+    EXPLAINABLE_AI_NAME: 'XAI',
+    EXPLAINABLE_AI: 'explainable_ai',
+    DATA_BALANCING_NAME: 'Data Balancing',
+    DATA_BALANCING: 'balancing',
+}
+
+export const DATASET_ACTION_PARAMS = {    
+    A: { 'paramA': 'cleaning_valueA' },
+    B: { 'paramA': 'enrichment_valueB' },
+    C: { 'paramA': 'data_curation_valueC' },
+    D: { 'paramA': 'balancing_valueD' },
+    E: { 'paramA': 'explainable_ai_valueE' },
 }

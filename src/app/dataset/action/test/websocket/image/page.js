@@ -66,7 +66,7 @@ export default function EventSourceClient() {
     const [img, setImage] = useState(null);
     
     useEffect(() => {
-        const socket = new WebSocket(`${WEBSOCKET_URL}/dataset/image/test-async-file-stream-json/`);
+        const socket = new WebSocket(`${WEBSOCKET_URL}/dataset/image/async-file-stream/`);
         
         socket.onmessage = (event) => {
             socketOnMessageAppendListState(event, setEvents, socket)

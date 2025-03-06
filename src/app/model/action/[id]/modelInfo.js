@@ -2,7 +2,7 @@
 
 import { fetchAndSetState } from "@/app/dataset/blob/[id]/[...path]/viewTextFileClientSide";
 import { ModelInfoComponent } from "../../fork/[id]/pageClient";
-import { API_ROOT } from "@/app/login/fetchData";
+import { API_ROOT, fetchData } from "@/app/login/fetchData";
 import { useEffect, useState } from "react";
 
 export default function ModelInfo({ id }) {
