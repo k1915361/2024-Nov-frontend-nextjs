@@ -110,9 +110,9 @@ export default function PageClient({ id, taskId = '', task_name = '', isDataset 
             <div>
             </div>
             <ProgressBarView 
-                buttonName={EXPLAINABLE_AI_NAME}
+                buttonName={DATASET_ACTIONS.EXPLAINABLE_AI_NAME}
                 apiRoute={`${apiRouteActionProgressBase}-e`}
-                type={EXPLAINABLE_AI}
+                type={DATASET_ACTIONS.EXPLAINABLE_AI}
                 parameters={DATASET_ACTION_PARAMS.E}
                 message_props={message_props}
                 dataset_id={id}
