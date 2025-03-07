@@ -1,11 +1,14 @@
+// next.config.mjs is the original config file name
+// some env variables are removed for security
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
         customKey: 'my-value',
         PUBLIC_BACKEND_URL: 'http://localhost:8000/',
         TEST_VAL: 'from next.config.mjs',
-        ADMIN_LOGIN: 'admin',
-        ADMIN_PASSWORD: 'ku202425',
+        ADMIN_LOGIN: '...',
+        ADMIN_PASSWORD: '...',
     },
     async headers() {
         return [

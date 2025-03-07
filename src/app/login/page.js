@@ -55,11 +55,12 @@ export async function getCSRFToken() {
     }
 }
 
+export const ApiRouteTokenLoginCookie = '/api/token/login/cookie/'
+
 export default function Login() {
     const router = useRouter()
     const [message, setMessage] = useState("")
-    const [username, setUsername] = useState("")    
-    const route = '/api/token/login/cookie/'
+    const [username, setUsername] = useState("")
     const { user, logOut, updateUser } = useAuth();
     
     const handleSubmit = async (e) => {
@@ -96,7 +97,7 @@ export default function Login() {
                 body: JSON.stringify(credentials),
                 credentials: 'include',
             }
-            const data = await fetch(`${API_BASE_URL_WITH_PROTOCOL}${route}`, options)
+            const data = await fetch(`${API_BASE_URL_WITH_PROTOCOL}${ApiRouteTokenLoginCookie}`, options)
             setUsername(data.username)
         } catch (err) {
             setMessage(err.message || "An error occurred")
